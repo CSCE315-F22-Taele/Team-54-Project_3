@@ -1,0 +1,4 @@
+# basic filetypes to ignore
+*.cmd
+*.env
+*.sh
