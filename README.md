@@ -2,7 +2,7 @@
 
 This is the repository for CSCE 331 Team 54's Project 3. It contains code to implement a POS system for Chick-Fil-A, along with accessibility features such as language support
 
-All store data is maintained using an AWS-hosted PostgreSQL database. Backend functionality is coded in Python Flask, while frontend is coded in VueJS using the Vuetify framework. The use of Javascript with Flask supports dynamic websites and more powerful GUI implementation.
+All store data is maintained using an AWS-hosted PostgreSQL database. Backend functionality is coded in NodeJS using the Express framework, while frontend is coded in VueJS using the Vuetify framework. The use of Javascript with Flask supports dynamic websites and more powerful GUI implementation.
 
 ---
 
