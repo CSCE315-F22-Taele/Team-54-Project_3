@@ -3,7 +3,9 @@ import React from "react";
 const Manager = () => {
     return (
         <div>
-            Manager
+            <h1 className="font-weight-light display-1 text-center">
+                Manager
+            </h1>
         </div>
 
     )

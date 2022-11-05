@@ -10,7 +10,7 @@ const LaunchPage = () => {
 
     return (
         <div>
-            <h1>
+            <h1 className="font-weight-light display-1 text-center">
                 Launch Page
             </h1>
 
