@@ -1,5 +1,6 @@
 import React from "react";
 import {useNavigate} from "react-router-dom";
+import Button from "react-bootstrap/Button";
 
 const LaunchPage = () => {
     let navigate = useNavigate()
@@ -14,9 +15,9 @@ const LaunchPage = () => {
                 Launch Page
             </h1>
 
-            <button onClick={() => handleUpdate("Cashier")}>Cashier</button>
-            <button onClick={() => handleUpdate("Customer")}>Customer</button>
-            <button onClick={() => handleUpdate("Manager")}>Manager</button>
+            <Button type="button" class="btn btn-outline-danger" onClick={() => handleUpdate("Cashier")}>Cashier</Button>
+            <Button type="button" class="btn btn-outline-danger" onClick={() => handleUpdate("Customer")}>Customer</Button>
+            <Button type="button" class="btn btn-outline-danger" onClick={() => handleUpdate("Manager")}>Manager</Button>
         </div>
 
     )
