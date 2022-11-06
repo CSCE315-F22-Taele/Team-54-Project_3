@@ -28,12 +28,16 @@ const Menu = ({ items }) => {
                     <Card.Title className="text-center">{title}</Card.Title>
                     <Card.Text className="text-center">${price}</Card.Text>
                 </Card.Body>
-                <Form onSubmit={handleSubmit} onChange={handleChange}>
-                    <Form.Group>
-                        <Form.Control className="text-center" type="text" placeholder="Enter quantity" />
-                        <button style={{alignSelf: 'center', justifyContent: 'center'}} type="submit">Add to Order</button>
-                    </Form.Group>
-                </Form>
+                <div class="form-inline my-lg-1">
+                  <Form onSubmit={handleSubmit} onChange={handleChange}>
+                      <Form.Group>
+                          <Form.Control  type="text" placeholder="Enter quantity" />
+                          {/* <div class="col-md-12 text-center"> */}
+                            <button class="btn btn-primary " style={{alignSelf: 'center', justifyContent: 'center'}} type="submit">Order</button>
+                          {/* </div> */}
+                      </Form.Group>
+                  </Form>
+                </div>
             </Card>
         </Col>
       );

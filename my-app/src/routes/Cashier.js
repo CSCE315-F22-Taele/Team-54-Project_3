@@ -24,8 +24,7 @@ const Cashier = () => {
     <main>
       <section className="menu section">
         <div className="title">
-          {/* <img src={logo} alt="logo" className="logo" /> */}
-          <h2 style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>Menu List</h2>
+          <br></br>
           <div className="underline"></div>
         </div>
         <Categories
