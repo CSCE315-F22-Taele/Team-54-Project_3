@@ -4,24 +4,28 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
+import Form from 'react-bootstrap/Form';
 
 const Menu = ({ items }) => {
   const columnsPerRow = 3;
 
   const getColumnsForRow = () => {
     return items.map((item) => {
-      const { id, title, desc, price } = item;
+      const { id, title, price } = item;
 
       return (
         <Col>
-          <Card style={{ width: '18rem' }}key={id} className="box">
-              <Card.Body>
-                  <Card.Title>{title}</Card.Title>
-                  <Card.Text>
-                  {price}
-                  </Card.Text>
-              </Card.Body>
-          </Card>
+            <Card style={{ width: '18rem' }} key={id} className="box">
+                <Card.Body>
+                    <Card.Title className="text-center">{title}</Card.Title>
+                    <Card.Text className="text-center">${price}</Card.Text>
+                </Card.Body>
+                <Form>
+                    <Form.Group>
+                        <Form.Control className="text-center" type="text" placeholder="Enter quantity" />
+                    </Form.Group>
+                </Form>
+            </Card>
         </Col>
       );
     });
