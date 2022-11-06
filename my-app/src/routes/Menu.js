@@ -3,7 +3,7 @@ import Card from 'react-bootstrap/Card';
 
 const Menu = ({ items }) => {
   return (
-    <div className="section-center">
+    <div className="grid">
       {items.map((item) => {
         const { id, title, desc, price } = item;
         return (
@@ -17,7 +17,7 @@ const Menu = ({ items }) => {
         //     </div>
         //   </article>
 
-        <Card style={{ width: '18rem' }}> key={id} className="box"
+        <Card style={{ width: '18rem' }}key={id} className="box">
             <Card.Body>
                 <Card.Title>{title}</Card.Title>
                 <Card.Text>
