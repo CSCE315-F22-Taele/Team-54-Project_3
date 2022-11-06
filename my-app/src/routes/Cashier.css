@@ -10,3 +10,6 @@
     background: rgb(120, 132, 210);
     color:aliceblue;
 }
+.logo {
+    border-radius: 150 / 2;
+}
