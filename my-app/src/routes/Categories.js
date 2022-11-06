@@ -1,20 +1,22 @@
 import React from "react";
+import Button from 'react-bootstrap/Button';
 
 const Categories = ({ categories, filterItems, activeCategory }) => {
   return (
     <div className="btn-container">
       {categories.map((category, index) => {
         return (
-          <button
-            type="button"
+          <Button
+          variant="outline-primary"
+          type="button" 
             className={`${
-              activeCategory === category ? "filter-btn active" : "filter-btn"
+              activeCategory === category ? "filter-btn-active" : "filter-btn"
             }`}
             key={index}
             onClick={() => filterItems(category)}
           >
             {category}
-          </button>
+          </Button>
         );
       })}
     </div>

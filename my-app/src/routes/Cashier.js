@@ -26,7 +26,7 @@ const Cashier = () => {
       <section className="menu section">
         <div className="title">
           {/* <img src={logo} alt="logo" className="logo" /> */}
-          <h2>Menu List</h2>
+          <h2 style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>Menu List</h2>
           <div className="underline"></div>
         </div>
         <Categories
@@ -34,7 +34,7 @@ const Cashier = () => {
           activeCategory={activeCategory}
           filterItems={filterItems}
         />
-        {/* <Menu items={menuItems} /> */}
+        <Menu items={menuItems} />
       </section>
     </main>
   );
