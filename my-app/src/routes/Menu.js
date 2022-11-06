@@ -13,17 +13,17 @@ const Menu = ({ items }) => {
     return items.map((item) => {
       const { id, title, price } = item;
 
-      const handleSubmit = () => {
-
+      const handleSubmit = event => {
+        event.preventDefault();
       }
 
       const handleChange = () => {
-        
+
       }
 
       return (
         <Col>
-            <Card style={{ width: '18rem' }} key={id} className="box">
+            <Card style={{ width: '18rem', alignItems: 'center', justifyContent: 'center'}} key={id} className="box">
                 <Card.Body>
                     <Card.Title className="text-center">{title}</Card.Title>
                     <Card.Text className="text-center">${price}</Card.Text>
@@ -31,6 +31,7 @@ const Menu = ({ items }) => {
                 <Form onSubmit={handleSubmit} onChange={handleChange}>
                     <Form.Group>
                         <Form.Control className="text-center" type="text" placeholder="Enter quantity" />
+                        <button style={{alignSelf: 'center', justifyContent: 'center'}} type="submit">Add to Order</button>
                     </Form.Group>
                 </Form>
             </Card>
