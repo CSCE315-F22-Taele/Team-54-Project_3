@@ -11,8 +11,12 @@ const LaunchPage = () => {
     return (
         <div>
             <h1 className="font-weight-light display-1 text-center">
-                Launch Page
+                Welcome!
             </h1>
+
+            <h2 className="font-weight-light display-5 text-center">
+                Select user below:
+            </h2>
 
             <button onClick={() => handleUpdate("Cashier")} type="button" class="btn btn-outline-danger btn-block">Cashier</button>
             <button onClick={() => handleUpdate("Customer")} type="button" class="btn btn-outline-danger btn-block">Customer</button>
