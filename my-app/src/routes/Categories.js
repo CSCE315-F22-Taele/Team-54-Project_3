@@ -1,9 +1,17 @@
 import React from "react";
 import Button from 'react-bootstrap/Button';
+import {useNavigate} from "react-router-dom";
+import { ArrowReturnLeft } from 'react-bootstrap-icons';
 
 const Categories = ({ categories, filterItems, activeCategory }) => {
+  let navigate = useNavigate()
+
+  const handleUpdate = (page) => {
+      navigate(`/${page}`);
+  };
   return (
     <div className="btn-container">
+      <button onClick={() => handleUpdate("")} type="button" class="btn btn-outline-secondary"><ArrowReturnLeft color="black"/></button>
       {categories.map((category, index) => {
         return (
           <Button

@@ -2,7 +2,6 @@ import React, {useState} from "react";
 import Menu from "./Menu";
 import Categories from "./Categories";
 import items from "./data";
-// import logo from "./logo.JPG";
 
 const allCategories = ["All Items", "Breakfast", "Entree", "Salads", "Sides", "Kids Meals", "Treats", "Drinks", "Sauce"];
 
@@ -25,7 +24,6 @@ const Cashier = () => {
       <section className="menu section">
         <div className="title">
           <br></br>
-          <div className="underline"></div>
         </div>
         <Categories
           categories={categories}
