@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import Menu from "./Menu";
 import Categories from "./Categories";
 import items from "./data";
 // import logo from "./logo.JPG";
 
-const allCategories = ["Breakfast", "Entree", "Salads", "Sides", "Kids Meals", "Treats", "Drinks", "Sauce"];
+const allCategories = ["All Items", "Breakfast", "Entree", "Salads", "Sides", "Kids Meals", "Treats", "Drinks", "Sauce"];
 
 const Customer = () => {
   const [menuItems, setMenuItems] = useState(items);
@@ -13,7 +13,7 @@ const Customer = () => {
 
   const filterItems = (category) => {
     setActiveCategory(category);
-    if (category === "all") {
+    if (category === "All Items") {
       setMenuItems(items);
       return;
     }
