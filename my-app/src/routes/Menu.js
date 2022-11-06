@@ -1,24 +1,38 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import Card from 'react-bootstrap/Card';
+import "bootstrap/dist/css/bootstrap.min.css";
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Container from 'react-bootstrap/Container';
 
 const Menu = ({ items }) => {
+  const columnsPerRow = 3;
+
+  const getColumnsForRow = () => {
+    return items.map((item) => {
+      const { id, title, desc, price } = item;
+
+      return (
+        <Col>
+          <Card style={{ width: '18rem' }}key={id} className="box">
+              <Card.Body>
+                  <Card.Title>{title}</Card.Title>
+                  <Card.Text>
+                  {price}
+                  </Card.Text>
+              </Card.Body>
+          </Card>
+        </Col>
+      );
+    });
+  };
+
   return (
-    <div className="grid">
-      {items.map((item) => {
-        const { id, title, desc, price } = item;
-        return (
-        <Card style={{ width: '18rem' }}key={id} className="box">
-            <Card.Body>
-                <Card.Title>{title}</Card.Title>
-                <Card.Text>
-                {price}
-                </Card.Text>
-            </Card.Body>
-        </Card>
-        
-        );
-      })}
-    </div>
+    <Container>
+      <Row xs={1} md={columnsPerRow}>
+          {getColumnsForRow()}
+      </Row>
+    </Container>  
   );
 };
 
