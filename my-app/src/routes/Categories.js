@@ -7,7 +7,7 @@ const Categories = ({ categories, filterItems, activeCategory }) => {
       {categories.map((category, index) => {
         return (
           <Button
-          variant="outline-primary"
+          variant="outline-danger"
           type="button" 
             className={`${
               activeCategory === category ? "filter-btn-active" : "filter-btn"

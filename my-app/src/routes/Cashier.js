@@ -5,7 +5,6 @@ import items from "./data";
 // import logo from "./logo.JPG";
 
 const allCategories = ["Breakfast", "Entree", "Salads", "Sides", "Kids Meals", "Treats", "Drinks", "Sauce"];
-console.log(allCategories)
 
 const Cashier = () => {
   const [menuItems, setMenuItems] = useState(items);
