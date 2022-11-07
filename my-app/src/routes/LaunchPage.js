@@ -20,8 +20,8 @@ const LaunchPage = () => {
             </h2>
             <br></br>
 
-            <button onClick={() => handleUpdate("Cashier")} type="button" class="btn btn-outline-danger btn-block">Cashier</button>
             <button onClick={() => handleUpdate("Customer")} type="button" class="btn btn-outline-danger btn-block">Customer</button>
+            <button onClick={() => handleUpdate("Cashier")} type="button" class="btn btn-outline-danger btn-block">Cashier</button>
             <button onClick={() => handleUpdate("Manager")} type="button" class="btn btn-outline-danger btn-block">Manager</button>
         </div>
 

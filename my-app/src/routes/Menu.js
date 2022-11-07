@@ -14,7 +14,7 @@ const Menu = ({ items }) => {
       const { id, title, price } = item;
 
       const handleSubmit = event => {
-        event.preventDefault();
+        event.preventDefault(); // prevent page from refreshing
       }
 
       const handleChange = () => {
