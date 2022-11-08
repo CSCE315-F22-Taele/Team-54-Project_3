@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import Menu from "./Menu";
 import Categories from "./Categories";
 import items from "./data";
+import OrderPanel from "./OrderPanel";
 
 const allCategories = ["All Items", "Breakfast", "Entree", "Salads", "Sides", "Kids Meals", "Treats", "Drinks", "Sauce"];
 
@@ -32,6 +33,7 @@ const Cashier = () => {
           filterItems={filterItems}
         />
         <Menu items={menuItems} />
+        <OrderPanel/>
       </section>
     </main>
   );
