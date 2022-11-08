@@ -4,6 +4,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import {useNavigate} from "react-router-dom";
+import { ArrowReturnLeft } from 'react-bootstrap-icons';
 
 const Manager = () => {
     let navigate = useNavigate()
@@ -15,7 +16,8 @@ const Manager = () => {
     return (
         <Navbar bg="dark" variant="dark" expand="lg">
       <Container>
-        <Navbar.Brand>Manager</Navbar.Brand>
+      <button onClick={() => handleUpdate("")} type="button" class="btn btn-outline-secondary"><ArrowReturnLeft color="black"/></button>
+        <Navbar.Brand>&nbsp;&nbsp; Manager</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
