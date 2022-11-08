@@ -1,11 +1,11 @@
 import React from "react";
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import LaunchPage from "./pages/MainPage/LaunchPage";
-import Cashier from "./pages/CashierCustomer";
-import Customer from "./pages/Customer";
-import Manager from "./pages/Manager";
+import Cashier from "./pages/CashierCustomer/Cashier";
+import Customer from "./pages/CashierCustomer/Customer";
+import Manager from "./pages/Manager/Manager";
 import Inventory from "./pages/Manager/Inventory";
-import MenuEditor from "./pages/MenuEditor";
+import MenuEditor from "./pages/Manager/MenuEditor";
 
 const App = () => {
     return <div>

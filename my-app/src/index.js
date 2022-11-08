@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
-import "./routes/Cashier.css";
+import "./pages/CashierCustomer/Cashier.css";
 
 ReactDOM.render(<App/>, document.getElementById("root"))
