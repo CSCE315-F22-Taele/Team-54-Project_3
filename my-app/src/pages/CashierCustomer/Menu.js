@@ -23,7 +23,7 @@ const Menu = ({ items }) => {
 
       return (
         <Col>
-            <Card style={{ width: '18rem', alignItems: 'center', justifyContent: 'center'}} key={id} className="box">
+            <Card style={{ width: '18rem', alignItems: 'center', justifyContent: 'center', background: "none", color: "black"}} key={id} className="box">
                 <Card.Body>
                     <Card.Title className="text-center">{title}</Card.Title>
                     <Card.Text className="text-center">${price}</Card.Text>
@@ -33,7 +33,7 @@ const Menu = ({ items }) => {
                       <Form.Group>
                           <Form.Control  type="text" placeholder="Enter quantity" />
                           {/* <div class="col-md-12 text-center"> */}
-                            <button class="btn btn-primary " style={{alignSelf: 'center', justifyContent: 'center'}} type="submit">Order</button>
+                            <button class="btn btn-danger " style={{alignSelf: 'center', justifyContent: 'center'}} type="submit">Order</button>
                           {/* </div> */}
                       </Form.Group>
                   </Form>

@@ -47,7 +47,6 @@ const menu = [
         category: 'Sauce',
         price: 1.00
     }
-
 ];
 
 export default menu;
