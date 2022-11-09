@@ -32,8 +32,12 @@ const Cashier = () => {
           activeCategory={activeCategory}
           filterItems={filterItems}
         />
-        <Menu items={menuItems} />
-        <OrderPanel/>
+        <div class="menu-align">
+          <Menu items={menuItems} />
+        </div>
+        <div class="order-align">
+          <OrderPanel/>
+        </div>
       </section>
     </main>
   );

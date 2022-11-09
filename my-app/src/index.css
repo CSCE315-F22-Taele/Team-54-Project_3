@@ -17,8 +17,18 @@
     border-radius: 150 / 2;
 }
 
-.order-panel {
-    margin-block: 2rem;
+.orders {
+    margin: 4rem;
+}
+
+.menu-align {
+    position: absolute;
     display: flex;
-    justify-content: left;
+    left: 0px;
+}
+
+.order-align {
+    position: absolute;
+    display: flex;
+    left: 80%;
 }

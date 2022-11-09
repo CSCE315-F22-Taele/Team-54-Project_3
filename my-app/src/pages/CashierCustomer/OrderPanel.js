@@ -3,12 +3,10 @@ import { FileX } from "react-bootstrap-icons";
 
 const OrderPanel = () => {
     return (
-        <div class="order-panel">
-            <h2>Orders</h2>
-            
-            <div>
-                <h2>Total Cost</h2>
-            </div>
+        <div class="orders">
+            <h3>Orders</h3>
+
+            <h3>Total Cost</h3>
         </div>
     );
 };
