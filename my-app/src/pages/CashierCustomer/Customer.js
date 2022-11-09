@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import Menu from "./Menu";
 import Categories from "./Categories";
 import items from "./data";
-// import logo from "./logo.JPG";
+import OrderPanel from "./OrderPanel";
 
 const allCategories = ["All Items", "Breakfast", "Entree", "Salads", "Sides", "Kids Meals", "Treats", "Drinks", "Sauce"];
 
@@ -33,7 +33,12 @@ const Customer = () => {
           activeCategory={activeCategory}
           filterItems={filterItems}
         />
-        <Menu items={menuItems} />
+        <div class="menu-align">
+          <Menu items={menuItems} />
+        </div>
+        <div class="order-align">
+          <OrderPanel/>
+        </div>
       </section>
     </main>
   );
