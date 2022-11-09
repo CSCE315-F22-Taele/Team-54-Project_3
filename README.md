@@ -30,4 +30,4 @@ The website can be found at the following URL:
 
 Alternatively:
 1. Clone this repository locally
-2. Compile and run using the command `npm run build`
+2. Compile and run using the command `npm start`
