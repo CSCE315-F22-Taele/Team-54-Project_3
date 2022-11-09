@@ -10,23 +10,19 @@ The website is publicly hosted on Render. All store data is maintained using an 
 
 #### Customer Functionality:
 - View store menu items and prices, sorted by categories
-- Add quantities of menu items to an order and view updated order in real-time
-- View total price of order, updating in real-time.
-- Finalize order and update SQL database
+- Add quantities of menu items to an order
 
 #### Cashier Functionality:
 - View store menu items and prices, sorted by categories
-- Add quantities of menu items to an order and view updated order in real-time
-- View total price of order, updating in real-time
-- Finalize order and update SQL database
+- Add quantities of menu items to an order
 
 #### Manager Functionality:
-- View complete store inventory and menu
+- To be implemented
 
 ---
 ### How to Run
 
-The website can be found at the following URL:
+The website can be found at the following URL: 
 
 Alternatively:
 1. Clone this repository locally
