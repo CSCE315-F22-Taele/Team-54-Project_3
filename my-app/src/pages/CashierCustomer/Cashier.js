@@ -23,7 +23,6 @@ const Cashier = () => {
   
   return (
     <main>
-      <section className="menu section">
         <div className="title">
           <br></br>
         </div>
@@ -32,13 +31,14 @@ const Cashier = () => {
           activeCategory={activeCategory}
           filterItems={filterItems}
         />
-        <div class="menu-align">
-          <Menu items={menuItems} />
+        <div class="container">
+          <div class="menu-align">
+            <Menu items={menuItems} />
+          </div>
+          <div class="order-align">
+            <OrderPanel/>
+          </div>
         </div>
-        <div class="order-align">
-          <OrderPanel/>
-        </div>
-      </section>
     </main>
   );
 };

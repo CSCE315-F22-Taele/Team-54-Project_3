@@ -17,18 +17,19 @@
     border-radius: 150 / 2;
 }
 
-.orders {
-    margin: 4rem;
-}
-
-.menu-align {
-    position: absolute;
-    display: flex;
-    right: 20%;
-}
-
 .order-align {
     position: absolute;
     display: flex;
     left: 80%;
+    padding: 20px;
+}
+
+.menu-align {
+    padding: 20px;
+    float: left;
+    width: 90%;
+}
+
+.container {
+    padding: 20px;
 }

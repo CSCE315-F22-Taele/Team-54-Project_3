@@ -22,7 +22,6 @@ const Customer = () => {
   };
   return (
     <main>
-      <section className="menu section">
         <div className="title">
           {/* <img src={logo} alt="logo" className="logo" /> */}
           <h2 style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>Menu List</h2>
@@ -33,13 +32,14 @@ const Customer = () => {
           activeCategory={activeCategory}
           filterItems={filterItems}
         />
-        <div class="menu-align">
-          <Menu items={menuItems} />
+        <div class="container">
+          <div class="menu-align">
+            <Menu items={menuItems} />
+          </div>
+          <div class="order-align">
+            <OrderPanel/>
+          </div>
         </div>
-        <div class="order-align">
-          <OrderPanel/>
-        </div>
-      </section>
     </main>
   );
 };

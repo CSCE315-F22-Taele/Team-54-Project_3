@@ -46,13 +46,7 @@ const menu = [
         title: 'Chick-Fil-A Sauce',
         category: 'Sauce',
         price: 1.00
-    },
-    {
-        id: 9,
-        title: 'Baby',
-        category: 'Breakfast',
-        price: 1500.00
-    },
+    }
 
 ];
 
