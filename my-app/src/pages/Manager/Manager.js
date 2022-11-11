@@ -24,6 +24,7 @@ const Manager = () => {
             <Nav.Link onClick={() => handleUpdate("Inventory")}>Inventory</Nav.Link>
             <Nav.Link onClick={() => handleUpdate("MenuEditor")}>MenuEditor</Nav.Link>
             <NavDropdown title="Order Trends" id="basic-nav-dropdown">
+              {/* TODO: Need routing in App.js */}
               <NavDropdown.Item href="#report/sales">Sales Report</NavDropdown.Item>
               <NavDropdown.Item href="#report/excess">Excess Report</NavDropdown.Item>
               <NavDropdown.Item href="#report/restock">Restock Report</NavDropdown.Item>

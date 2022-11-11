@@ -15,7 +15,7 @@ const MenuEditor = () => {
     return (
         <Navbar bg="dark" variant="dark" expand="lg">
       <Container>
-      <button onClick={() => handleUpdate("Manager")} type="button" class="btn btn-outline-secondary"><ArrowReturnLeft color="black"/></button>
+      <button onClick={() => handleUpdate("Manager")} type="button" class="btn btn-outline-secondary"><ArrowReturnLeft color="white"/></button>
         <Navbar.Brand>&nbsp;&nbsp; Manager</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
