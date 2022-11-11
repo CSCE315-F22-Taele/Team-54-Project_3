@@ -6,7 +6,7 @@ import Container from 'react-bootstrap/Container';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import {useNavigate} from "react-router-dom";
 import { ArrowReturnLeft } from 'react-bootstrap-icons';
-import inventory from './InventoryData';
+import inventory from './inventoryData';
 
 const Inventory = () => {
     let navigate = useNavigate()
