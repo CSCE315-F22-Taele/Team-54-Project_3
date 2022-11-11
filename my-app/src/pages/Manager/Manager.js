@@ -14,26 +14,30 @@ const Manager = () => {
     };
 
     return (
+      <div>
         <Navbar bg="dark" variant="dark" expand="lg">
-      <Container>
-      <button onClick={() => handleUpdate("")} type="button" class="btn btn-outline-secondary"><ArrowReturnLeft color="white"/></button>
-        <Navbar.Brand>&nbsp;&nbsp; Manager</Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto">
-            <Nav.Link onClick={() => handleUpdate("Inventory")}>Inventory</Nav.Link>
-            <Nav.Link onClick={() => handleUpdate("MenuEditor")}>MenuEditor</Nav.Link>
-            <NavDropdown title="Order Trends" id="basic-nav-dropdown">
-              {/* TODO: Need routing in App.js */}
-              <NavDropdown.Item href="#report/sales">Sales Report</NavDropdown.Item>
-              <NavDropdown.Item href="#report/excess">Excess Report</NavDropdown.Item>
-              <NavDropdown.Item href="#report/restock">Restock Report</NavDropdown.Item>
-            </NavDropdown>
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
-
+          <Container>
+            <button onClick={() => handleUpdate("")} type="button" class="btn btn-outline-secondary"><ArrowReturnLeft color="white"/></button>
+            <Navbar.Brand>&nbsp;&nbsp; Manager</Navbar.Brand>
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse id="basic-navbar-nav">
+              <Nav className="me-auto">
+                <Nav.Link onClick={() => handleUpdate("Inventory")}>Inventory</Nav.Link>
+                <Nav.Link onClick={() => handleUpdate("MenuEditor")}>MenuEditor</Nav.Link>
+                <NavDropdown title="Order Trends" id="basic-nav-dropdown">
+                  {/* TODO: Need routing in App.js */}
+                  <NavDropdown.Item href="#report/sales">Sales Report</NavDropdown.Item>
+                  <NavDropdown.Item href="#report/excess">Excess Report</NavDropdown.Item>
+                  <NavDropdown.Item href="#report/restock">Restock Report</NavDropdown.Item>
+                </NavDropdown>
+              </Nav>
+            </Navbar.Collapse>
+          </Container>
+        </Navbar>
+        <h1 className="font-weight-light display-1 text-center" style={{display: 'flex',  justifyContent:'center', alignItems:'center', height: '75vh'}}>
+          Welcome, Manager!
+        </h1>
+      </div>
     )
 }
 
