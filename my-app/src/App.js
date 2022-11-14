@@ -6,6 +6,7 @@ import Customer from "./pages/CashierCustomer/Customer";
 import Manager from "./pages/Manager/Manager";
 import Inventory from "./pages/Manager/Inventory";
 import MenuEditor from "./pages/Manager/MenuEditor";
+import MapContainer from "./pages/CashierCustomer/MapContainer";
 
 const App = () => {
     return <div>
@@ -17,6 +18,7 @@ const App = () => {
                 <Route exact path ="/Manager" element={<Manager/>}/>
                 <Route exact path ="/Inventory" element={<Inventory/>}/>
                 <Route exact path ="/MenuEditor" element={<MenuEditor/>}/>
+                <Route exact path ="/MapContainer" element={<MapContainer/>}/>
             </Routes>
         </Router>
     </div>;
