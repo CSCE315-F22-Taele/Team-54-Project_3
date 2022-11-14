@@ -33,3 +33,26 @@
 .container {
     padding: 20px;
 }
+
+.card-title {
+    color: #ee8301;
+}
+
+.fw-md {
+font-weight: 800 !important;
+}
+
+.h-lg {
+height: 35rem;
+}
+
+.font-1-5 {
+font-size: 1.5rem;
+}
+
+.image-wrapper-sm {
+object-fit: cover;
+border-radius: 50%;
+height: 15rem;
+width: 100%;
+}
