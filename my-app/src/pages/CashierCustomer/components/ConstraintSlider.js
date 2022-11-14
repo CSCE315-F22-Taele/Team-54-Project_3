@@ -1,6 +1,6 @@
 import React from 'react';
 import { Slider } from 'antd';
-import 'antd/dist/antd.css';
+import 'antd/dist/antd.min.css';
 
 const ConstraintSlider = (({value, onChange}) => {
   return (
