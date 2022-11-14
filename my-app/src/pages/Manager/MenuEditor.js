@@ -6,7 +6,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import Table from 'react-bootstrap/Table';
 import {useNavigate} from "react-router-dom";
 import { ArrowReturnLeft } from 'react-bootstrap-icons';
-import menu from '../../components/Cards/menuData';
+import menu from '../CashierCustomer/components/Cards/menuData';
 
 const MenuEditor = () => {
   let navigate = useNavigate()

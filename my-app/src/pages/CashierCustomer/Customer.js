@@ -1,8 +1,8 @@
 import React, {useState} from "react";
-import Menu from "../../components/Cards/Menu";
-import Categories from "../../components/NavBar/Categories";
-import items from "../../components/Cards/menuData";
-import OrderPanel from "../../components/Panel/OrderPanel";
+import Menu from "./components/Cards/Menu";
+import Categories from "./components/NavBar/Categories";
+import items from "./components/Cards/menuData";
+import OrderPanel from "./components/Panel/OrderPanel";
 
 const allCategories = ["All Items", "Breakfast", "Entree", "Salads", "Sides", "Kids Meals", "Treats", "Drinks", "Sauce"];
 
