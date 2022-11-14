@@ -6,7 +6,6 @@ const MapMarker = (({ name, key }) => {
     <div key={key}>
         <span className="brand-red">{name}</span>
         <ArrowDownCircleFill/>
-        console.log("MapMarker")
     </div>
   );
 });

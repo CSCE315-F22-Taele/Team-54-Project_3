@@ -1,17 +1,22 @@
 import React from 'react';
+import {useNavigate} from "react-router-dom";
 
-// TODO: info is bad naming.
 const PlaceCard = (({ info, key }) => {
-  const { address, distanceText, name, openNow, photoUrl, timeText } = info;
+  let navigate = useNavigate()
+
+    const handleUpdate = (page) => {
+        navigate(`/${page}`);
+  };
+
+  const { address, distanceText, name, openNow, photoUrl } = info;
   return (
     <div key={key} className="col-3 w-100 mx-4 my-4">
-      <img src={photoUrl} className="image-wrapper-sm mb-2" alt="ice-cream" />
+      <img src={photoUrl} className="image-wrapper-sm mb-2" alt="chicken-hehe" />
       <div className="card">
         <div className="card-body">
-          <h5 className="card-title">{name}</h5>
+          <button onClick={() => handleUpdate("Customer")} type="button" class="btn btn-outline-danger btn-block">{name}</button>
           <span className="d-block mb-1">{address}</span>
           <span className="d-block">{distanceText}</span>
-          <span className="d-block">{timeText}</span>
         </div>
         <ul className="list-group list-group-flush">
           {openNow ?

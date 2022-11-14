@@ -5,25 +5,19 @@ import MapMarker from './components/MapMarker';
 import PlaceCard from './components/PlaceCard';
 import ConstraintSlider from './components/ConstraintSlider';
 
-// import { Button, Input, Divider, message } from 'antd';
-import {Button, Form, Alert} from 'react-bootstrap';
-
-const SG_COOR = { lat: 1.3521, lng: 103.8198 };
-const handleSubmit = event => {
-    event.preventDefault(); // prevent page from refreshing
-}
+const CSTAT = { lat: 30.622370, lng: -96.325851 };
 
 class MapsContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      constraints: [{ name: '', time: 0 }],
+      constraints: [{ name: '', distance: 0 }],
       searchResults: [],
       mapsLoaded: false,
       markers: [],
       map: {},
       mapsApi: {},
-      singaporeLatLng: {},
+      cstatLatLng: {},
       autoCompleteService: {},
       placesService: {},
       geoCoderService: {},
@@ -44,41 +38,28 @@ class MapsContainer extends Component {
   updateConstraintTime = ((key, value) => {
     const prevConstraints = this.state.constraints;
     const constraints = Object.assign([], prevConstraints);
-    constraints[key].time = value;
+    constraints[key].distance = value;
     this.setState({ constraints });
   });
 
   // Adds a Marker to the GoogleMaps component
   addMarker = ((lat, lng, name) => {
-    console.log("add marker")
     const prevMarkers = this.state.markers;
     const markers = Object.assign([], prevMarkers);
 
-    // If name already exists in marker list just replace lat & lng.
+    // If name already exists in marker list, just replace lat & lng.
     let newMarker = true;
     for (let i = 0; i < markers.length; i++) {
       if (markers[i].name === name) {
         newMarker = false;
         markers[i].lat = lat;
         markers[i].lng = lng;
-        // message.success(`Updated "${name}" Marker`);
-        <Alert variant="success" style={{ width: "42rem" }}>
-            <Alert.Heading>
-            Updated "${name}" Marker
-            </Alert.Heading>
-        </Alert>
         break;
       }
     }
     // Name does not exist in marker list. Create new marker
     if (newMarker) {
-        markers.push({ lat, lng, name });
-    //   message.success(`Added new "${name}" Marker`);
-        <Alert variant="success" style={{ width: "42rem" }}>
-            <Alert.Heading>
-            Added new "${name}" Marker
-            </Alert.Heading>
-        </Alert>
+      markers.push({ lat, lng, name });
     }
 
     this.setState({ markers });
@@ -91,7 +72,7 @@ class MapsContainer extends Component {
       mapsLoaded: true,
       map,
       mapsApi,
-      singaporeLatLng: new mapsApi.LatLng(SG_COOR.lat, SG_COOR.lng),
+      cstatLatLng: new mapsApi.LatLng(CSTAT.lat, CSTAT.lng),
       autoCompleteService: new mapsApi.places.AutocompleteService(),
       placesService: new mapsApi.places.PlacesService(map),
       geoCoderService: new mapsApi.Geocoder(),
@@ -99,71 +80,57 @@ class MapsContainer extends Component {
     });
   });
 
-  // With the constraints, find some places serving ice-cream
   handleSearch = (() => {
     const { markers, constraints, placesService, directionService, mapsApi } = this.state;
     if (markers.length === 0) {
-    //   message.warn('Add a constraint and try again!');
-        <Alert variant="danger" style={{ width: "42rem" }}>
-            <Alert.Heading>
-            Add a constraint and try again!
-            </Alert.Heading>
-        </Alert>
       return;
     }
     const filteredResults = [];
     const marker = markers[0];
-    const timeLimit = constraints[0].time;
+    const distanceLimit = constraints[0].distance;
     const markerLatLng = new mapsApi.LatLng(marker.lat, marker.lng);
 
     const placesRequest = {
       location: markerLatLng,
-      // radius: '30000', // Cannot be used with rankBy. Pick your poison!
-      type: ['restaurant', 'cafe'], // List of types: https://developers.google.com/places/supported_types
-      query: 'ice cream',
-      rankBy: mapsApi.places.RankBy.DISTANCE, // Cannot be used with radius.
+      type: ['restaurant', 'cafe'],
+      query: 'Chick-fil-A',
+      rankBy: mapsApi.places.RankBy.DISTANCE,
     };
 
-    // First, search for ice cream shops.
+    // First, search for chick-fil-a locations.
     placesService.textSearch(placesRequest, ((response) => {
-      // Only look at the nearest top 5.
-      const responseLimit = Math.min(5, response.length);
+      const responseLimit = Math.min(10, response.length);
+      console.log(response)
       for (let i = 0; i < responseLimit; i++) {
-        const iceCreamPlace = response[i];
-        const { rating, name } = iceCreamPlace;
-        const address = iceCreamPlace.formatted_address; // e.g 80 mandai Lake Rd,
-        const priceLevel = iceCreamPlace.price_level; // 1, 2, 3...
+        const cfa = response[i];
+        const { name } = cfa;
+        const address = cfa.formatted_address;
         let photoUrl = '';
         let openNow = false;
-        if (iceCreamPlace.opening_hours) {
-          openNow = iceCreamPlace.opening_hours.open_now; // e.g true/false
+        if (cfa.opening_hours) {
+          openNow = cfa.opening_hours.open_now;
         }
-        if (iceCreamPlace.photos && iceCreamPlace.photos.length > 0) {
-          photoUrl = iceCreamPlace.photos[0].getUrl();
+        if (cfa.photos && cfa.photos.length > 0) {
+          photoUrl = cfa.photos[0].getUrl();
         }
 
-        // Second, For each iceCreamPlace, check if it is within acceptable travelling distance
         const directionRequest = {
           origin: markerLatLng,
-          destination: address, // Address of ice cream place
+          destination: address,
           travelMode: 'DRIVING',
         }
         directionService.route(directionRequest, ((result, status) => {
           if (status !== 'OK') { return }
-          const travellingRoute = result.routes[0].legs[0]; // { duration: { text: 1mins, value: 600 } }
-          const travellingTimeInMinutes = travellingRoute.duration.value / 60;
-          if (travellingTimeInMinutes < timeLimit) {
-            const distanceText = travellingRoute.distance.text; // 6.4km
-            const timeText = travellingRoute.duration.text; // 11 mins
+          const travellingRoute = result.routes[0].legs[0];
+          console.log("limit", distanceLimit)
+          if (parseFloat(travellingRoute.distance.text, 10) < distanceLimit) {
+            const distanceText = travellingRoute.distance.text;
             filteredResults.push({
               name,
-              rating,
               address,
               openNow,
-              priceLevel,
               photoUrl,
-              distanceText,
-              timeText,
+              distanceText
             });
           }
           // Finally, Add results to state
@@ -174,47 +141,41 @@ class MapsContainer extends Component {
   });
 
   render() {
-    const { constraints, mapsLoaded, singaporeLatLng, markers, searchResults } = this.state;
+    const { constraints, mapsLoaded, cstatLatLng, markers, searchResults } = this.state;
     const { autoCompleteService, geoCoderService } = this.state; // Google Maps Services
     return (
       <div className="w-100 d-flex py-4 flex-wrap justify-content-center">
-        <h1 className="w-100 fw-md">Find Some Ice-Creams!</h1>
+        <h1 className="w-100" style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>Find a nearby Chick-fil-A location</h1>
         {/* Constraints section */}
         <section className="col-4">
           {mapsLoaded ?
             <div>
               {constraints.map((constraint, key) => {
-                const { name, time } = constraint;
+                const { name, distance } = constraint;
                 return (
                   <div key={key} className="mb-4">
                     <div className="d-flex mb-2">
-                        <Form className="col-4 mr-2" placeholder="Name" onChange={(event) => this.updateConstraintName(event, key)} />
-                            <Form onSubmit={handleSubmit} onChange={(event) => this.updateConstraintName(event, key)}>
-                            <Form.Group>
-                                <Form.Control  type="text" placeholder="Name" />
-                            </Form.Group>
-                        </Form>
-                        <MapAutoComplete
-                            autoCompleteService={autoCompleteService}
-                            geoCoderService={geoCoderService}
-                            singaporeLatLng={singaporeLatLng}
-                            markerName={name}
-                            addMarker={this.addMarker}
-                        />
+                      <MapAutoComplete
+                        autoCompleteService={autoCompleteService}
+                        geoCoderService={geoCoderService}
+                        cstatLatLng={cstatLatLng}
+                        markerName={name}
+                        addMarker={this.addMarker}
+                      />
                     </div>
+                    <br></br>
                     <ConstraintSlider
-                      value={time}
+                      value={distance}
                       onChange={(value) => this.updateConstraintTime(key, value)}
-                      text="Minutes away by car"
                     />
-                    {/* <Divider /> */}
+                    {/* Search Button */}
+                    <button className="mt-4 btn btn-outline-danger" type="primary" size="large" onClick={this.handleSearch}>Search</button>
                   </div>
                 );
               })}
             </div>
             : null
           }
-          console.log("MAPauto")
         </section>
 
         {/* Maps Section */}
@@ -225,9 +186,9 @@ class MapsContainer extends Component {
               libraries: ['places', 'directions']
             }}
             defaultZoom={11}
-            defaultCenter={{ lat: SG_COOR.lat, lng: SG_COOR.lng }}
+            defaultCenter={{ lat: CSTAT.lat, lng: CSTAT.lng }}
             yesIWantToUseGoogleMapApiInternals={true}
-            onGoogleApiLoaded={({ map, maps }) => this.apiHasLoaded(map, maps)} // "maps" is the mapApi. Bad naming but that's their library.
+            onGoogleApiLoaded={({ map, maps }) => this.apiHasLoaded(map, maps)}
           >
             {/* Pin markers on the Map*/}
             {markers.map((marker, key) => {
@@ -239,16 +200,12 @@ class MapsContainer extends Component {
           </GoogleMapReact>
         </section>
 
-        {/* Search Button */}
-        <Button className="mt-4 fw-md" type="primary" size="large" onClick={this.handleSearch}>Search!</Button>
-
         {/* Results section */}
         {searchResults.length > 0 ?
           <>
-            {/* <Divider /> */}
             <section className="col-12">
+            <hr color="red"/>
               <div className="d-flex flex-column justify-content-center">
-                <h1 className="mb-4 fw-md">Tadah! Ice-Creams!</h1>
                 <div className="d-flex flex-wrap">
                   {searchResults.map((result, key) => (
                     <PlaceCard info={result} key={key} />

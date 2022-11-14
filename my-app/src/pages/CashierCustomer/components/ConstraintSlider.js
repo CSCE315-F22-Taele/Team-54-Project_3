@@ -1,18 +1,14 @@
 import React from 'react';
-// import {Slider } from 'antd';
-// import RangeSlider from 'react-bootstrap-range-slider';
-import { CarFront } from 'react-bootstrap-icons';
+import { Slider } from 'antd';
+import 'antd/dist/antd.css';
 
-const ConstraintSlider = (({ value, onChange, text }) => {
+const ConstraintSlider = (({value, onChange}) => {
   return (
-    <section className="d-flex flex-column" >
-        <div className="d-flex w-100 align-items-center">
-            <CarFront color="black"/>
-            {/* <RangeSlider className="w-100" value={value} min={0} max={60} onChange={onChange} /> */}
-            <label htmlFor="customRange2" className="form-label">Enter minutes</label>
-            <input type="range" className="form-range" min={0} max={60} id="customRange2" onChange={onChange}></input>
-        </div>
-        <span className="text-center">{text}</span>
+    < section className="d-flex flex-column" >
+      <div className="d-flex w-100 align-items-center">
+        <h6>Enter distance in mi: &nbsp; &nbsp;</h6>
+        <Slider className="w-100" value={value} min={0} max={60} onChange={onChange} />
+      </div>
     </section >
   );
 });

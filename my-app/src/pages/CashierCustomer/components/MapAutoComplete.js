@@ -1,6 +1,5 @@
-import React, { Component, useCallback, useState, useEffect } from 'react';
-import { Typeahead } from 'react-bootstrap-typeahead';
-
+import React, { Component } from 'react';
+import { AutoComplete } from 'antd';
 
 class MapAutoComplete extends Component {
   constructor(props) {
@@ -8,16 +7,14 @@ class MapAutoComplete extends Component {
     this.state = {
       suggestionts: [],
       dataSource: [],
-      singaporeLatLng: this.props.singaporeLatLng,
+      cstatLatLng: this.props.cstatLatLng,
       autoCompleteService: this.props.autoCompleteService,
       geoCoderService: this.props.geoCoderService,
     }
   }
 
-  // Runs after clicking away from the input field or pressing 'enter'.
   // Geocode the location selected to be created as a marker.
   onSelect = ((value) => {
-    console.log("onSelect")
     this.state.geoCoderService.geocode({ address: value }, ((response) => {
       const { location } = response[0].geometry;
       this.props.addMarker(location.lat(), location.lng(), this.props.markerName);
@@ -27,14 +24,13 @@ class MapAutoComplete extends Component {
 
   // Runs a search on the current value as the user types in the AutoComplete field.
   handleSearch = ((value) => {
-    console.log("handleSearch")
-    const { autoCompleteService, singaporeLatLng } = this.state;
+    const { autoCompleteService, cstatLatLng } = this.state;
     // Search only if there is a string
     if (value.length > 0) {
       const searchQuery = {
         input: value,
-        location: singaporeLatLng, // Search in Singapore
-        radius: 30000, // With a 30km radius
+        location: cstatLatLng, // Search in College Station
+        radius: 30000,
       };
       autoCompleteService.getQueryPredictions(searchQuery, ((response) => {
         // The name of each GoogleMaps suggestion object is in the "description" field
@@ -49,13 +45,13 @@ class MapAutoComplete extends Component {
   render() {
     const { dataSource } = this.state;
     return (
-      <Typeahead
+      <AutoComplete
         className="w-100"
-        options={dataSource}
-        onKeyDown={this.onSelect}
-        onInputChange={this.handleSearch}
-        placeholder="Address"
-        id="yurh"
+        dataSource={dataSource}
+        onSelect={this.onSelect}
+        onSearch={this.handleSearch}
+        placeholder="Enter your local address ..."
+        status="error"
       />
     );
   }
