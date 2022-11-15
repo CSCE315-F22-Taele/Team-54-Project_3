@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
-import MapAutoComplete from './components/GoogleMap/MapAutoComplete';
-import MapMarker from './components/GoogleMap/MapMarker';
-import PlaceCard from './components/GoogleMap/PlaceCard';
-import ConstraintSlider from './components/GoogleMap/ConstraintSlider';
+import MapAutoComplete from '../../components/GoogleMap/MapAutoComplete';
+import MapMarker from '../../components/GoogleMap/MapMarker';
+import PlaceCard from '../../components/GoogleMap/PlaceCard';
+import ConstraintSlider from '../../components/GoogleMap/ConstraintSlider';
 
 const CSTAT = { lat: 30.622370, lng: -96.325851 };
 
