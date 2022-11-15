@@ -4,8 +4,8 @@ import LaunchPage from "../pages/MainPage/LaunchPage";
 import Cashier from "../pages/CashierCustomer/Cashier";
 import Customer from "../pages/CashierCustomer/Customer";
 import Manager from "../pages/Manager/Manager";
-import Inventory from "../pages/Manager/Inventory";
-import MenuEditor from "../pages/Manager/MenuEditor";
+import Inventory from "../pages/Manager/Inventory/Inventory";
+import MenuEditor from "../pages/Manager/MenuEditor/MenuEditor";
 import MapContainer from "../pages/CashierCustomer/MapContainer";
 
 const App = () => {
