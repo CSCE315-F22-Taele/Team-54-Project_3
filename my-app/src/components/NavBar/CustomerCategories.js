@@ -7,7 +7,11 @@ const Categories = ({ categories, filterItems, activeCategory }) => {
   let navigate = useNavigate()
 
   const handleUpdate = (page) => {
-      navigate(`/${page}`);
+      if (page === "") {
+        navigate(`/`);
+      } else {
+        navigate(`/Customer/${page}`);
+      }
   };
   return (
     <div className="btn-container">

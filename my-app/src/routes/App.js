@@ -7,6 +7,9 @@ import Manager from "../pages/Manager/Manager";
 import Inventory from "../pages/Manager/Inventory/Inventory";
 import MenuEditor from "../pages/Manager/MenuEditor/MenuEditor";
 import MapContainer from "../pages/Customer/MapContainer";
+import SalesReport from "../pages/Manager/SalesReport";
+import ExcessReport from "../pages/Manager/ExcessReport";
+import RestockReport from "../pages/Manager/RestockReport";
 
 const App = () => {
     return <div>
@@ -16,9 +19,12 @@ const App = () => {
                 <Route exact path ="/Cashier" element={<Cashier/>}/>
                 <Route exact path ="/Customer" element={<Customer/>}/>
                 <Route exact path ="/Manager" element={<Manager/>}/>
-                <Route exact path ="/Inventory" element={<Inventory/>}/>
-                <Route exact path ="/MenuEditor" element={<MenuEditor/>}/>
-                <Route exact path ="/MapContainer" element={<MapContainer/>}/>
+                <Route exact path ="/Manager/Inventory" element={<Inventory/>}/>
+                <Route exact path ="/Manager/MenuEditor" element={<MenuEditor/>}/>
+                <Route exact path ="/Customer/MapContainer" element={<MapContainer/>}/>
+                <Route exact path ="/Manager/Reports/Sales" element={<SalesReport/>}/>
+                <Route exact path ="/Manager/Reports/Excess" element={<ExcessReport/>}/>
+                <Route exact path ="/Manager/Reports/Restock" element={<RestockReport/>}/>
             </Routes>
         </Router>
     </div>;

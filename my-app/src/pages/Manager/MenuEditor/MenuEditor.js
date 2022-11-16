@@ -26,11 +26,9 @@ const MenuEditor = () => {
               <Nav.Link onClick={() => handleUpdate("Inventory")}>Inventory</Nav.Link>
               <Nav.Link style={{color:"red"}} onClick={() => handleUpdate("MenuEditor")}>MenuEditor</Nav.Link>
               <NavDropdown title="Order Trends" id="basic-nav-dropdown">
-                <NavDropdown.Item href="#action/3.1">Sales Report</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">
-                  Excess Report
-                </NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3">Restock Report</NavDropdown.Item>
+                <NavDropdown.Item href="/Manager/Reports/Sales">Sales Report</NavDropdown.Item>
+                <NavDropdown.Item href="/Manager/Reports/Excess">Excess Report</NavDropdown.Item>
+                <NavDropdown.Item href="/Manager/Reports/Restock">Restock Report</NavDropdown.Item>
               </NavDropdown>
             </Nav>
           </Navbar.Collapse>
