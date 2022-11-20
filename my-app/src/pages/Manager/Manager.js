@@ -1,4 +1,5 @@
 import React from "react";
+import { useEffect } from "react";
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
@@ -16,6 +17,24 @@ const Manager = () => {
           navigate(`/Manager/${page}`);
         }
     };
+    const googleTranslateElementInit = () => {
+      new window.google.translate.TranslateElement(
+        {
+          pageLanguage: "en",
+          autoDisplay: false
+        },
+        "google_translate_element"
+      );
+    };
+    useEffect(() => {
+      var addScript = document.createElement("script");
+      addScript.setAttribute(
+        "src",
+        "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+      );
+      document.body.appendChild(addScript);
+      window.googleTranslateElementInit = googleTranslateElementInit;
+    }, []);
 
     return (
       <div>
@@ -36,6 +55,7 @@ const Manager = () => {
                 </NavDropdown>
               </Nav>
             </Navbar.Collapse>
+            <div id="google_translate_element"></div>
           </Container>
         </Navbar>
         <h1 className="font-weight-light display-1 text-center" 
