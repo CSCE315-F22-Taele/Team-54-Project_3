@@ -14,7 +14,7 @@ const PlaceCard = (({ info, key }) => {
       <img src={photoUrl} className="image-wrapper-sm mb-2" alt="chicken-hehe" />
       <div className="card">
         <div className="card-body">
-          <button onClick={() => handleUpdate("Customer")} type="button" class="btn btn-outline-danger btn-block">{name}</button>
+          <button onClick={() => handleUpdate("Customer")} type="button" className="btn btn-outline-danger btn-block">{name}</button>
           <span className="d-block mb-1">{address}</span>
           <span className="d-block">{distanceText}</span>
         </div>

@@ -3,7 +3,7 @@ import { FileX } from "react-bootstrap-icons";
 
 const OrderPanel = () => {
     return (
-        <div class="orders">
+        <div className="orders">
             <h3>Orders</h3>
 
             <h3>Total Cost</h3>

@@ -1,11 +1,12 @@
 import React from "react";
 import { useEffect } from "react";
-import Button from 'react-bootstrap/Button';
+import {Button, Dropdown} from 'react-bootstrap';
 import {useNavigate} from "react-router-dom";
-import { ArrowReturnLeft, GeoAltFill } from 'react-bootstrap-icons';
+import { ArrowReturnLeft, GeoAltFill, Cart4 } from 'react-bootstrap-icons';
+import Cart from "../Cards/Cart";
 
 const Categories = ({ categories, filterItems, activeCategory }) => {
-  let navigate = useNavigate()
+  let navigate = useNavigate()  
 
   const handleUpdate = (page) => {
       if (page === "") {
@@ -34,8 +35,8 @@ const Categories = ({ categories, filterItems, activeCategory }) => {
   }, []);
   return (
     <div className="btn-container">
-      <button onClick={() => handleUpdate("")} type="button" class="btn btn-outline-secondary"><ArrowReturnLeft color="black"/></button>
-      <button onClick={() => handleUpdate("MapContainer")} type="button" class="btn btn-outline-secondary"><GeoAltFill color="blue"/></button>
+      <button onClick={() => handleUpdate("")} type="button" className="btn btn-outline-secondary"><ArrowReturnLeft color="black"/></button>
+      <button onClick={() => handleUpdate("MapContainer")} type="button" className="btn btn-outline-secondary"><GeoAltFill color="blue"/></button>
       {categories.map((category, index) => {
         return (
           <Button
@@ -51,6 +52,15 @@ const Categories = ({ categories, filterItems, activeCategory }) => {
           </Button>
         );
       })}
+      <Dropdown alignright="true">
+        <Dropdown.Toggle variant="success">
+          <Cart4></Cart4>
+        </Dropdown.Toggle>
+        {/* <Dropdown.Menu style={{minWidth: 370}}>
+          <span style={{padding: 10}}>Cart is Empty!</span>
+        </Dropdown.Menu> */}
+        <Cart name = "yurh"/>
+      </Dropdown>
       <div id="google_translate_element"></div>
     </div>
   );

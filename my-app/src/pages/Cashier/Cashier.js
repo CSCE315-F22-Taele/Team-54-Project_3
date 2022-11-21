@@ -31,11 +31,11 @@ const Cashier = () => {
           activeCategory={activeCategory}
           filterItems={filterItems}
         />
-        <div class="container">
-          <div class="menu-align">
+        <div clasNames="container">
+          <div className="menu-align">
             <Menu items={menuItems} />
           </div>
-          <div class="order-align">
+          <div className="order-align">
             <OrderPanel/>
           </div>
         </div>

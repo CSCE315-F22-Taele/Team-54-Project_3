@@ -7,7 +7,15 @@ import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 
 const Menu = ({ items }) => {
+  const [orders, orderList] = useState([]);
   const columnsPerRow = 3;
+  const [value, setValue] = useState(0),
+        onInput = ({target:{value}}) => setValue(value),
+        onFormSubmit = e => {
+          e.preventDefault()
+          console.log(value)
+          setValue()
+        }
 
   const getColumnsForRow = () => {
     return items.map((item) => {
@@ -17,8 +25,12 @@ const Menu = ({ items }) => {
         event.preventDefault(); // prevent page from refreshing
       }
 
-      const handleChange = () => {
-
+      const handleOrders = () => {
+        for (let i = 0; i < Number(value); i++) {
+          orderList(current => [...current, title])
+        }
+        
+        console.log(orders);
       }
 
       return (
@@ -28,12 +40,22 @@ const Menu = ({ items }) => {
                     <Card.Title className="text-center">{title}</Card.Title>
                     <Card.Text className="text-center">${price}</Card.Text>
                 </Card.Body>
-                <div class="form-inline my-lg-1">
-                  <Form onSubmit={handleSubmit} onChange={handleChange}>
+                <div className="form-inline my-lg-1">
+                  <Form onSubmit={onFormSubmit}>
                       <Form.Group>
-                          <Form.Control  type="text" placeholder="Enter quantity" />
+                          <Form.Control 
+                            type="text" 
+                            placeholder="Enter quantity" 
+                            onChange={onInput}
+                          />
                           {/* <div class="col-md-12 text-center"> */}
-                            <button class="btn btn-danger " style={{alignSelf: 'center', justifyContent: 'center'}} type="submit">Order</button>
+                            <button 
+                              onClick={handleOrders}
+                              className="btn btn-danger " 
+                              style={{alignSelf: 'center', justifyContent: 'center'}} 
+                              type="submit">
+                              Order
+                            </button>
                           {/* </div> */}
                       </Form.Group>
                   </Form>

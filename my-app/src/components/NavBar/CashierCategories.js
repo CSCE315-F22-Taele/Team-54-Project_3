@@ -30,7 +30,7 @@ const Categories = ({ categories, filterItems, activeCategory }) => {
   }, []);
   return (
     <div className="btn-container">
-      <button onClick={() => handleUpdate("")} type="button" class="btn btn-outline-secondary"><ArrowReturnLeft color="black"/></button>
+      <button onClick={() => handleUpdate("")} type="button" className="btn btn-outline-secondary"><ArrowReturnLeft color="black"/></button>
       {categories.map((category, index) => {
         return (
           <Button
