@@ -11,18 +11,23 @@ The website is publicly hosted on Render. All store data is maintained using an 
 #### Customer Functionality:
 - View store menu items and prices, sorted by categories
 - Add quantities of menu items to an order
+- View stores locations within a certain radius via the Google Maps API
+- View the site in multiple languages via the Google Translate API
 
 #### Cashier Functionality:
 - View store menu items and prices, sorted by categories
 - Add quantities of menu items to an order
+- View the site in multiple languages via the Google Translate API
 
 #### Manager Functionality:
-- To be implemented
+- View the store's inventory and menu in table format
+- View reports on order sales, excess inventory, and depleted inventory
+- View the site in multiple languages via the Google Translate API
 
 ---
 ### How to Run
 
-The website can be found at the following URL: 
+The website is publicly hosted at the following URL: 
 
 Alternatively:
 1. Clone this repository locally
