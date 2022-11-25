@@ -51,7 +51,6 @@ const Menu = (props) => {
                             placeholder="Enter quantity" 
                             onChange={onInput}
                           />
-                          {/* <div class="col-md-12 text-center"> */}
                             <button 
                               onClick={handleOrders}
                               className="btn btn-danger " 

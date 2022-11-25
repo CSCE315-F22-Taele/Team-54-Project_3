@@ -46,11 +46,11 @@ const Customer = () => {
           filterItems={filterItems}
           pls = {orders}
         />
-        <div class="container">
-          <div class="menu-align">
+        <div className="container">
+          <div className="menu-align">
             <Menu items={menuItems} sendOrders = {getOrders}/>
           </div>
-          {/* <div class="order-align">
+          {/* <div className="order-align">
             <OrderPanel/>
           </div> */}
         </div>
