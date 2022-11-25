@@ -5,7 +5,7 @@ import {useNavigate} from "react-router-dom";
 import { ArrowReturnLeft, GeoAltFill, Cart4 } from 'react-bootstrap-icons';
 import Cart from "../Cards/Cart";
 
-const Categories = ({ categories, filterItems, activeCategory }) => {
+const Categories = ({ categories, filterItems, activeCategory, pls }) => {
   let navigate = useNavigate()  
 
   const handleUpdate = (page) => {
@@ -24,6 +24,12 @@ const Categories = ({ categories, filterItems, activeCategory }) => {
       "google_translate_element"
     );
   };
+
+  const func = () => {
+    console.log("this is CATEGORIES");
+    console.log(pls.current);
+  }
+
   useEffect(() => {
     var addScript = document.createElement("script");
     addScript.setAttribute(
@@ -52,15 +58,7 @@ const Categories = ({ categories, filterItems, activeCategory }) => {
           </Button>
         );
       })}
-      <Dropdown alignright="true">
-        <Dropdown.Toggle variant="success">
-          <Cart4></Cart4>
-        </Dropdown.Toggle>
-        {/* <Dropdown.Menu style={{minWidth: 370}}>
-          <span style={{padding: 10}}>Cart is Empty!</span>
-        </Dropdown.Menu> */}
-        <Cart name = "yurh"/>
-      </Dropdown>
+      <Cart mapOrders={pls}/>
       <div id="google_translate_element"></div>
     </div>
   );

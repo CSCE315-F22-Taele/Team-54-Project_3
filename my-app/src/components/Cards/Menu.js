@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import Card from 'react-bootstrap/Card';
 import "bootstrap/dist/css/bootstrap.min.css";
 import Row from 'react-bootstrap/Row';
@@ -6,7 +6,7 @@ import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 
-const Menu = ({ items }) => {
+const Menu = (props) => {
   const [orders, orderList] = useState([]);
   const columnsPerRow = 3;
   const [value, setValue] = useState(0),
@@ -18,7 +18,7 @@ const Menu = ({ items }) => {
         }
 
   const getColumnsForRow = () => {
-    return items.map((item) => {
+    return props.items.map((item) => {
       const { id, title, price } = item;
 
       const handleSubmit = event => {
@@ -30,7 +30,10 @@ const Menu = ({ items }) => {
           orderList(current => [...current, title])
         }
         
+        console.log("this is Menu.js")
         console.log(orders);
+
+        props.sendOrders(orders);
       }
 
       return (
