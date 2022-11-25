@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect } from "react";
-import {Button, Dropdown} from 'react-bootstrap';
+import {Button} from 'react-bootstrap';
 import {useNavigate} from "react-router-dom";
 import { ArrowReturnLeft, GeoAltFill } from 'react-bootstrap-icons';
 import Cart from "../Cards/Cart";

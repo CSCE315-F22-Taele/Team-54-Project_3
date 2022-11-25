@@ -2,7 +2,7 @@ import React, {useState, useRef} from "react";
 import Menu from "../../components/Cards/Menu";
 import Categories from "../../components/NavBar/CustomerCategories";
 import items from "../../components/Cards/menuData";
-import OrderPanel from "../../components/Panel/OrderPanel";
+// import OrderPanel from "../../components/Panel/OrderPanel";
 
 const allCategories = ["All Items", "Breakfast", "Entree", "Salads", "Sides", "Kids Meals", "Treats", "Drinks", "Sauce"];
 

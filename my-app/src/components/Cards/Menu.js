@@ -21,10 +21,6 @@ const Menu = (props) => {
     return props.items.map((item) => {
       const { id, title, price } = item;
 
-      const handleSubmit = event => {
-        event.preventDefault(); // prevent page from refreshing
-      }
-
       const handleOrders = () => {
         for (let i = 0; i < Number(value); i++) {
           orderList(current => [...current, title])
