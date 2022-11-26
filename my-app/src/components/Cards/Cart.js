@@ -27,10 +27,13 @@ const Cart = (({mapOrders }) => {
             <>
             {orders.map((item, i) => 
               <>
-                <Dropdown.Item key={i}>{item}</Dropdown.Item>
+                <Dropdown.Item className="text-center" key={i}>{item}</Dropdown.Item>
                 <Divider />
               </>
             )}
+              <div style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
+                <button type="button" className="btn btn-primary">Payment</button>
+              </div>
             </>
           ) : (
             <span>Cart is Empty!</span>
