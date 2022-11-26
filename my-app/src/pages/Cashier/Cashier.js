@@ -1,15 +1,16 @@
-import React, {useState} from "react";
-import Menu from "../../components/Cards/Menu";
+import React, {useState, useRef} from "react";
+import Menu from "../../components/Cards/MenuCashier";
 import Categories from "../../components/NavBar/CashierCategories";
 import items from "../../components/Cards/menuData";
-import OrderPanel from "../../components/Panel/OrderPanel";
+// import OrderPanel from "../../components/Panel/OrderPanel";
 
 const allCategories = ["All Items", "Breakfast", "Entree", "Salads", "Sides", "Kids Meals", "Treats", "Drinks", "Sauce"];
 
-const Cashier = () => {
+const Customer = () => {
   const [menuItems, setMenuItems] = useState(items);
   const [activeCategory, setActiveCategory] = useState("");
   const [categories, setCategories] = useState(allCategories);
+  const orders = useRef([])
 
   const filterItems = (category) => {
     setActiveCategory(category);
@@ -20,27 +21,37 @@ const Cashier = () => {
     const newItems = items.filter((item) => item.category === category);
     setMenuItems(newItems);
   };
-  
+  const getOrders = (mapOrders) => {
+    orders.current = [];
+    let temp = Object.assign([], mapOrders);
+    temp.forEach(food => {
+      orders.current.push(food);
+    });
+  }
+
   return (
     <main>
         <div className="title">
-          <br></br>
+          {/* <img src={logo} alt="logo" className="logo" /> */}
+          <h2 style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>Menu List</h2>
+          <div className="underline"></div>
         </div>
         <Categories
           categories={categories}
           activeCategory={activeCategory}
           filterItems={filterItems}
+          pls = {orders}
         />
-        <div clasNames="container">
+        <div className="container">
           <div className="menu-align">
-            <Menu items={menuItems} />
+            <Menu items={menuItems} sendOrders = {getOrders}/>
           </div>
-          <div className="order-align">
+          {/* <div className="order-align">
             <OrderPanel/>
-          </div>
+          </div> */}
         </div>
     </main>
   );
 };
 
-export default Cashier;
+export default Customer;

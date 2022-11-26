@@ -1,14 +1,19 @@
 import React from "react";
 import { useEffect } from "react";
-import Button from 'react-bootstrap/Button';
+import {Button} from 'react-bootstrap';
 import {useNavigate} from "react-router-dom";
-import { ArrowReturnLeft } from 'react-bootstrap-icons';
+import { ArrowReturnLeft, GeoAltFill } from 'react-bootstrap-icons';
+import Cart from "../Cards/CartCashier";
 
-const Categories = ({ categories, filterItems, activeCategory }) => {
-  let navigate = useNavigate()
+const Categories = ({ categories, filterItems, activeCategory, pls }) => {
+  let navigate = useNavigate()  
 
   const handleUpdate = (page) => {
-      navigate(`/${page}`);
+      if (page === "") {
+        navigate(`/`);
+      } else {
+        navigate(`/Customer/${page}`);
+      }
   };
   const googleTranslateElementInit = () => {
     new window.google.translate.TranslateElement(
@@ -19,6 +24,7 @@ const Categories = ({ categories, filterItems, activeCategory }) => {
       "google_translate_element"
     );
   };
+
   useEffect(() => {
     var addScript = document.createElement("script");
     addScript.setAttribute(
@@ -31,6 +37,7 @@ const Categories = ({ categories, filterItems, activeCategory }) => {
   return (
     <div className="btn-container">
       <button onClick={() => handleUpdate("")} type="button" className="btn btn-outline-secondary"><ArrowReturnLeft color="black"/></button>
+      <button onClick={() => handleUpdate("MapContainer")} type="button" className="btn btn-outline-secondary"><GeoAltFill color="blue"/></button>
       {categories.map((category, index) => {
         return (
           <Button
@@ -46,6 +53,7 @@ const Categories = ({ categories, filterItems, activeCategory }) => {
           </Button>
         );
       })}
+      <Cart mapOrders={pls}/>
       <div id="google_translate_element"></div>
     </div>
   );

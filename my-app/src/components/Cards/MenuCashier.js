@@ -6,7 +6,7 @@ import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 
-const Menu = (props) => {
+const MenuCashier = (props) => {
   const [orders, orderList] = useState([]);
   const columnsPerRow = 3;
   const [value, setValue] = useState(0),
@@ -70,4 +70,4 @@ const Menu = (props) => {
   );
 };
 
-export default Menu;
+export default MenuCashier;

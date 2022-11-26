@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import {Button} from 'react-bootstrap';
 import {useNavigate} from "react-router-dom";
 import { ArrowReturnLeft, GeoAltFill } from 'react-bootstrap-icons';
-import Cart from "../Cards/Cart";
+import Cart from "../Cards/CartCustomer";
 
 const Categories = ({ categories, filterItems, activeCategory, pls }) => {
   let navigate = useNavigate()  

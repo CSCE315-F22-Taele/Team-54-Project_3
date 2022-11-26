@@ -1,5 +1,5 @@
 import React, {useState, useRef} from "react";
-import Menu from "../../components/Cards/Menu";
+import Menu from "../../components/Cards/MenuCustomer";
 import Categories from "../../components/NavBar/CustomerCategories";
 import items from "../../components/Cards/menuData";
 // import OrderPanel from "../../components/Panel/OrderPanel";
@@ -10,7 +10,6 @@ const Customer = () => {
   const [menuItems, setMenuItems] = useState(items);
   const [activeCategory, setActiveCategory] = useState("");
   const [categories, setCategories] = useState(allCategories);
-  // const [orders, setOrders] = useState([]);
   const orders = useRef([])
 
   const filterItems = (category) => {
