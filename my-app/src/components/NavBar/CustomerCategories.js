@@ -25,11 +25,6 @@ const Categories = ({ categories, filterItems, activeCategory, pls }) => {
     );
   };
 
-  const func = () => {
-    console.log("this is CATEGORIES");
-    console.log(pls.current);
-  }
-
   useEffect(() => {
     var addScript = document.createElement("script");
     addScript.setAttribute(

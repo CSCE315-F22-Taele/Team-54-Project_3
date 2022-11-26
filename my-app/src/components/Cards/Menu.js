@@ -25,9 +25,6 @@ const Menu = (props) => {
         for (let i = 0; i < Number(value); i++) {
           orderList(current => [...current, title])
         }
-        
-        console.log("this is Menu.js")
-        console.log(orders);
 
         props.sendOrders(orders);
       }

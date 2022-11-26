@@ -23,14 +23,11 @@ const Customer = () => {
     setMenuItems(newItems);
   };
   const getOrders = (mapOrders) => {
-    console.log("Customer received orders!!! YAYYAY")
-    // console.log(mapOrders);
     orders.current = [];
     let temp = Object.assign([], mapOrders);
     temp.forEach(food => {
       orders.current.push(food);
     });
-    console.log(orders.current);
   }
 
   return (

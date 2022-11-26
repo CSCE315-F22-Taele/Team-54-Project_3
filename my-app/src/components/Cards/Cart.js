@@ -1,46 +1,43 @@
 
-import {React, useRef} from "react";
+import {React, useState} from "react";
 import {Dropdown} from 'react-bootstrap';
 import {Cart4} from 'react-bootstrap-icons';
+import { Divider } from 'antd';
 
 const Cart = (({mapOrders }) => {
-  const orders = useRef([])
+  const [orders, setMyArray] = useState([]);
 
-  const func = () => {
-    console.log("CARTTTTT");
-    console.log(mapOrders);
-    orders.current = [];
-    let temp = Object.assign([], mapOrders.current);
-    temp.forEach(food => {
-      orders.current.push(food);
-    });
-    console.log(orders.current);
+  const displayOrders = () => {
+    setMyArray([]);
+    for (let i = 0; i < mapOrders.current.length; i++) {
+      setMyArray(oldArray => [...oldArray, mapOrders.current[i]]);
+      console.log(mapOrders.current[i])
+    }
   }
 
   return (
-    <Dropdown alignright="true">
+    <Dropdown alignright="true" onClick={() => {displayOrders()}}>
+
         <Dropdown.Toggle variant="success">
           <Cart4></Cart4>
         </Dropdown.Toggle>
+
         <Dropdown.Menu style={{minWidth: 370}}>
-          
-      {orders.current.length > 0 ? (
-        <>
-        {orders.current.map((item) => {
-          return (
-            // <div className="cartitem">
-            //   <span>{item}</span>
-            // </div>
-            <Dropdown.Item>{item}</Dropdown.Item>
-          );
-        })}
-        </>
-      ) : (
-        <span>Cart is Empty!</span>
-      )}
-      <button onClick={() => {func()}}></button>
-    </Dropdown.Menu>
-      </Dropdown>
+          {orders.length > 0 ? (
+            <>
+            {orders.map((item, i) => 
+              <>
+                <Dropdown.Item key={i}>{item}</Dropdown.Item>
+                <Divider />
+              </>
+            )}
+            </>
+          ) : (
+            <span>Cart is Empty!</span>
+          )}
+        </Dropdown.Menu>
+        
+    </Dropdown>
   );
 
 });
