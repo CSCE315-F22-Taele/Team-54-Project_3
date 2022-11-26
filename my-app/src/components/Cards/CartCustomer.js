@@ -36,7 +36,7 @@ const Cart = (({mapOrders }) => {
               </div>
             </>
           ) : (
-            <span>Cart is Empty!</span>
+            <Dropdown.Item className="text-center">Cart is empty</Dropdown.Item>
           )}
         </Dropdown.Menu>
         
