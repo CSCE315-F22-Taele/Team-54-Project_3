@@ -88,7 +88,7 @@ app.get("/api/finances/financeItems", async (req, res) => {
 
 // ------------------------------------ INVENTORY ------------------------------------
 // get all inventory items
-app.get("/api/customer/customerItems", async (req, res) => {
+app.get("/api/customer/inventoryItems", async (req, res) => {
   try {
     const results = await db.query("select * from customer;");
 
