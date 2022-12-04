@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/static/css/main.d136fe70.css",
-    "main.js": "/static/js/main.b202ecea.js",
+    "main.js": "/static/js/main.ab062013.js",
     "static/media/chicken-logo.jpg": "/static/media/chicken-logo.df2639325695e2d9098d.jpg",
     "index.html": "/index.html",
     "main.d136fe70.css.map": "/static/css/main.d136fe70.css.map",
-    "main.b202ecea.js.map": "/static/js/main.b202ecea.js.map"
+    "main.ab062013.js.map": "/static/js/main.ab062013.js.map"
   },
   "entrypoints": [
     "static/css/main.d136fe70.css",
-    "static/js/main.b202ecea.js"
+    "static/js/main.ab062013.js"
   ]
 }
