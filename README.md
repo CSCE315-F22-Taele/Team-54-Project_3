@@ -27,7 +27,7 @@ The website is publicly hosted on Render. All store data is maintained using an 
 ---
 ### How to Run
 
-The website is publicly hosted at the following URL: 
+The website is publicly hosted at the following URL: https://cfa-frontend.onrender.com/
 
 Alternatively:
 1. Clone this repository locally
