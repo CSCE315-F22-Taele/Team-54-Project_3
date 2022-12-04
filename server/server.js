@@ -104,6 +104,8 @@ app.get("/api/customer/customerItems", async (req, res) => {
   }
 });
 
+
+
 // ------------------------------------ MENU ------------------------------------
 // get all menu items
 app.get("/api/menu/menuItems", async (req, res) => {
@@ -178,6 +180,14 @@ app.post("/api/orders/placeOrder", async (req, res) => {
 try {
   const { orderid, ordernumber, totalprice, saledate, employeeid, customerid, satisfied, itemsordered } = req.body;
   console.log(orderid, ordernumber, totalprice, saledate, employeeid, customerid, satisfied, itemsordered);
+  
+
+
+  orderItems = itemsordered.substring(1, itemsordered.length-1).split(",");
+  
+  
+  
+  
   const results = await db.query("INSERT INTO orders(orderid, ordernumber, totalprice, saledate, employeeid, customerid, satisfied, itemsordered) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)  ", 
                                   [orderid, ordernumber, totalprice, saledate, employeeid, customerid, satisfied, itemsordered]);
 
@@ -186,6 +196,17 @@ try {
   console.log(err);
 }
 });
+
+
+// ------------------------------------ Restock ------------------------------------
+
+
+
+
+
+// ------------------------------------ Excess ------------------------------------
+
+
 
 
 // ------------------------------------ OAUTH ------------------------------------
