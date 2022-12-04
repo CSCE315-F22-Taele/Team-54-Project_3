@@ -7,7 +7,7 @@ const morgan = require("morgan");
 
 const app = express();
 
-app.use(cors());
+app.use(cors({ credentials: true, origin: true }));
 app.use(express.json());
 
 
@@ -103,6 +103,7 @@ app.get("/api/customer/customerItems", async (req, res) => {
     console.log(err);
   }
 });
+
 // ------------------------------------ MENU ------------------------------------
 // get all menu items
 app.get("/api/menu/menuItems", async (req, res) => {
@@ -119,6 +120,40 @@ app.get("/api/menu/menuItems", async (req, res) => {
   } catch (err) {
     console.log(err);
   }
+});
+
+app.post("/api/menu/addMenuItem", async (req, res) => {
+  
+  
+  try {
+
+    const {menuid, name, price, category, ingredients} = req.body;
+    
+    const results = await db.query("INSERT INTO MENU(menuid, name, price, category, ingredients) VALUES ($1, $2, $3, $4, $5)",
+                                    [menuid, name, price, category, ingredients]);
+
+    res.status(200).send("Menu Item Addition Succeded.");
+  } catch (err) {
+    console.log(err);
+    res.status(404).send("Menu Item Addition Failed.");
+  }
+});
+
+app.post("/api/menu/deleteMenuItem", async (req, res) => {
+  try {
+
+  const {itemName} = req.body;
+    
+    const results = await db.query("DELETE FROM menu WHERE name = $1",
+                                    [itemName]);
+
+    res.status(200).send("Menu Item Deletion Succeded.");
+  } catch (err) {
+    console.log(err);
+    res.status(404).send("Menu Item Deletion Failed.");
+  }
+
+   
 });
 // ------------------------------------ ORDERS ------------------------------------
 // get all orders
@@ -138,6 +173,7 @@ app.get("/api/orders/orderItems", async (req, res) => {
   }
 });
 
+// place an order
 app.post("/api/orders/placeOrder", async (req, res) => {
 try {
   const { orderid, ordernumber, totalprice, saledate, employeeid, customerid, satisfied, itemsordered } = req.body;
@@ -150,6 +186,13 @@ try {
   console.log(err);
 }
 });
+
+
+// ------------------------------------ OAUTH ------------------------------------
+
+
+
+
 
 const port = process.env.PORT || 3001;
 app.listen(port, () => {
