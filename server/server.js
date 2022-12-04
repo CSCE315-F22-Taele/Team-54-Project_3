@@ -13,16 +13,15 @@ app.use(express.json());
 
 // Import Routes
 // Make one for each table in the database.
-// const customer = require("../routes/customer");
+// const customers = require("../routes/customer");
 // const employees = require("../routes/employees");
 // const finances = require("../routes/finances");
 // const inventory = require("../routes/inventory");
 // const menu = require("../routes/menu");
 // const orders = require("../routes/orders");
-// const customer = require("../routes/customer");
 
 
-// app.use("/api/customer", customer);
+// app.use("/api/customers", customers);
 // app.use("/api/employees", employees);
 // app.use("/api/finances", finances);
 // app.use("/api/inventory", inventory);
@@ -32,9 +31,9 @@ app.use(express.json());
 
 // ------------------------------------ CUSTOMER ------------------------------------
 // get all customer items
-app.get("/api/customer/customerItems", async (req, res) => {
+app.get("/api/customers/customerItems", async (req, res) => {
   try {
-    const results = await db.query("select * from customers;");
+    const results = await db.query("SELECT * FROM customers;");
 
     res.status(200).json({
       status: "success",
@@ -53,7 +52,7 @@ app.get("/api/customer/customerItems", async (req, res) => {
 // get all employee items
 app.get("/api/employees/employeeItems", async (req, res) => {
   try {
-    const results = await db.query("select * from employees;");
+    const results = await db.query("SELECT * FROM employees;");
 
     res.status(200).json({
       status: "success",
@@ -72,7 +71,7 @@ app.get("/api/employees/employeeItems", async (req, res) => {
 // get all finances items
 app.get("/api/finances/financeItems", async (req, res) => {
   try {
-    const results = await db.query("select * from finances;");
+    const results = await db.query("SELECT * FROM finances;");
 
     res.status(200).json({
       status: "success",
@@ -88,9 +87,9 @@ app.get("/api/finances/financeItems", async (req, res) => {
 
 // ------------------------------------ INVENTORY ------------------------------------
 // get all inventory items
-app.get("/api/customer/inventoryItems", async (req, res) => {
+app.get("/api/inventory/inventoryItems", async (req, res) => {
   try {
-    const results = await db.query("select * from customer;");
+    const results = await db.query("SELECT * FROM inventory;");
 
     res.status(200).json({
       status: "success",
@@ -110,7 +109,7 @@ app.get("/api/customer/inventoryItems", async (req, res) => {
 // get all menu items
 app.get("/api/menu/menuItems", async (req, res) => {
   try {
-    const results = await db.query("select * from menu;");
+    const results = await db.query("SELECT * FROM menu;");
 
     res.status(200).json({
       status: "success",
@@ -131,7 +130,7 @@ app.post("/api/menu/addMenuItem", async (req, res) => {
 
     const {menuid, name, price, category, ingredients} = req.body;
     
-    const results = await db.query("INSERT INTO MENU(menuid, name, price, category, ingredients) VALUES ($1, $2, $3, $4, $5)",
+    const results = await db.query("INSERT INTO menu(menuid, name, price, category, ingredients) VALUES ($1, $2, $3, $4, $5)",
                                     [menuid, name, price, category, ingredients]);
 
     res.status(200).send("Menu Item Addition Succeded.");
@@ -161,7 +160,7 @@ app.post("/api/menu/deleteMenuItem", async (req, res) => {
 // get all orders
 app.get("/api/orders/orderItems", async (req, res) => {
   try {
-    const results = await db.query("select * from orders;");
+    const results = await db.query("SELECT * FROM orders;");
 
     res.status(200).json({
       status: "success",
