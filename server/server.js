@@ -34,7 +34,7 @@ app.use(express.json());
 // get all customer items
 app.get("/api/customer/customerItems", async (req, res) => {
   try {
-    const results = await db.query("select * from customer;");
+    const results = await db.query("select * from customers;");
 
     res.status(200).json({
       status: "success",
