@@ -33,7 +33,9 @@ const Cart = (({mapOrders }) => {
       console.log(items_ordered);
       console.log(total_price);
 
-      const response = await fetch(conn + "/api/orders/placeOrder", {
+      console.log("Sending via JSON...");
+
+      const response = fetch(conn + "/api/orders/placeOrder", {
         method: 'POST', // *GET, POST, PUT, DELETE, etc.
         headers: {
           'Content-Type': 'application/json'
@@ -49,6 +51,11 @@ const Cart = (({mapOrders }) => {
           "itemsordered": items_ordered
         })
       });
+
+      console.log("Finished API call");
+
+      console.log("Reached reload location");
+      window.location.reload();
     }
     catch (err) {
         console.log("ERROR");
