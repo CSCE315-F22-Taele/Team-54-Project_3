@@ -28,10 +28,10 @@ const ExcessReport = () => {
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="me-auto">
                 <Nav.Link onClick={() => handleUpdate("Inventory")}>Inventory</Nav.Link>
-                <Nav.Link style={{color:"red"}} onClick={() => handleUpdate("MenuEditor")}>MenuEditor</Nav.Link>
-                <NavDropdown title="Order Trends" id="basic-nav-dropdown">
+                <Nav.Link onClick={() => handleUpdate("MenuEditor")}>MenuEditor</Nav.Link>
+                <NavDropdown style={{color: "red"}} title="Order Trends" id="basic-nav-dropdown">
                   <NavDropdown.Item href="/Manager/Reports/Sales">Sales Report</NavDropdown.Item>
-                  <NavDropdown.Item href="/Manager/Reports/Excess">Excess Report</NavDropdown.Item>
+                  <NavDropdown.Item style={{color: "red"}} href="/Manager/Reports/Excess">Excess Report</NavDropdown.Item>
                   <NavDropdown.Item href="/Manager/Reports/Restock">Restock Report</NavDropdown.Item>
                 </NavDropdown>
               </Nav>
