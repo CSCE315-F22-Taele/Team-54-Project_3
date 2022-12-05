@@ -19,11 +19,11 @@ const MenuCashier = (props) => {
 
   const getColumnsForRow = () => {
     return props.items.map((item) => {
-      const { id, title, price } = item;
+      const { menuid, name, price } = item;
 
       const handleOrders = () => {
         for (let i = 0; i < Number(value); i++) {
-          orderList(current => [...current, title])
+          orderList(current => [...current, name])
         }
 
         props.sendOrders(orders);
@@ -31,9 +31,9 @@ const MenuCashier = (props) => {
 
       return (
         <Col>
-            <Card style={{ width: '18rem', alignItems: 'center', justifyContent: 'center', background: "none", color: "black"}} key={id} className="box">
+            <Card style={{ width: '18rem', alignItems: 'center', justifyContent: 'center', background: "none", color: "black"}} key={menuid} className="box">
                 <Card.Body>
-                    <Card.Title className="text-center">{title}</Card.Title>
+                    <Card.Title className="text-center">{name}</Card.Title>
                     <Card.Text className="text-center">${price}</Card.Text>
                 </Card.Body>
                 <div className="form-inline my-lg-1">

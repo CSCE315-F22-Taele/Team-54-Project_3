@@ -1,25 +1,33 @@
 import React, {useState, useRef} from "react";
 import Menu from "../../components/Cards/MenuCustomer";
 import Categories from "../../components/NavBar/CategoriesCustomer";
-import items from "../../components/Cards/menuData";
-// import OrderPanel from "../../components/Panel/OrderPanel";
 
 const allCategories = ["All Items", "Breakfast", "Entree", "Salads", "Sides", "Kids Meals", "Treats", "Drinks", "Sauce"];
-
+const conn = "http://localhost:3001";
 const Customer = () => {
-  const [menuItems, setMenuItems] = useState(items);
+  const [menuItems, setMenuItems] = useState([]);
   const [activeCategory, setActiveCategory] = useState("");
   const [categories, setCategories] = useState(allCategories);
   const orders = useRef([])
 
-  const filterItems = (category) => {
-    setActiveCategory(category);
-    if (category === "All Items") {
-      setMenuItems(items);
-      return;
+  const filterItems = async (category) => {
+    try {
+      const response = await fetch(conn + "/api/menu/menuItems");
+      const jsonVals = await response.json();
+      console.log("WORKING")
+      console.log(jsonVals.data.table);
+      setActiveCategory(category);
+      if (category === "All Items") {
+        setMenuItems(jsonVals.data.table);
+        return;
+      }
+      const newItems = jsonVals.data.table.filter((item) => item.category === category);
+      setMenuItems(newItems);
     }
-    const newItems = items.filter((item) => item.category === category);
-    setMenuItems(newItems);
+    catch (err) {
+        console.log("ERROR");
+        console.error(err.message);
+    }
   };
   const getOrders = (mapOrders) => {
     orders.current = [];
@@ -27,6 +35,19 @@ const Customer = () => {
     temp.forEach(food => {
       orders.current.push(food);
     });
+  }
+
+  const func = async () => {
+    try {
+      const response = await fetch(conn + "/api/menu/menuItems");
+      const jsonVals = await response.json();
+      // console.log("WORKING")
+      // console.log(jsonVals);
+    }
+    catch (err) {
+        console.log("ERROR");
+        console.error(err.message);
+    }
   }
 
   return (
@@ -46,9 +67,7 @@ const Customer = () => {
           <div className="menu-align">
             <Menu items={menuItems} sendOrders = {getOrders}/>
           </div>
-          {/* <div className="order-align">
-            <OrderPanel/>
-          </div> */}
+          {/* <button type="button" onClick={()=>func()} /> */}
         </div>
     </main>
   );
