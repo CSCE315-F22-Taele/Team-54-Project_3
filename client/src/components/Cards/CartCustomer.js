@@ -75,8 +75,8 @@ const Cart = (({mapOrders }) => {
   }
 
   const clear = (page) => {
-    // navigate(`/${page}`);
-    navigate(0)
+    navigate(`/${page}`);
+    // navigate(0)
 };
 
   return (
@@ -97,7 +97,7 @@ const Cart = (({mapOrders }) => {
             )}
               <div style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
                 <button onClick={() => addItemToOrdersTable()} type="button" className="btn btn-primary">Payment</button>
-                <button onClick={() => clear("Manager")} type="button" className="btn btn-primary">Start new order</button>
+                <button onClick={() => clear("Customer/New")} type="button" className="btn btn-primary">Start new order</button>
               </div>
             </>
           ) : (
