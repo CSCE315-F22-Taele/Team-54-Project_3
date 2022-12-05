@@ -11,7 +11,11 @@ const SalesReport = () => {
     let navigate = useNavigate()
   
     const handleUpdate = (page) => {
+      if (page === "Manager") { 
         navigate(`/${page}`);
+      } else {
+        navigate(`/Manager/${page}`);
+      }
     };
     return (
       <div>
