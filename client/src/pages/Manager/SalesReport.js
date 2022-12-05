@@ -10,7 +10,6 @@ import { ArrowReturnLeft } from 'react-bootstrap-icons';
 
 const conn = "http://localhost:3000/";
 
-// export default function SalesReport(props) {
 const SalesReport = () => {
 
     console.log("Here we go lads");
