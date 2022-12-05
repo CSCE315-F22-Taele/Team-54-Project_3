@@ -41,13 +41,22 @@ const ExcessReport = () => {
         <Table striped bordered hover>
           <thead>
             <tr>
-              <th>Item ID</th>
               <th>Item Name</th>
               <th>Category</th>
-              <th>Price</th>
+              <th>Amount Remaining</th>
             </tr>
           </thead>
           <tbody>
+            <tr>
+                <td>
+                    To be filled
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    To be filled
+                </td>
+            </tr>
             <tr>
                 <td>
                     To be filled
