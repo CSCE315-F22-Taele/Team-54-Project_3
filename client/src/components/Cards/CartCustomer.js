@@ -5,7 +5,7 @@ import {Cart4} from 'react-bootstrap-icons';
 import { Divider } from 'antd';
 
 const conn = "http://localhost:3001";
-const [clear, setClear] = useState([]);
+
 const Cart = (({mapOrders }) => {
   const [orders, setMyArray] = useState([]);
 
@@ -82,7 +82,7 @@ const Cart = (({mapOrders }) => {
             )}
               <div style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
                 <button onClick={() => addItemToOrdersTable()} type="button" className="btn btn-primary">Payment</button>
-                <button onClick={() => clear()} type="button" className="btn btn-primary">Clear</button>
+                {/* <button onClick={() => clear()} type="button" className="btn btn-primary">Clear</button> */}
               </div>
             </>
           ) : (
