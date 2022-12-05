@@ -37,19 +37,6 @@ const Customer = () => {
     });
   }
 
-  const func = async () => {
-    try {
-      const response = await fetch(conn + "/api/menu/menuItems");
-      const jsonVals = await response.json();
-      // console.log("WORKING")
-      // console.log(jsonVals);
-    }
-    catch (err) {
-        console.log("ERROR");
-        console.error(err.message);
-    }
-  }
-
   return (
     <main>
         <div className="title">

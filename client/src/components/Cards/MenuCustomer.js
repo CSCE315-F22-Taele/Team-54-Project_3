@@ -23,9 +23,9 @@ const MenuCustomer = (props) => {
 
       const handleOrders = () => {
         for (let i = 0; i < Number(value); i++) {
-          orderList(current => [...current, name])
+          orderList(current => [...current, [name, price]])
         }
-
+        console.log(orders);
         props.sendOrders(orders);
       }
 

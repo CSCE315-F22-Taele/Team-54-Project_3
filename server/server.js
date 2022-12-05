@@ -189,11 +189,13 @@ app.get("/api/orders/orderItems", async (req, res) => {
   }
 });
 
+// "{"",""}"
 // place an order
 app.post("/api/orders/placeOrder", async (req, res) => {
 try {
   const { orderid, ordernumber, totalprice, saledate, employeeid, customerid, satisfied, itemsordered } = req.body;
   console.log(orderid, ordernumber, totalprice, saledate, employeeid, customerid, satisfied, itemsordered);
+  // console.log(req);
   
 
 
