@@ -6,7 +6,7 @@ import { ArrowReturnLeft, GeoAltFill } from 'react-bootstrap-icons';
 import Cart from "../Cards/CartCustomer";
 
 const Categories = ({ categories, filterItems, activeCategory, pls }) => {
-  let navigate = useNavigate()  
+  let navigate = useNavigate()
 
   const handleUpdate = (page) => {
       if (page === "") {
