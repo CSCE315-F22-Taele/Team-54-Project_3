@@ -1,4 +1,5 @@
 import React from "react";
+import { useState, useEffect } from "react";
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
@@ -7,7 +8,19 @@ import Table from 'react-bootstrap/Table';
 import {useNavigate} from "react-router-dom";
 import { ArrowReturnLeft } from 'react-bootstrap-icons';
 
+const conn = "http://localhost:3000/";
+
 const SalesReport = () => {
+
+    console.log("Here we go lads");
+
+    const [startDate, setStartDate] = useState("");
+    const [endDate, setEndDate] = useState("");
+    const [dates, setDates] = useState({start:-2, end:-2});
+    const [salesReport, setSalesReport] = useState([]);
+
+    console.log("Set the shit");
+
     let navigate = useNavigate()
   
     const handleUpdate = (page) => {
@@ -18,9 +31,51 @@ const SalesReport = () => {
       }
     };
 
-    const func = async () => {
-      
-    }
+    const retrieveReport = async () => {
+      try {
+        setSalesReport([]);
+
+        const start = (dates.start);
+        const end = (dates.end);
+
+        console.log("start date", start);
+        console.log("end date", end);
+
+        const response = await fetch (conn + `api/sales/getSalesReport/${start}/${end}`,
+        {
+          method: "GET", headers: { "Content-Type": "application/json" },
+        });
+
+        const retrieveReq = await response.json();
+        console.log(retrieveReq);
+
+        setSalesReport(retrieveReq);
+        
+        console.log("Sales Report", salesReport);
+
+      } catch (err) {
+        console.error(err.message);
+      }
+    };
+
+    const setDateSubmit = event => {
+      setSalesReport([]);
+
+      // const startDate = event.target.startDate.value;
+      // const endDate = event.target.endDate.value;
+
+      setDates({start: startDate, end: endDate});
+
+      console.log("start date", startDate);
+      console.log("end date", endDate);
+    };
+
+    useEffect(() => {
+      // TODO: add error handling so must be in format YYYY-DD-MM
+      retrieveReport();
+    }, [dates]);
+
+    console.log("Right before the return");
 
     return (
       <div>
@@ -50,20 +105,18 @@ const SalesReport = () => {
             </tr>
           </thead>
           <tbody>
-            <tr>
-                <td>
-                    To be filled
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    To be filled
-                </td>
-            </tr>
+            {salesReport.map((i) => {
+              return (
+                <tr>
+                  <td>{i.name}</td>
+                  <td>{i.sold}</td>
+                </tr>
+              )
+            })}
           </tbody>
         </Table>
       </div>
     )
   }
-  
+
   export default SalesReport;

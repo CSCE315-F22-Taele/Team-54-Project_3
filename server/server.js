@@ -216,50 +216,31 @@ try {
 
 // ------------------------------------ Sales ------------------------------------
 app.get("/api/sales/getSalesReport/:timeStart/:timeEnd", async (req, res) => {
+  
+  const getFreq = (map, array) => {
+    array.forEach(item => {
+      if(map[item]) map[item]++;
+      else map[item] = 1;
+    })
+    return map;
+  }
+  
+  
   try {
     const timeStart = req.params.timeStart;
     const timeEnd = req.params.timeEnd;
 
-    const menu = await db.query("SELECT name FROM menu ORDER BY menuid");
-    const amountSold = [];
-    const menuNames = [];
-
-    // populate menuNames with all menu item names from database
-    for (let i = 0; i < menu.rowCount; i++) {
-      total.push(0);
-      var tmp = JSON.stringify(menu.rows[i]);
-      tmp = tmp.substring(tmp.indexOf("name") + 6, indexOf("\"", tmp.indexOf("name") + 6)); // gets menu name from table row
-      menuNames.push(tmp);
+    const report = await db.query("SELECT * FROM orders WHERE saledate >= $1 AND saledate <= $2", [timeStart, timeEnd]);
+    const freq = new Map();
+    for(let i = 0; i < report.rowCount; ++i)
+    {
+      const orderItems = report.rows[i].itemsordered;
+      getFreq(freq, orderItems);
     }
-
-    // calculate amount of each menu item sold
-    const allOrders = await db.query("SELECT itemsordered FROM orders WHERE saledate >= $1 AND saledate <= $2", [timeStart, timeEnd]);
-
-    for (var i in allOrders.rows) {
-      var tmp = JSON.stringify(allOrders.rows[i]);
-      tmp = tmp.substring(16, tmp.length - 2);
-
-      var splitOrder = tmp.split(",");
-
-      for (var item in splitOrder) {
-        amountSold[item] = amountSold[item] + 1;
-      }
-    }
-
-    // create an object of menu items sold sorted from most to least items sold
-    let reportArr = [];
-
-    for (var item in amountSold) {
-      let completeOrder = { name: menuNames[item], sold: amountSold[item] };
-      reportArr.push(completeOrder);
-    }
-
-    reportArr.sort(function(a, b) {
-      return b.sold - a.sold;
-    });
-
-    res.json(reportArr);
-    res.status(200);
+    
+    console.log(freq);
+    
+    res.status(200).json(freq);
   } catch (err) {
     console.log(err);
   }
