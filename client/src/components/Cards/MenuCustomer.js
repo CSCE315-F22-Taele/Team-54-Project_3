@@ -12,7 +12,7 @@ const MenuCustomer = (props) => {
   const [value, setValue] = useState(0),
         onInput = ({target:{value}}) => setValue(value),
         onFormSubmit = e => {
-          e.preventDefault()
+          e.preventDefault() // prevents the page from refreshing when you enter a quantity
           console.log(value)
           setValue()
         }
