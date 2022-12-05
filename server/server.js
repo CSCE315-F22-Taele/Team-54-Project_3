@@ -4,23 +4,23 @@ const cors = require("cors");
 const db = require("./db");
 // const path = require("path");
 const morgan = require("morgan");
-const passport = require("passport");
-const cookieSession = require("cookie-session");
-const passportSetup = require("./passport");
-const authRoute = require("./routes/auth");
+// const passport = require("passport");
+// const cookieSession = require("cookie-session");
+// const passportSetup = require("./passport");
+// const authRoute = require("./routes/auth");
 const app = express();
 
 app.use(cors({ credentials: true, origin: true }));
 app.use(express.json());
-app.use(cookieSession({
-  name: "session",
-  keys: ["estellaschen"],
-  maxAge: 24 * 60 * 60 * 100,
-	})
-);
+// app.use(cookieSession({
+//   name: "session",
+//   keys: ["estellaschen"],
+//   maxAge: 24 * 60 * 60 * 100,
+// 	})
+// );
 
-app.use(passport.initialize());
-app.use(passport.session());
+// app.use(passport.initialize());
+// app.use(passport.session());
 
 
 // app.use("/auth", authRoute);
@@ -41,7 +41,7 @@ app.use(passport.session());
 // app.use("/api/inventory", inventory);
 // app.use("/api/menu", menu);
 // app.use("/api/orders", orders);
-app.use("/auth", authRoute);
+// app.use("/auth", authRoute);
 
 
 // ------------------------------------ CUSTOMER ------------------------------------
