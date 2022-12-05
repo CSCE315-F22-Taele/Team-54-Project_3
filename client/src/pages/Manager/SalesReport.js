@@ -17,6 +17,11 @@ const SalesReport = () => {
         navigate(`/Manager/${page}`);
       }
     };
+
+    const func = async () => {
+      
+    }
+
     return (
       <div>
         <Navbar bg="dark" variant="dark" expand="lg">
