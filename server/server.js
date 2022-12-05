@@ -238,7 +238,7 @@ app.get("/api/sales/getSalesReport/:timeStart/:timeEnd", async (req, res) => {
       getFreq(freq, orderItems);
     }
     
-    console.log(freq);
+    // console.log(freq);
     
     res.status(200).json(freq);
   } catch (err) {
@@ -249,7 +249,29 @@ app.get("/api/sales/getSalesReport/:timeStart/:timeEnd", async (req, res) => {
 
 
 // ------------------------------------ Restock ------------------------------------
+app.get("/api/sales/getRestockReport/", async (req, res) => {
+  const {threshold} = req.body;
+  try {
+    const report = await db.query("SELECT * FROM inventory WHERE quantity < $1", [threshold]);
+    // console.log("SELECT * FROM inventory WHERE quantity < $1", [threshold]);
+    const depletedItems = new Array(report.rowCount)
+    for(let i = 0; i < report.rowCount; ++i)
+    {
+      const ingredientName = report.rows[i].name;
+      const remainingQty = report.rows[i].quantity + " " + report.rows[i].unit;
+      // getFreq(freq, orderItems);
+      // console.log(ingredientName, ':', remainingQty);
+      depletedItems[i] = [ingredientName, remainingQty];
 
+    }
+    // console.log("Reached here");
+    // console.log(freq);
+    
+    res.status(200).json(depletedItems);
+  } catch (err) {
+    console.log(err);
+  }
+});
 
 
 
