@@ -216,15 +216,31 @@ try {
 
 // ------------------------------------ Sales ------------------------------------
 app.get("/api/sales/getSalesReport/:timeStart/:timeEnd", async (req, res) => {
+  
+  const getFreq = (map, array) => {
+    array.forEach(item => {
+      if(map[item]) map[item]++;
+      else map[item] = 1;
+    })
+    return map;
+  }
+  
+  
   try {
     const timeStart = req.params.timeStart;
     const timeEnd = req.params.timeEnd;
 
     const report = await db.query("SELECT * FROM orders WHERE saledate >= $1 AND saledate <= $2", [timeStart, timeEnd]);
-
+    const freq = new Map();
+    for(let i = 0; i < report.rowCount; ++i)
+    {
+      const orderItems = report.rows[i].itemsordered;
+      getFreq(freq, orderItems);
+    }
     
+    console.log(freq);
     
-    res.status(200);
+    res.status(200).json(freq);
   } catch (err) {
     console.log(err);
   }
