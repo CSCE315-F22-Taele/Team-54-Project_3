@@ -40,7 +40,6 @@ const Customer = () => {
   return (
     <main>
         <div className="title">
-          {/* <img src={logo} alt="logo" className="logo" /> */}
           <h2 style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>Menu List</h2>
           <div className="underline"></div>
         </div>
@@ -54,9 +53,6 @@ const Customer = () => {
           <div className="menu-align">
             <Menu items={menuItems} sendOrders = {getOrders}/>
           </div>
-          {/* <div className="order-align">
-            <OrderPanel/>
-          </div> */}
         </div>
     </main>
   );
