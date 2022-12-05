@@ -3,10 +3,13 @@ import {React, useState} from "react";
 import {Dropdown} from 'react-bootstrap';
 import {Cart4} from 'react-bootstrap-icons';
 import { Divider } from 'antd';
+import {useNavigate} from "react-router-dom";
+import {message} from 'antd';
 
 const conn = "http://localhost:3001";
-const [clear, setClear] = useState([]);
 const Cart = (({mapOrders }) => {
+  let navigate = useNavigate()
+  const [messageApi, contextHolder] = message.useMessage();
   const [orders, setMyArray] = useState([]);
 
   const displayOrders = () => {
@@ -56,17 +59,29 @@ const Cart = (({mapOrders }) => {
       console.log("Finished API call");
 
       console.log("Reached reload location");
-      // window.location.reload();
+      messageApi.open({
+        type: 'success',
+        content: 'Ordered successfully :)',
+      });
     }
     catch (err) {
         console.log("ERROR");
+        messageApi.open({
+          type: 'error',
+          content: 'Place order again :(',
+        });
         console.error(err.message);
     }
   }
 
+  const clear = (page) => {
+    // navigate(`/${page}`);
+    navigate(0)
+};
+
   return (
     <Dropdown alignright="true" onClick={() => {displayOrders()}}>
-
+        {contextHolder}
         <Dropdown.Toggle variant="success">
           <Cart4></Cart4>
         </Dropdown.Toggle>
@@ -82,7 +97,7 @@ const Cart = (({mapOrders }) => {
             )}
               <div style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
                 <button onClick={() => addItemToOrdersTable()} type="button" className="btn btn-primary">Payment</button>
-                <button onClick={() => clear()} type="button" className="btn btn-primary">Clear</button>
+                <button onClick={() => clear("Manager")} type="button" className="btn btn-primary">Start new order</button>
               </div>
             </>
           ) : (
