@@ -10,7 +10,11 @@ const morgan = require("morgan");
 // const authRoute = require("./routes/auth");
 const app = express();
 
-app.use(cors({ credentials: true, origin: true }));
+app.use(
+  cors({
+      origin: ["http://localhost:3001/", "https://chickfila.onrender.com"],
+  })
+);
 app.use(express.json());
 // app.use(cookieSession({
 //   name: "session",
@@ -270,7 +274,13 @@ app.get("/api/sales/getSalesReport/:timeStart/:timeEnd", async (req, res) => {
     
     // console.log(freq);
     
-    res.status(200).json(freq);
+    res.status(200).json({
+      status: "success",
+      results: freq.length,
+      data: {
+        table: freq,
+      },
+    });
   } catch (err) {
     console.log(err);
   }
@@ -284,21 +294,27 @@ app.get("/api/sales/getRestockReport/", async (req, res) => {
   try {
     const report = await db.query("SELECT * FROM inventory WHERE quantity < $1", [threshold]);
     // console.log("SELECT * FROM inventory WHERE quantity < $1", [threshold]);
-    const depletedItems = new Array(report.rowCount)
+    // const depletedItems = new Array(report.rowCount);
+    const returnVal = new Map();
     for(let i = 0; i < report.rowCount; ++i)
     {
       const ingredientName = report.rows[i].name;
       const remainingQty = report.rows[i].quantity + " " + report.rows[i].unit;
       // getFreq(freq, orderItems);
       // console.log(ingredientName, ':', remainingQty);
-      depletedItems[i] = [ingredientName, remainingQty];
-
+      // depletedItems[i] = [ingredientName, remainingQty];
+      returnVal[ingredientName] = remainingQty;
     }
     // console.log("Reached here");
     // console.log(freq);
     
-    res.status(200).json(depletedItems);
-  } catch (err) {
+    res.status(200).json({
+      status: "success",
+      results: returnVal.length,
+      data: {
+        table: returnVal,
+      },
+    });  } catch (err) {
     console.log(err);
   }
 });
