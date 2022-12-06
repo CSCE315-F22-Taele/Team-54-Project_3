@@ -57,7 +57,7 @@ const LaunchPage = () => {
           console.log("Reached reload location");
           messageApi.open({
             type: 'success',
-            content: 'Ordered successfully :)',
+            content: 'Ordered successfully! :)',
           });
         }
         catch (err) {
@@ -97,7 +97,7 @@ const LaunchPage = () => {
         </Table>
         </div>
             <div style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
-            <button onClick={() => addItemToOrdersTable()} type="button" className="btn btn-outline-primary">Payment</button>
+            <button onClick={() => addItemToOrdersTable()} type="button" className="btn btn-outline-primary">Checkout</button>
             <button type="button" className="btn btn-outline-primary" onClick={()=>handleUpdate("Customer")}>Start a new order</button>
             </div>
         </div>
