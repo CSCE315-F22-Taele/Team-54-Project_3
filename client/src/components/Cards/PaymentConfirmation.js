@@ -1,18 +1,37 @@
+/**
+ * This file defines the functionality for the Payment Confirmation page, which is displayed when the user finalizes their
+ * order on either the Cashier or Customer user. The page displays the items in the order as a table, along with a button to
+ * pay for the order and a button to start a new order, which returns the user to the menu page.
+ * @author Neha Sujith
+ */
 import {React, useState} from "react";
 import {useLocation, useNavigate} from 'react-router-dom';
 import {message} from 'antd';
 import Table from 'react-bootstrap/Table';
 
 const conn = "http://localhost:3001";
-const LaunchPage = () => {
+
+/**
+ * Creates and displays the payment confirmation page that shows the user the final order.
+ * @returns a page showing the final order, along with options to proceed to payment or start a new order
+ */
+const PaymentConfirmation = () => {
     let navigate = useNavigate();
     const location = useLocation();
     const [messageApi, contextHolder] = message.useMessage();
     const [totalOrderAmount, setTotal] = useState(0);
 
+    /**
+     * Navigates to the given page
+     * @param {string} page the page to navigate to
+     */
     const handleUpdate = (page) => {
         navigate(`/${page}`);
     };
+
+    /**
+     * Adds the final order to the orders table in the database. Called by the "Checkout" button.
+     */
     const addItemToOrdersTable = async () => {
         console.log("LPLSLSLSLSLLSLS WORK");
         console.log(location.state);
@@ -105,4 +124,4 @@ const LaunchPage = () => {
     )
 }
 
-export default LaunchPage;
+export default PaymentConfirmation;
