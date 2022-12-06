@@ -40,6 +40,11 @@ const MenuEditor = () => {
           </Navbar.Collapse>
         </Container>
       </Navbar>
+      <ButtonRow>
+          <Button variant="outline-success">Add Item</Button>
+          <Button variant="outline-secondary">Edit Item</Button>
+          <Button variant="outline-danger">Remove Item</Button>
+        </ButtonRow>
       <Table striped bordered hover>
         <thead>
           <tr>
