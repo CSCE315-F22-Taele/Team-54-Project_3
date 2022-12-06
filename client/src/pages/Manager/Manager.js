@@ -1,5 +1,5 @@
 import React from "react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
@@ -7,15 +7,37 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import {useNavigate} from "react-router-dom";
 import { ArrowReturnLeft } from 'react-bootstrap-icons';
 
+const conn = "http://localhost:3001";
 const Manager = () => {
     let navigate = useNavigate()
+    const [inventory, setInventory] = useState([]);
 
-    const handleUpdate = (page) => {
-        if (page === "") {
-          navigate(`/`);
-        } else {
-          navigate(`/Manager/${page}`);
+    const handleUpdate = async (page) => {
+      let nav = "";
+      if (page === "Inventory") {
+        nav = "inventory/inventoryItems";
+      }
+      else if (page === "MenuEditor") {
+        nav = "menu/menuItems";
+      }
+      
+      if (page !== "") {
+        try {
+          console.log(`/api/${nav}`)
+          const response = await fetch (conn + `/api/${nav}`);
+          const jsonVals = await response.json();
+          console.log("tableeee");
+          console.log(jsonVals.data.table);
+          setInventory(jsonVals.data.table);
+          navigate(`/Manager/${page}`, {state:jsonVals.data.table});
+        } catch (err) {
+          console.log("ERROR!!!")
+          console.log(err);
         }
+      }
+      else {
+        navigate(`/`);
+      }
     };
     const googleTranslateElementInit = () => {
       new window.google.translate.TranslateElement(
@@ -48,7 +70,6 @@ const Manager = () => {
                 <Nav.Link onClick={() => handleUpdate("Inventory")}>Inventory</Nav.Link>
                 <Nav.Link onClick={() => handleUpdate("MenuEditor")}>MenuEditor</Nav.Link>
                 <NavDropdown title="Order Trends" id="basic-nav-dropdown">
-                  {/* TODO: Need routing in App.js */}
                   <NavDropdown.Item href="/Manager/Reports/Sales">Sales Report</NavDropdown.Item>
                   <NavDropdown.Item href="/Manager/Reports/Excess">Excess Report</NavDropdown.Item>
                   <NavDropdown.Item href="/Manager/Reports/Restock">Restock Report</NavDropdown.Item>

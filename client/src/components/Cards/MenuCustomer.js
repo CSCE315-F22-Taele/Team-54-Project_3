@@ -16,7 +16,7 @@ const MenuCustomer = (props) => {
           console.log(value)
           setValue()
         }
-
+  
   const getColumnsForRow = () => {
     return props.items.map((item) => {
       const { menuid, name, price } = item;
