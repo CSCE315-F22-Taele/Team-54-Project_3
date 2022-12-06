@@ -28,7 +28,7 @@ const App = () => {
                 <Route exact path ="/Manager/Reports/Excess" element={<ExcessReport/>}/>
                 <Route exact path ="/Manager/Reports/Restock" element={<RestockReport/>}/>
                 <Route exact path ="/Customer/PaymentConfirmation" element={<PaymentConfirmation/>}/>
-                <Route exact path = "/Manager/Inventory/EditInventory" element={<EditInventory/>}/>
+                <Route exact path ="/Manager/Inventory/EditInventory" element={<EditInventory/>}/>
             </Routes>
         </Router>
     </div>;
