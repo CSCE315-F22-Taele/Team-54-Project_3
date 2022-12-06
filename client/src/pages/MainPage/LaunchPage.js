@@ -30,6 +30,9 @@ const LaunchPage = () => {
 
     return (
         <div>
+            <div>
+              <div id="google_translate_element" /*style="text-align: 'right'; vertical-align: text-top;"*/></div>
+            </div>
             <img width="200" className="rounded mx-auto d-block" src={logo} alt="chicken-yurh"/>
             <h1 className="font-weight-light display-1 text-center">
                 Welcome to Chick-fil-A!
@@ -38,7 +41,6 @@ const LaunchPage = () => {
                 Select user below:
             </h2>
             <br></br>
-            <div id="google_translate_element"></div>
 
             <button onClick={() => handleUpdate("Customer")} type="button" className="btn btn-outline-danger btn-block">Customer</button>
             <button onClick={() => handleUpdate("Cashier")} type="button" className="btn btn-outline-danger btn-block">Cashier</button>

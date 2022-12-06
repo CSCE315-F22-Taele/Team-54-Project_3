@@ -104,7 +104,7 @@ app.get("/api/finances/financeItems", async (req, res) => {
 // get all inventory items
 app.get("/api/inventory/inventoryItems", async (req, res) => {
   try {
-    const results = await db.query("SELECT * FROM inventory;");
+    const results = await db.query("SELECT * FROM inventory ORDER BY itemid ASC;");
 
     res.status(200).json({
       status: "success",
@@ -124,7 +124,7 @@ app.get("/api/inventory/inventoryItems", async (req, res) => {
 // get all menu items
 app.get("/api/menu/menuItems", async (req, res) => {
   try {
-    const results = await db.query("SELECT * FROM menu;");
+    const results = await db.query("SELECT * FROM menu ORDER BY menuid ASC;");
 
     res.status(200).json({
       status: "success",

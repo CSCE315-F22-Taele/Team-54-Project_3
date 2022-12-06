@@ -1,15 +1,19 @@
-import React from "react";
+import React, {useState} from "react";
 import Table from 'react-bootstrap/Table';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import {useNavigate} from "react-router-dom";
+import ButtonRow from 'react-bootstrap/ButtonGroup';
+import Button from 'react-bootstrap/Button';
+import {useLocation, useNavigate} from 'react-router-dom';
 import { ArrowReturnLeft } from 'react-bootstrap-icons';
-import inventory from './inventoryData';
+
+// const conn = "http://localhost:3001";
 
 const Inventory = () => {
     let navigate = useNavigate()
+    const location = useLocation();
 
     const handleUpdate = (page) => {
       if (page === "Manager") {
@@ -18,6 +22,7 @@ const Inventory = () => {
         navigate(`/Manager/${page}`);
       }
     };
+
     return (
       <div>
         <Navbar bg="dark" variant="dark" expand="lg">
@@ -38,6 +43,11 @@ const Inventory = () => {
               </Navbar.Collapse>
           </Container>
         </Navbar>
+        <ButtonRow>
+          <Button variant="outline-success">Add Item</Button>
+          <Button variant="outline-secondary">Edit Item</Button>
+          <Button variant="outline-danger">Remove Item</Button>
+        </ButtonRow>
         <Table striped bordered hover>
           <thead>
             <tr>
@@ -51,14 +61,14 @@ const Inventory = () => {
             </tr>
           </thead>
           <tbody>
-            {inventory.map((i) => {
+            {location.state.map((i) => {
               return (
                 <tr>
-                  <td>{i.id}</td>
+                  <td>{i.itemid}</td>
                   <td>{i.name}</td>
                   <td>{i.category}</td>
-                  <td>{i.expiration}</td>
-                  <td>{i.fridge}</td>
+                  <td>{i.expirationdate.toString().substring(0, 10)}</td>
+                  <td>{i.fridgerequired.toString()}</td>
                   <td>{i.quantity}</td>
                   <td>{i.unit}</td>
                 </tr>

@@ -4,12 +4,14 @@ import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Table from 'react-bootstrap/Table';
-import {useNavigate} from "react-router-dom";
+import ButtonRow from 'react-bootstrap/ButtonGroup';
+import Button from 'react-bootstrap/Button';
+import {useLocation, useNavigate} from "react-router-dom";
 import { ArrowReturnLeft } from 'react-bootstrap-icons';
-import menu from '../../../components/Cards/menuData';
 
 const MenuEditor = () => {
-  let navigate = useNavigate()
+  let navigate = useNavigate();
+  const location = useLocation();
 
   const handleUpdate = (page) => {
     if (page === "Manager") {
@@ -45,16 +47,18 @@ const MenuEditor = () => {
             <th>Item Name</th>
             <th>Category</th>
             <th>Price</th>
+            <th>Ingredients</th>
           </tr>
         </thead>
         <tbody>
-          {menu.map((m) => {
+          {location.state.map((m) => {
             return (
               <tr>
-                <td>{m.id}</td>
-                <td>{m.title}</td>
+                <td>{m.menuid}</td>
+                <td>{m.name}</td>
                 <td>{m.category}</td>
-                <td>{m.price}</td>
+                <td>{"$" + m.price.toString()}</td>
+                <td>{m.ingredients}</td>
               </tr>
             )
           })}
