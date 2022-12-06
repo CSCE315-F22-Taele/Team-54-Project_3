@@ -9,17 +9,38 @@ import Button from 'react-bootstrap/Button';
 import {useLocation, useNavigate} from 'react-router-dom';
 import { ArrowReturnLeft } from 'react-bootstrap-icons';
 
-// const conn = "http://localhost:3001";
+const conn = "http://localhost:3001";
 
 const Inventory = () => {
     let navigate = useNavigate()
     const location = useLocation();
+    const [inventory, setInventory] = useState([]);
 
-    const handleUpdate = (page) => {
-      if (page === "Manager") {
+    const handleUpdate = async (page) => {
+      let nav = "";
+      if (page === "Inventory") {
+        nav = "inventory/inventoryItems";
+      }
+      else if (page === "MenuEditor") {
+        nav = "menu/menuItems";
+      }
+      
+      if (page !== "Manager") {
+        try {
+          console.log(`/api/${nav}`)
+          const response = await fetch (conn + `/api/${nav}`);
+          const jsonVals = await response.json();
+          console.log("tableeee");
+          console.log(jsonVals.data.table);
+          setInventory(jsonVals.data.table);
+          navigate(`/Manager/${page}`, {state:jsonVals.data.table});
+        } catch (err) {
+          console.log("ERROR!!!");
+          console.log(err);
+        }
+      }
+      else {
         navigate(`/${page}`);
-      } else {
-        navigate(`/Manager/${page}`);
       }
     };
 
