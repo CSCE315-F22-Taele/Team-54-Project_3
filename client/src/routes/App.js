@@ -1,3 +1,8 @@
+/**
+ * This file describes the routing used on the frontend of this webapp but enabling navigation between the different subpages of 
+ * each user.
+ * @author Mohona Ghosh
+ */
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LaunchPage from "../pages/MainPage/LaunchPage";
@@ -14,6 +19,10 @@ import PaymentConfirmation from "../components/Cards/PaymentConfirmation";
 import EditInventory from "../pages/Manager/Inventory/EditInventory";
 import EditMenu from "../pages/Manager/MenuEditor/EditMenu";
 
+/**
+ * Creates and enables the frontend routing
+ * @returns an App object describing navigation routes for various pages on the web app
+ */
 const App = () => {
     return <div>
         <Router>
