@@ -118,7 +118,37 @@ app.get("/api/inventory/inventoryItems", async (req, res) => {
   }
 });
 
+// add item to inventory
+app.post("/api/menu/addInventoryItem", async (req, res) => {
+  try {
 
+    const {itemid, name, category, expirationdate, fridgerequired, quantity, unit} = req.body;
+    
+    const results = await db.query("INSERT INTO inventory(itemid, name, category, expirationdate, fridgerequired, quantity, unit) VALUES ($1, $2, $3, $4, $5, $6, $7)",
+                                    [itemid, name, category, expirationdate, fridgerequired, quantity, unit]);
+
+    res.status(200).send("Inventory Item Addition Succeded.");
+  } catch (err) {
+    console.log(err);
+    res.status(404).send("Inventory Item Addition Failed.");
+  }
+});
+
+// delete item from inventory
+app.post("/api/menu/deleteInventoryItem", async (req, res) => {
+  try {
+
+  const {itemName} = req.body;
+    
+    const results = await db.query("DELETE FROM inventory WHERE name = $1",
+                                    [itemName]);
+
+    res.status(200).send("Menu Item Deletion Succeded.");
+  } catch (err) {
+    console.log(err);
+    res.status(404).send("Menu Item Deletion Failed.");
+  }   
+});
 
 // ------------------------------------ MENU ------------------------------------
 // get all menu items
@@ -138,9 +168,8 @@ app.get("/api/menu/menuItems", async (req, res) => {
   }
 });
 
+// add item to menu
 app.post("/api/menu/addMenuItem", async (req, res) => {
-  
-  
   try {
 
     const {menuid, name, price, category, ingredients} = req.body;
@@ -155,6 +184,7 @@ app.post("/api/menu/addMenuItem", async (req, res) => {
   }
 });
 
+// delete item from menu
 app.post("/api/menu/deleteMenuItem", async (req, res) => {
   try {
 
@@ -167,10 +197,9 @@ app.post("/api/menu/deleteMenuItem", async (req, res) => {
   } catch (err) {
     console.log(err);
     res.status(404).send("Menu Item Deletion Failed.");
-  }
-
-   
+  }   
 });
+
 // ------------------------------------ ORDERS ------------------------------------
 // get all orders
 app.get("/api/orders/orderItems", async (req, res) => {

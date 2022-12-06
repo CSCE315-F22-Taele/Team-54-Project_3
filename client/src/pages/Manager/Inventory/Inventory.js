@@ -4,8 +4,8 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import ButtonRow from 'react-bootstrap/ButtonGroup';
-import Button from 'react-bootstrap/Button';
+// import ButtonRow from 'react-bootstrap/ButtonGroup';
+// import Button from 'react-bootstrap/Button';
 import {useLocation, useNavigate} from 'react-router-dom';
 import { ArrowReturnLeft } from 'react-bootstrap-icons';
 
@@ -25,7 +25,7 @@ const Inventory = () => {
         nav = "menu/menuItems";
       }
       
-      if (page !== "Manager") {
+      if (page !== "Manager" && page !== "Manager/Inventory/EditInventory") {
         try {
           console.log(`/api/${nav}`)
           const response = await fetch (conn + `/api/${nav}`);
@@ -54,21 +54,17 @@ const Inventory = () => {
               <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="me-auto">
                   <Nav.Link style={{color:"red"}} onClick={() => handleUpdate("Inventory")}>Inventory</Nav.Link>
-                  <Nav.Link onClick={() => handleUpdate("MenuEditor")}>MenuEditor</Nav.Link>
+                  <Nav.Link onClick={() => handleUpdate("MenuEditor")}>Store Menu</Nav.Link>
                   <NavDropdown title="Order Trends" id="basic-nav-dropdown">
                     <NavDropdown.Item href="/Manager/Reports/Sales">Sales Report</NavDropdown.Item>
                     <NavDropdown.Item href="/Manager/Reports/Excess">Excess Report</NavDropdown.Item>
                     <NavDropdown.Item href="/Manager/Reports/Restock">Restock Report</NavDropdown.Item>
                   </NavDropdown>
+                  <Nav.Link onClick={() => handleUpdate("Manager/Inventory/EditInventory")}>Edit Inventory</Nav.Link>
                 </Nav>
               </Navbar.Collapse>
           </Container>
         </Navbar>
-        <ButtonRow>
-          <Button variant="outline-success">Add Item</Button>
-          <Button variant="outline-secondary">Edit Item</Button>
-          <Button variant="outline-danger">Remove Item</Button>
-        </ButtonRow>
         <Table striped bordered hover>
           <thead>
             <tr>

@@ -11,6 +11,7 @@ import SalesReport from "../pages/Manager/SalesReport";
 import ExcessReport from "../pages/Manager/ExcessReport";
 import RestockReport from "../pages/Manager/RestockReport";
 import PaymentConfirmation from "../components/Cards/PaymentConfirmation";
+import EditInventory from "../pages/Manager/Inventory/EditInventory";
 
 const App = () => {
     return <div>
@@ -27,6 +28,7 @@ const App = () => {
                 <Route exact path ="/Manager/Reports/Excess" element={<ExcessReport/>}/>
                 <Route exact path ="/Manager/Reports/Restock" element={<RestockReport/>}/>
                 <Route exact path ="/Customer/PaymentConfirmation" element={<PaymentConfirmation/>}/>
+                <Route exact path = "/Manager/Inventory/EditInventory" element={<EditInventory/>}/>
             </Routes>
         </Router>
     </div>;
