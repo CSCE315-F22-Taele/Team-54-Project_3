@@ -4,7 +4,7 @@ import Categories from "../../components/NavBar/CategoriesCashier";
 
 const allCategories = ["All Items", "Breakfast", "Entree", "Salads", "Sides", "Kids Meals", "Treats", "Drinks", "Sauce"];
 const conn = "http://localhost:3001";
-const Customer = () => {
+const Cashier = () => {
   const [menuItems, setMenuItems] = useState([]);
   const [activeCategory, setActiveCategory] = useState("");
   const [categories, setCategories] = useState(allCategories);
@@ -58,4 +58,4 @@ const Customer = () => {
   );
 };
 
-export default Customer;
+export default Cashier;

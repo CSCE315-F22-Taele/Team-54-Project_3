@@ -12,7 +12,7 @@ const MenuCashier = (props) => {
   const [value, setValue] = useState(0),
         onInput = ({target:{value}}) => setValue(value),
         onFormSubmit = e => {
-          e.preventDefault()
+          e.preventDefault() // prevents the page from refreshing when you enter a quantity
           console.log(value)
           setValue()
         }
@@ -23,9 +23,9 @@ const MenuCashier = (props) => {
 
       const handleOrders = () => {
         for (let i = 0; i < Number(value); i++) {
-          orderList(current => [...current, name])
+          orderList(current => [...current, [name, price]])
         }
-
+        console.log(orders);
         props.sendOrders(orders);
       }
 

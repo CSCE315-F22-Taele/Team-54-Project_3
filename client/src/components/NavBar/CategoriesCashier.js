@@ -2,17 +2,17 @@ import React from "react";
 import { useEffect } from "react";
 import {Button} from 'react-bootstrap';
 import {useNavigate} from "react-router-dom";
-import { ArrowReturnLeft, GeoAltFill } from 'react-bootstrap-icons';
+import { ArrowReturnLeft } from 'react-bootstrap-icons';
 import Cart from "../Cards/CartCashier";
 
 const Categories = ({ categories, filterItems, activeCategory, pls }) => {
-  let navigate = useNavigate()  
+  let navigate = useNavigate()
 
   const handleUpdate = (page) => {
       if (page === "") {
         navigate(`/`);
       } else {
-        navigate(`/Customer/${page}`);
+        navigate(`/Cashier/${page}`);
       }
   };
   const googleTranslateElementInit = () => {
@@ -37,7 +37,6 @@ const Categories = ({ categories, filterItems, activeCategory, pls }) => {
   return (
     <div className="btn-container">
       <button onClick={() => handleUpdate("")} type="button" className="btn btn-outline-secondary"><ArrowReturnLeft color="black"/></button>
-      <button onClick={() => handleUpdate("MapContainer")} type="button" className="btn btn-outline-secondary"><GeoAltFill color="blue"/></button>
       {categories.map((category, index) => {
         return (
           <Button

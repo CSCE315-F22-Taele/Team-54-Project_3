@@ -4,12 +4,9 @@ import {Dropdown} from 'react-bootstrap';
 import {Cart4} from 'react-bootstrap-icons';
 import { Divider } from 'antd';
 import {useNavigate} from "react-router-dom";
-import {message} from 'antd';
 
-const conn = "http://localhost:3001";
 const Cart = (({mapOrders }) => {
   let navigate = useNavigate()
-  const [messageApi, contextHolder] = message.useMessage();
   const [orders, setMyArray] = useState([]);
 
   const displayOrders = () => {
@@ -26,7 +23,6 @@ const Cart = (({mapOrders }) => {
 
   return (
     <Dropdown alignright="true" onClick={() => {displayOrders()}}>
-        {contextHolder}
         <Dropdown.Toggle variant="success">
           <Cart4></Cart4>
         </Dropdown.Toggle>
