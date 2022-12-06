@@ -1,13 +1,26 @@
+/**
+ * This file defines functionality for the cart viewer component on the cashier side that allows the user to view the
+ * items in the current order as a dropdown.
+ * @author Neha Sujith
+ */
 import {React, useState} from "react";
 import {Dropdown} from 'react-bootstrap';
 import {Cart4} from 'react-bootstrap-icons';
 import { Divider } from 'antd';
 import {useNavigate} from "react-router-dom";
 
-const Cart = (({mapOrders }) => {
+/**
+ * Create the cart object and define functionality
+ * @param {Array} mapOrders a list of items in the current order
+ * @returns A Cart dropdown object for the Cashier user
+ */
+const Cart = (({mapOrders}) => {
   let navigate = useNavigate()
   const [orders, setMyArray] = useState([]);
 
+  /**
+   * Populates the cart's orders array with items from mapOrders
+   */
   const displayOrders = () => {
     setMyArray([]);
     for (let i = 0; i < mapOrders.current.length; i++) {
@@ -16,10 +29,14 @@ const Cart = (({mapOrders }) => {
     }
   }
 
+  /**
+   * Clear the cart
+   * @param {string} page 
+   */
   const clear = (page) => {
     let yurh = "Cashier";
     navigate(`/${page}`, {state:orders});
-};
+  };
 
   return (
     <Dropdown alignright="true" onClick={() => {displayOrders()}}>
@@ -37,7 +54,6 @@ const Cart = (({mapOrders }) => {
               </>
             )}
               <div style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
-                {/* <button onClick={() => addItemToOrdersTable()} type="button" className="btn btn-primary">Payment</button> */}
                 <button onClick={() => clear("Customer/PaymentConfirmation")} type="button" className="btn btn-primary">View Payment</button>
               </div>
             </>
@@ -45,10 +61,8 @@ const Cart = (({mapOrders }) => {
             <Dropdown.Item className="text-center">Cart is empty</Dropdown.Item>
           )}
         </Dropdown.Menu>
-        
     </Dropdown>
   );
-
 });
 
 export default Cart;
