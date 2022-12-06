@@ -20,63 +20,8 @@ const Cart = (({mapOrders }) => {
     }
   }
 
-  const addItemToOrdersTable = async () => {
-    try {
-      let total_price = 0;
-      let items_ordered = "{\"";
-      for (let i = 0; i < orders.length; i++) {
-        total_price = total_price + orders[i][1];
-        if (i != orders.length-1) {
-          items_ordered = items_ordered + orders[i][0] + "\", \""
-        }
-        else {
-          items_ordered = items_ordered + orders[i][0] + "\""
-        }
-      }
-      items_ordered = items_ordered + "}"
-      console.log(items_ordered);
-      console.log(total_price);
-
-      console.log("Sending via JSON...");
-
-      const response = fetch(conn + "/api/orders/placeOrder", {
-        method: 'POST', // *GET, POST, PUT, DELETE, etc.
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body : JSON.stringify({
-          "orderid": 3000000,
-          "ordernumber":3000000,
-          "totalprice": total_price,
-          "saledate":"2024-10-04",
-          "employeeid":10,
-          "customerid":10,
-          "satisfied": "t",
-          "itemsordered": items_ordered
-        })
-      });
-
-      console.log("Finished API call");
-
-      console.log("Reached reload location");
-      messageApi.open({
-        type: 'success',
-        content: 'Ordered successfully :)',
-      });
-    }
-    catch (err) {
-        console.log("ERROR");
-        messageApi.open({
-          type: 'error',
-          content: 'Place order again :(',
-        });
-        console.error(err.message);
-    }
-  }
-
   const clear = (page) => {
-    navigate(`/${page}`);
-    // navigate(0)
+    navigate(`/${page}`, {state:orders});
 };
 
   return (
@@ -96,8 +41,8 @@ const Cart = (({mapOrders }) => {
               </>
             )}
               <div style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
-                <button onClick={() => addItemToOrdersTable()} type="button" className="btn btn-primary">Payment</button>
-                <button onClick={() => clear("Customer/New")} type="button" className="btn btn-primary">Start new order</button>
+                {/* <button onClick={() => addItemToOrdersTable()} type="button" className="btn btn-primary">Payment</button> */}
+                <button onClick={() => clear("Customer/PaymentConfirmation")} type="button" className="btn btn-primary">View Payment</button>
               </div>
             </>
           ) : (

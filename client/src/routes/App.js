@@ -10,7 +10,7 @@ import MapContainer from "../pages/Customer/MapContainer";
 import SalesReport from "../pages/Manager/SalesReport";
 import ExcessReport from "../pages/Manager/ExcessReport";
 import RestockReport from "../pages/Manager/RestockReport";
-import New from "../components/Cards/New";
+import PaymentConfirmation from "../components/Cards/PaymentConfirmation";
 
 const App = () => {
     return <div>
@@ -26,7 +26,7 @@ const App = () => {
                 <Route exact path ="/Manager/Reports/Sales" element={<SalesReport/>}/>
                 <Route exact path ="/Manager/Reports/Excess" element={<ExcessReport/>}/>
                 <Route exact path ="/Manager/Reports/Restock" element={<RestockReport/>}/>
-                <Route exact path ="/Customer/New" element={<New/>}/>
+                <Route exact path ="/Customer/PaymentConfirmation" element={<PaymentConfirmation/>}/>
             </Routes>
         </Router>
     </div>;
