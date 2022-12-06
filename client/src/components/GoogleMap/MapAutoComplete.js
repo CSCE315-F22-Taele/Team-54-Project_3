@@ -1,7 +1,15 @@
+/**
+ * This file enables the autocomplete feature for inputting an address into the Google Maps API.
+ * @author Neha Sujith
+ */
 import React, { Component } from 'react';
 import { AutoComplete } from 'antd';
 
 class MapAutoComplete extends Component {
+  /**
+   * Constructs the MapAutoComplete feature as an extension of the Component class
+   * @param {*} props The parameters as given in the parent Component class
+   */
   constructor(props) {
     super(props);
     this.state = {
@@ -13,7 +21,10 @@ class MapAutoComplete extends Component {
     }
   }
 
-  // Geocode the location selected to be created as a marker.
+  /**
+   * Geocode the location selected to be created as a marker
+   * @param {*} value the location selected
+   */
   onSelect = ((value) => {
     this.state.geoCoderService.geocode({ address: value }, ((response) => {
       const { location } = response[0].geometry;
@@ -22,7 +33,10 @@ class MapAutoComplete extends Component {
   });
 
 
-  // Runs a search on the current value as the user types in the AutoComplete field.
+  /** 
+   * Runs a search on the current value as the user types in the AutoComplete field.
+   * @param {*} value the address as the user is inputted it into the search field
+   */
   handleSearch = ((value) => {
     const { autoCompleteService, cstatLatLng } = this.state;
     // Search only if there is a string
@@ -42,6 +56,10 @@ class MapAutoComplete extends Component {
     }
   });
 
+  /**
+   * Displays the AutoComplete component in the webapp
+   * @returns the AutoComplete component calling the methods described above. Displays as a text entry field with a placeholder.
+   */
   render() {
     const { dataSource } = this.state;
     return (
