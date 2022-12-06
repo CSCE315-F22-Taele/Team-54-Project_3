@@ -4,8 +4,6 @@ import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Table from 'react-bootstrap/Table';
-// import ButtonRow from 'react-bootstrap/ButtonGroup';
-// import Button from 'react-bootstrap/Button';
 import {useLocation, useNavigate} from "react-router-dom";
 import { ArrowReturnLeft } from 'react-bootstrap-icons';
 
@@ -24,7 +22,7 @@ const MenuEditor = () => {
         nav = "menu/menuItems";
       }
       
-      if (page !== "Manager") {
+      if (page !== "Manager" && page !== "MenuEditor/EditMenu") {
         try {
           console.log(`/api/${nav}`)
           const response = await fetch (conn + `/api/${nav}`);
@@ -39,7 +37,12 @@ const MenuEditor = () => {
         }
       }
       else {
-        navigate(`/${page}`);
+        if (page === "MenuEditor/EditMenu") {
+          navigate(`/Manager/${page}`);
+        }
+        else {
+          navigate(`/${page}`);
+        }
       }
   };
 
@@ -69,6 +72,7 @@ const MenuEditor = () => {
                 <NavDropdown.Item href="/Manager/Reports/Excess">Excess Report</NavDropdown.Item>
                 <NavDropdown.Item href="/Manager/Reports/Restock">Restock Report</NavDropdown.Item>
               </NavDropdown>
+              <Nav.Link onClick={() => handleUpdate("MenuEditor/EditMenu")}>Edit Menu</Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>
