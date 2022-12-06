@@ -30,8 +30,8 @@ const Cart = (({mapOrders}) => {
   }
 
   /**
-   * Clear the cart
-   * @param {string} page 
+   * Clear the cart and navigates to the desired page
+   * @param {string} page the page to navigate to
    */
   const clear = (page) => {
     let yurh = "Cashier";
