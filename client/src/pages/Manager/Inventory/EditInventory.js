@@ -68,7 +68,7 @@ const EditInventory = () => {
         e.preventDefault();
     }
     const handleAdd = () => {
-
+        
     }
     const handleEdit = () => {
 

@@ -119,7 +119,7 @@ app.get("/api/inventory/inventoryItems", async (req, res) => {
 });
 
 // add item to inventory
-app.post("/api/menu/addInventoryItem", async (req, res) => {
+app.post("/api/inventory/addInventoryItem", async (req, res) => {
   try {
 
     const {itemid, name, category, expirationdate, fridgerequired, quantity, unit} = req.body;
@@ -135,7 +135,7 @@ app.post("/api/menu/addInventoryItem", async (req, res) => {
 });
 
 // delete item from inventory
-app.post("/api/menu/deleteInventoryItem", async (req, res) => {
+app.post("/api/inventory/deleteInventoryItem", async (req, res) => {
   try {
 
   const {itemName} = req.body;
@@ -143,10 +143,10 @@ app.post("/api/menu/deleteInventoryItem", async (req, res) => {
     const results = await db.query("DELETE FROM inventory WHERE name = $1",
                                     [itemName]);
 
-    res.status(200).send("Menu Item Deletion Succeded.");
+    res.status(200).send("Inventory Item Deletion Succeded.");
   } catch (err) {
     console.log(err);
-    res.status(404).send("Menu Item Deletion Failed.");
+    res.status(404).send("Inventory Item Deletion Failed.");
   }   
 });
 
