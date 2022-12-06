@@ -7,75 +7,97 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import Table from 'react-bootstrap/Table';
 import {useNavigate} from "react-router-dom";
 import { ArrowReturnLeft } from 'react-bootstrap-icons';
+import Form from 'react-bootstrap/Form';
 
-const conn = "http://localhost:3000/";
+const conn = "http://localhost:3001";
 
 const SalesReport = () => {
-
-    console.log("Here we go lads");
-
-    const [startDate, setStartDate] = useState("");
-    const [endDate, setEndDate] = useState("");
-    const [dates, setDates] = useState({start:-2, end:-2});
-    const [salesReport, setSalesReport] = useState([]);
-
-    console.log("Set the shit");
-
     let navigate = useNavigate()
+    const [start, setStart] = useState("");
+    const [end, setEnd] = useState("");
+    const [sales, setSales] = useState([]);
   
-    const handleUpdate = (page) => {
-      if (page === "Manager") { 
-        navigate(`/${page}`);
-      } else {
-        navigate(`/Manager/${page}`);
+    const handleUpdate = async (page) => {
+      let nav = "";
+      if (page === "Inventory") {
+        nav = "inventory/inventoryItems";
+      }
+      else if (page === "MenuEditor") {
+        nav = "menu/menuItems";
+      }
+      
+      if (page !== "Manager") {
+        try {
+          console.log(`/api/${nav}`)
+          const response = await fetch (conn + `/api/${nav}`);
+          const jsonVals = await response.json();
+          console.log("tableeee");
+          console.log(jsonVals.data.table);
+          navigate(`/Manager/${page}`, {state:jsonVals.data.table});
+        } catch (err) {
+          console.log("ERROR!!!")
+          console.log(err);
+        }
+      }
+      else {
+        navigate(`/`);
       }
     };
-
-    const retrieveReport = async () => {
-      try {
-        setSalesReport([]);
-
-        const start = (dates.start);
-        const end = (dates.end);
-
-        console.log("start date", start);
-        console.log("end date", end);
-
-        const response = await fetch (conn + `api/sales/getSalesReport/${start}/${end}`,
+    
+    const googleTranslateElementInit = () => {
+      new window.google.translate.TranslateElement(
         {
-          method: "GET", headers: { "Content-Type": "application/json" },
+          pageLanguage: "en",
+          autoDisplay: false
+        },
+        "google_translate_element"
+      );
+    };
+
+    const onFormSubmit = e => {
+      e.preventDefault();
+    }
+
+    const onInputStart = ({target:{value}}) => {
+      console.log(value);
+      setStart(value)
+    }
+    const onInputEnd = ({target:{value}}) => {
+      console.log(value);
+      setEnd(value)
+    }
+    const getSalesReport = async () => {
+      try {
+        console.log("Sending via JSON...");
+        const new_start = start;
+        const new_end = end;
+        console.log(start, end);
+        const response = await fetch(conn + `/api/sales/getSalesReport/${new_start}/${new_end}`, 
+        {
+          method: 'GET',
+          headers: {
+            "Content-Type": "application/json",
+            'Accept': 'application/json'}
         });
+        console.log("RESPONSE")
+        // console.log(response);
+        const jsonVals = await response.json();
 
-        const retrieveReq = await response.json();
-        console.log(retrieveReq);
+        console.log("JSON")
+        console.log(jsonVals);
+        console.log(typeof jsonVals);
+        setSales(jsonVals);
+        console.log("sales", sales);
 
-        setSalesReport(retrieveReq);
-        
-        console.log("Sales Report", salesReport);
+        console.log("Finished API call");
 
-      } catch (err) {
-        console.error(err.message);
+        console.log("Reached reload location");
       }
-    };
-
-    const setDateSubmit = event => {
-      setSalesReport([]);
-
-      // const startDate = event.target.startDate.value;
-      // const endDate = event.target.endDate.value;
-
-      setDates({start: startDate, end: endDate});
-
-      console.log("start date", startDate);
-      console.log("end date", endDate);
-    };
-
-    useEffect(() => {
-      // TODO: add error handling so must be in format YYYY-DD-MM
-      retrieveReport();
-    }, [dates]);
-
-    console.log("Right before the return");
+      catch (err) {
+          console.log("ERROR");
+          console.error(err.message);
+      }
+    }
 
     return (
       <div>
@@ -97,6 +119,29 @@ const SalesReport = () => {
             </Navbar.Collapse>
           </Container>
         </Navbar>
+
+        <Form onSubmit={onFormSubmit}>
+          <Form.Group>
+              <Form.Control 
+              type="text" 
+              placeholder="Enter start date" 
+              onChange={onInputStart}
+              />
+              <Form.Control 
+              type="text" 
+              placeholder="Enter start date" 
+              onChange={onInputEnd}
+              />
+          </Form.Group>
+        </Form>
+        <button 
+          onClick={getSalesReport}
+          className="btn btn-primary " 
+          style={{alignSelf: 'center', justifyContent: 'center'}} 
+          type="submit">
+          Display results
+        </button>
+
         <Table striped bordered hover>
           <thead>
             <tr>
@@ -105,11 +150,11 @@ const SalesReport = () => {
             </tr>
           </thead>
           <tbody>
-            {salesReport.map((i) => {
+            {Object.keys(sales).map(key => {
               return (
                 <tr>
-                  <td>{i.name}</td>
-                  <td>{i.sold}</td>
+                  <td>{key}</td>
+                  <td>{sales[key]}</td>
                 </tr>
               )
             })}
