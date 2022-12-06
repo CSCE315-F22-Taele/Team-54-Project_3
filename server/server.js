@@ -123,6 +123,7 @@ app.post("/api/inventory/addInventoryItem", async (req, res) => {
   try {
 
     const {itemid, name, category, expirationdate, fridgerequired, quantity, unit} = req.body;
+    console.log(itemid, name, category, expirationdate, fridgerequired, quantity, unit);
     
     const results = await db.query("INSERT INTO inventory(itemid, name, category, expirationdate, fridgerequired, quantity, unit) VALUES ($1, $2, $3, $4, $5, $6, $7)",
                                     [itemid, name, category, expirationdate, fridgerequired, quantity, unit]);
@@ -139,7 +140,7 @@ app.post("/api/inventory/deleteInventoryItem", async (req, res) => {
   try {
 
   const {itemName} = req.body;
-    
+    console.log(itemName);
     const results = await db.query("DELETE FROM inventory WHERE name = $1",
                                     [itemName]);
 
