@@ -68,7 +68,7 @@ const Manager = () => {
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="me-auto">
                 <Nav.Link onClick={() => handleUpdate("Inventory")}>Inventory</Nav.Link>
-                <Nav.Link onClick={() => handleUpdate("MenuEditor")}>MenuEditor</Nav.Link>
+                <Nav.Link onClick={() => handleUpdate("MenuEditor")}>Store Menu</Nav.Link>
                 <NavDropdown title="Order Trends" id="basic-nav-dropdown">
                   <NavDropdown.Item href="/Manager/Reports/Sales">Sales Report</NavDropdown.Item>
                   <NavDropdown.Item href="/Manager/Reports/Excess">Excess Report</NavDropdown.Item>

@@ -4,8 +4,8 @@ import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Table from 'react-bootstrap/Table';
-import ButtonRow from 'react-bootstrap/ButtonGroup';
-import Button from 'react-bootstrap/Button';
+// import ButtonRow from 'react-bootstrap/ButtonGroup';
+// import Button from 'react-bootstrap/Button';
 import {useLocation, useNavigate} from "react-router-dom";
 import { ArrowReturnLeft } from 'react-bootstrap-icons';
 
@@ -42,6 +42,17 @@ const MenuEditor = () => {
         navigate(`/${page}`);
       }
   };
+
+  const generateForm = (btn) => {
+    if (btn === "add") {
+
+    } else if (btn === "edit") {
+
+    } else if (btn === "del") {
+
+    }
+  };
+
   return (
     <div>
       <Navbar bg="dark" variant="dark" expand="lg">
@@ -52,7 +63,7 @@ const MenuEditor = () => {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
               <Nav.Link onClick={() => handleUpdate("Inventory")}>Inventory</Nav.Link>
-              <Nav.Link style={{color:"red"}} onClick={() => handleUpdate("MenuEditor")}>MenuEditor</Nav.Link>
+              <Nav.Link style={{color:"red"}} onClick={() => handleUpdate("MenuEditor")}>Store Menu</Nav.Link>
               <NavDropdown title="Order Trends" id="basic-nav-dropdown">
                 <NavDropdown.Item href="/Manager/Reports/Sales">Sales Report</NavDropdown.Item>
                 <NavDropdown.Item href="/Manager/Reports/Excess">Excess Report</NavDropdown.Item>
@@ -62,11 +73,6 @@ const MenuEditor = () => {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      <ButtonRow>
-          <Button variant="outline-success">Add Item</Button>
-          <Button variant="outline-secondary">Edit Item</Button>
-          <Button variant="outline-danger">Remove Item</Button>
-        </ButtonRow>
       <Table striped bordered hover>
         <thead>
           <tr>
