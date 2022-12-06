@@ -25,7 +25,7 @@ const Inventory = () => {
         nav = "menu/menuItems";
       }
       
-      if (page !== "Manager") {
+      if (page !== "Manager" && page !== "Inventory/EditInventory") {
         try {
           console.log(`/api/${nav}`)
           const response = await fetch (conn + `/api/${nav}`);
@@ -40,7 +40,12 @@ const Inventory = () => {
         }
       }
       else {
-        navigate(`/${page}`);
+        if (page === "Inventory/EditInventory") {
+          navigate(`/Manager/${page}`);
+        }
+        else {
+          navigate(`/${page}`);
+        }
       }
     };
 
@@ -60,15 +65,11 @@ const Inventory = () => {
                     <NavDropdown.Item href="/Manager/Reports/Excess">Excess Report</NavDropdown.Item>
                     <NavDropdown.Item href="/Manager/Reports/Restock">Restock Report</NavDropdown.Item>
                   </NavDropdown>
+                  <Nav.Link onClick={() => handleUpdate("Inventory/EditInventory")}>Edit Inventory</Nav.Link>
                 </Nav>
               </Navbar.Collapse>
           </Container>
         </Navbar>
-        <ButtonRow>
-          <Button variant="outline-success">Add Item</Button>
-          <Button variant="outline-secondary">Edit Item</Button>
-          <Button variant="outline-danger">Remove Item</Button>
-        </ButtonRow>
         <Table striped bordered hover>
           <thead>
             <tr>
