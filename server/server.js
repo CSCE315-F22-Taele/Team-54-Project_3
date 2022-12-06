@@ -259,10 +259,11 @@ app.get("/api/sales/getSalesReport/:timeStart/:timeEnd", async (req, res) => {
     return map;
   }
   
-  
   try {
+    console.log("BEGIN API CALL")
     const timeStart = req.params.timeStart;
     const timeEnd = req.params.timeEnd;
+    console.log("timeStart", timeStart, "timeEnd", timeEnd)
 
     const report = await db.query("SELECT * FROM orders WHERE saledate >= $1 AND saledate <= $2", [timeStart, timeEnd]);
     const freq = new Map();
@@ -272,7 +273,7 @@ app.get("/api/sales/getSalesReport/:timeStart/:timeEnd", async (req, res) => {
       getFreq(freq, orderItems);
     }
     
-    // console.log(freq);
+    console.log(freq);
     
     res.status(200).json({
       status: "success",
@@ -282,7 +283,8 @@ app.get("/api/sales/getSalesReport/:timeStart/:timeEnd", async (req, res) => {
       },
     });
   } catch (err) {
-    console.log(err);
+    console.error(err.message);
+
   }
 });
 
