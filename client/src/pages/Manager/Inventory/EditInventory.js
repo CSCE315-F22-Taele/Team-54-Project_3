@@ -1,10 +1,46 @@
 import React from "react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {useNavigate} from "react-router-dom";
 import Form from 'react-bootstrap/Form';
 
 const EditInventory = () => {
     let navigate = useNavigate()
+    const [itemID, setID] = useState(0);
+    const [name, setName] = useState("");
+    const [category, setCategory] = useState("");
+    const [expiry, setExpiry] = useState("");
+    const [fridge, setFridge] = useState("");
+    const [quantity, setQuantity] = useState(0.0);
+    const [unit, setUnit] = useState("");
+
+    const onInputID = ({target:{value}}) => {
+        console.log(value);
+        setID(value)
+    }
+    const onInputName = ({target:{value}}) => {
+        console.log(value);
+        setName(value)
+    }
+    const onInputCategory = ({target:{value}}) => {
+        console.log(value);
+        setCategory(value)
+    }
+    const onInputExpiry = ({target:{value}}) => {
+        console.log(value);
+        setExpiry(value)
+    }
+    const onInputFridge = ({target:{value}}) => {
+        console.log(value);
+        setFridge(value)
+    }
+    const onInputQuantity = ({target:{value}}) => {
+        console.log(value);
+        setQuantity(value)
+    }
+    const onInputUnit = ({target:{value}}) => {
+        console.log(value);
+        setUnit(value)
+    }
 
     const handleUpdate = (page) => {
         navigate(`/${page}`);
@@ -31,9 +67,6 @@ const EditInventory = () => {
     const onFormSubmit = e => {
         e.preventDefault();
     }
-    const onInput = () => {
-
-    }
     const handleAdd = () => {
 
     }
@@ -54,37 +87,37 @@ const EditInventory = () => {
                     <Form.Control 
                     type="text" 
                     placeholder="Enter item ID" 
-                    onChange={onInput}
+                    onChange={onInputID}
                     />
                     <Form.Control 
                     type="text" 
                     placeholder="Enter item name" 
-                    onChange={onInput}
+                    onChange={onInputName}
                     />
                     <Form.Control 
                     type="text" 
                     placeholder="Enter category" 
-                    onChange={onInput}
+                    onChange={onInputCategory}
                     />
                     <Form.Control 
                     type="text" 
                     placeholder="Enter expiration date" 
-                    onChange={onInput}
+                    onChange={onInputExpiry}
                     />
                     <Form.Control 
                     type="text" 
                     placeholder="Enter refrigeration requirement" 
-                    onChange={onInput}
+                    onChange={onInputFridge}
                     />
                     <Form.Control 
                     type="text" 
                     placeholder="Enter quantity in stock" 
-                    onChange={onInput}
+                    onChange={onInputQuantity}
                     />
                     <Form.Control 
                     type="text" 
                     placeholder="Enter unit" 
-                    onChange={onInput}
+                    onChange={onInputUnit}
                     />
                     <button 
                         onClick={handleAdd}
