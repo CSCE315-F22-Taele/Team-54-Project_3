@@ -13,8 +13,8 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import {useNavigate} from "react-router-dom";
 import { ArrowReturnLeft } from 'react-bootstrap-icons';
 
-const conn = "http://localhost:3001";
-// const conn = "https://chick-fil-a-backend.onrender.com";
+// const conn = "http://localhost:3001";
+const conn = "https://chick-fil-a-backend.onrender.com";
 const Manager = () => {
     let navigate = useNavigate()
     const [inventory, setInventory] = useState([]);
