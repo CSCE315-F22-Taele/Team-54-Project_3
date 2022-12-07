@@ -9,7 +9,9 @@ import {useNavigate} from "react-router-dom";
 import { ArrowReturnLeft } from 'react-bootstrap-icons';
 import Form from 'react-bootstrap/Form';
 
-const conn = "http://localhost:3001";
+// const conn = "http://localhost:3001";
+const conn = "https://chick-fil-a-backend.onrender.com";
+
 
 const SalesReport = () => {
     let navigate = useNavigate()

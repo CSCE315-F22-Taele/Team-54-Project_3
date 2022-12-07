@@ -9,7 +9,10 @@ import {useLocation, useNavigate} from 'react-router-dom';
 import {message} from 'antd';
 import Table from 'react-bootstrap/Table';
 
-const conn = "http://localhost:3001";
+// Dev Version
+// const conn = "http://localhost:3001";
+// Prod Version
+const conn = "https://chick-fil-a-backend.onrender.com";
 
 /**
  * Creates and displays the payment confirmation page that shows the user the final order.

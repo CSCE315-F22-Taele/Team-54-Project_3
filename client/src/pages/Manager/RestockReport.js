@@ -7,7 +7,8 @@ import Table from 'react-bootstrap/Table';
 import {useNavigate} from "react-router-dom";
 import { ArrowReturnLeft } from 'react-bootstrap-icons';
 
-const conn = "http://localhost:3001";
+// const conn = "http://localhost:3001";
+const conn = "https://chick-fil-a-backend.onrender.com";
 const RestockReport = () => {
     let navigate = useNavigate();
     const [restock, setRestock] = useState([]);

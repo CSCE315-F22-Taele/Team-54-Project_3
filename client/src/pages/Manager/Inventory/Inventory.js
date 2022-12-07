@@ -13,7 +13,9 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import {useLocation, useNavigate} from 'react-router-dom';
 import { ArrowReturnLeft } from 'react-bootstrap-icons';
 
-const conn = "http://localhost:3001";
+// const conn = "http://localhost:3001";
+const conn = "https://chick-fil-a-backend.onrender.com";
+
 
 /**
  * Constructs and displays the Inventory page with a table displaying the store inventory and navigation functionality.
