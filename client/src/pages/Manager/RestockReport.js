@@ -1,3 +1,8 @@
+/**
+ * This file implements functionality to generate a restock report for the Manager user, i.e. the depleted items at the time of access.
+ * @author Mohona Ghosh
+ * @author Neha Sujith
+ */
 import {React, useState} from "react";
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -8,10 +13,22 @@ import {useNavigate} from "react-router-dom";
 import { ArrowReturnLeft } from 'react-bootstrap-icons';
 
 const conn = "http://localhost:3001";
+
+/**
+ * Constructs and returns a RestockReport element that generates a table of inventory items that need to be restocked. The item name
+ * and current quanitity in stock is displayed.
+ * @returns a RestockReport page
+ */
 const RestockReport = () => {
     let navigate = useNavigate();
     const [restock, setRestock] = useState([]);
   
+    /**
+     * Navigates the user to the desired page when a link in the navbar is clicked. If either Inventory or Store Menu is clicked,
+     * makes an API call to access the appropriate information from the database.
+     * @async
+     * @param {String} page the page route to navigate to
+     */
     const handleUpdate = async (page) => {
       let nav = "";
       if (page === "Inventory") {
@@ -39,6 +56,10 @@ const RestockReport = () => {
       } 
     };
 
+    /**
+     * Makes the API call to get the restock report when the RestockReport page is opened.
+     * @async
+     */
     const getRestockReport = async () => {
       try {
         const response = await fetch(conn + "/api/sales/getRestockReport/");
