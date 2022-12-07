@@ -4,19 +4,18 @@
       "dictionaries": ["jsdoc", "closure"]
     },
     "source": {
-      "include": ["client/src", "server"],
+      "include": ["src"],
       "includePattern": ".+\\.js(doc|x)?$",
       "excludePattern": "(^|\\/|\\\\)_"
     },
     "plugins": ["plugins/markdown"],
     "templates": {
-      "better-docs": {
-        "name": "My React components"
-      }
     },
     "opts": {
-      "destination": "docs",
-      "recurse": true,
-      "readme": "README.md"
+      "destination": "docs/client",
+      "recurse": true
+    },
+    "scripts": {
+        "docs": "jsdoc -c jsdoc.conf.json"
     }
   }

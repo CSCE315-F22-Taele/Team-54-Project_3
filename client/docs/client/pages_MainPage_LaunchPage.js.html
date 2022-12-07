@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: pages/MainPage/LaunchPage.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: pages/MainPage/LaunchPage.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * This page implements the webapp's launchpage containing buttons to access the Cashier, Customer, and Manager users.
+ * The launchpage also contains an image of the team logo and a Google Translate dropdown.
+ * @author Neha Sujith
+ * @author Mohona Ghosh
+ * @author Estella Chen
+ */
+import React from "react";
+import { useEffect, useState } from "react";
+import {useNavigate} from "react-router-dom";
+import logo from "./chicken-logo.jpg";
+
+/**
+ * Constructs and returns a LaunchPage object displaying team logo, Google Translate component, and buttons to access each user.
+ * @returns a LaunchPage component with the display described above
+ */
+const LaunchPage = () => {
+    let navigate = useNavigate()
+
+    /**
+     * Allows the user to navigate to a certain page depending on the button clicked.
+     * @param {String} page the page to navigate to
+     */
+    const handleUpdate = (page) => {
+        navigate(`/${page}`);
+    };
+
+    /**
+     * Initalizes the Google Translate element that shows up on the LaunchPage.
+     */
+    const googleTranslateElementInit = () => {
+      new window.google.translate.TranslateElement(
+        {
+          pageLanguage: "en",
+          autoDisplay: false
+        },
+        "google_translate_element"
+      );
+    };
+
+    /**
+     * 
+     */
+    function handleCallbackResponse(response) {
+      console.log("Encoded JWT ID token: " + response.credential);
+
+      document.getElementById("signInDiv").hidden = true;
+      navigate("/CashierManagerLogin");
+    }
+
+    /**
+     * 
+     */
+    function handleSignOut(event) {
+      document.getElementById("signInDiv").hidden = false;
+    }
+
+    useEffect(() => {
+      var addScript = document.createElement("script");
+      addScript.setAttribute(
+        "src",
+        "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+      );
+      document.body.appendChild(addScript);
+      window.googleTranslateElementInit = googleTranslateElementInit;
+
+      /* global google */
+      google.accounts.id.initialize({
+        client_id: "971843556198-g2dablttraii3memss2rmmfeqp4pv4dn.apps.googleusercontent.com",
+        callback: handleCallbackResponse
+      });
+
+      google.accounts.id.renderButton(
+        document.getElementById("signInDiv"),
+        { theme: "outline", size: "large" }
+      );
+
+      google.accounts.id.prompt();
+    }, []);
+
+    return (
+      &lt;div>
+          &lt;div>
+            &lt;div id="google_translate_element">&lt;/div>
+          &lt;/div>
+          &lt;img width="200" className="rounded mx-auto d-block" src={logo} alt="chicken-yurh"/>
+          &lt;h1 className="font-weight-light display-1 text-center">
+              Welcome to Chick-fil-A!
+          &lt;/h1>
+          &lt;h2 className="font-weight-light display-5 text-center">
+              Select user below:
+          &lt;/h2>
+          &lt;br>&lt;/br>
+
+          &lt;button onClick={() => handleUpdate("Customer")} type="button" className="btn btn-outline-danger btn-block">Customer&lt;/button>
+          &lt;h1 className="font-weight-light display-6 text-center">
+              Cashier or Manager
+          &lt;/h1>
+          &lt;div id="signInDiv" style={{display: 'flex', justifyContent:'center', alignItems:'center'}}>&lt;/div>
+      &lt;/div>
+    )
+}
+
+export default LaunchPage;</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="MapAutoComplete.html">MapAutoComplete</a></li><li><a href="MapsContainer.html">MapsContainer</a></li></ul><h3>Global</h3><ul><li><a href="global.html#App">App</a></li><li><a href="global.html#Cart">Cart</a></li><li><a href="global.html#Cashier">Cashier</a></li><li><a href="global.html#CashierManagerLogin">CashierManagerLogin</a></li><li><a href="global.html#Categories">Categories</a></li><li><a href="global.html#ConstraintSlider">ConstraintSlider</a></li><li><a href="global.html#Customer">Customer</a></li><li><a href="global.html#EditInventory">EditInventory</a></li><li><a href="global.html#ExcessReport">ExcessReport</a></li><li><a href="global.html#Inventory">Inventory</a></li><li><a href="global.html#LaunchPage">LaunchPage</a></li><li><a href="global.html#MapMarker">MapMarker</a></li><li><a href="global.html#MenuCashier">MenuCashier</a></li><li><a href="global.html#MenuCustomer">MenuCustomer</a></li><li><a href="global.html#MenuEditor">MenuEditor</a></li><li><a href="global.html#PaymentConfirmation">PaymentConfirmation</a></li><li><a href="global.html#PlaceCard">PlaceCard</a></li><li><a href="global.html#RestockReport">RestockReport</a></li><li><a href="global.html#SalesReport">SalesReport</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.0</a> on Tue Dec 06 2022 21:39:12 GMT-0600 (Central Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
