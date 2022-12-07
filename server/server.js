@@ -10,7 +10,11 @@ const morgan = require("morgan");
 // const authRoute = require("./routes/auth");
 const app = express();
 
-app.use(cors({ credentials: true, origin: true }));
+app.use(
+  cors({
+      // origin: ["http://localhost:3001/", "https://chickfila.onrender.com"],
+  })
+);
 app.use(express.json());
 // app.use(cookieSession({
 //   name: "session",
@@ -175,9 +179,9 @@ app.post("/api/menu/addMenuItem", async (req, res) => {
 
     const {menuid, name, price, category, ingredients} = req.body;
     
-    const results = await db.query("INSERT INTO menu(menuid, name, price, category, ingredients) VALUES ($1, $2, $3, $4, $5)",
+    const results = await db.query("INSERT INTO menu(menuid, name, price, category, 0) VALUES ($1, $2, $3, $4, $5)",
                                     [menuid, name, price, category, ingredients]);
-
+    const r = 
     res.status(200).send("Menu Item Addition Succeded.");
   } catch (err) {
     console.log(err);
@@ -229,7 +233,37 @@ try {
   
 
 
-  orderItems = itemsordered.substring(1, itemsordered.length-1).split(",");
+  orderItems = itemsordered.substring(1, itemsordered.length-1).split(", ");
+  console.log(orderItems);
+  var orderIng = new Array();
+  for(var i = 0; i < orderItems.length; ++i)
+  {
+    // console.log("SELECT ingredients FROM menu WHERE name = $1", orderItems[i])
+    const ingNeeded = await db.query("SELECT ingredients FROM menu WHERE name = $1", [orderItems[i]]);
+    for(var j = 0; j < ingNeeded.rows.length; ++j)
+      orderIng = orderIng.concat(ingNeeded.rows[j].ingredients);
+  }
+
+  for(var i = 0; i < orderIng.length; ++i)
+  {
+    const t = orderIng[i].lastIndexOf(" ");
+    orderIng[i] = [orderIng[i].substring(0, t), parseFloat(orderIng[i].substring(t+1))]
+  }
+
+  console.log(orderIng);
+  var pos = true;
+  for(var k = 0; k < orderIng.length; ++k)
+  {
+    var qty = await db.query("SELECT quantity FROM inventory WHERE name = $1", [orderIng[k][0]]);
+    qty = qty.rows[0]
+    if(qty.quantity > orderIng[k][1]) res.status(404);
+    // console.log(`UPDATE inventory SET quantity=${qty.quantity - orderIng[k][1]} WHERE name = ${orderIng[k][0]}`)
+    db.query("UPDATE inventory SET quantity=$1 WHERE name = $2", [qty.quantity - orderIng[k][1], orderIng[k][0]]);
+  }
+
+  
+
+
   
   
   
@@ -240,6 +274,8 @@ try {
   res.status(200);
 } catch (err) {
   console.log(err);
+  res.status(404);
+
 }
 });
 
@@ -255,10 +291,11 @@ app.get("/api/sales/getSalesReport/:timeStart/:timeEnd", async (req, res) => {
     return map;
   }
   
-  
   try {
+    console.log("BEGIN API CALL")
     const timeStart = req.params.timeStart;
     const timeEnd = req.params.timeEnd;
+    console.log("timeStart", timeStart, "timeEnd", timeEnd)
 
     const report = await db.query("SELECT * FROM orders WHERE saledate >= $1 AND saledate <= $2", [timeStart, timeEnd]);
     const freq = new Map();
@@ -268,11 +305,18 @@ app.get("/api/sales/getSalesReport/:timeStart/:timeEnd", async (req, res) => {
       getFreq(freq, orderItems);
     }
     
-    // console.log(freq);
+    console.log(freq);
     
-    res.status(200).json(freq);
+    res.status(200).json({
+      status: "success",
+      results: freq.length,
+      data: {
+        table: freq,
+      },
+    });
   } catch (err) {
-    console.log(err);
+    console.error(err.message);
+
   }
 });
 
@@ -280,25 +324,32 @@ app.get("/api/sales/getSalesReport/:timeStart/:timeEnd", async (req, res) => {
 
 // ------------------------------------ Restock ------------------------------------
 app.get("/api/sales/getRestockReport/", async (req, res) => {
-  const {threshold} = req.body;
+  const threshold = 105;
   try {
     const report = await db.query("SELECT * FROM inventory WHERE quantity < $1", [threshold]);
+    console.log(report.rows);
     // console.log("SELECT * FROM inventory WHERE quantity < $1", [threshold]);
-    const depletedItems = new Array(report.rowCount)
+    // const depletedItems = new Array(report.rowCount);
+    const returnVal = new Map();
     for(let i = 0; i < report.rowCount; ++i)
     {
       const ingredientName = report.rows[i].name;
       const remainingQty = report.rows[i].quantity + " " + report.rows[i].unit;
       // getFreq(freq, orderItems);
       // console.log(ingredientName, ':', remainingQty);
-      depletedItems[i] = [ingredientName, remainingQty];
-
+      // depletedItems[i] = [ingredientName, remainingQty];
+      returnVal[ingredientName] = remainingQty;
     }
     // console.log("Reached here");
     // console.log(freq);
-    
-    res.status(200).json(depletedItems);
-  } catch (err) {
+    // console.log(returnVal);
+    res.status(200).json({
+      status: "success",
+      results: returnVal.length,
+      data: {
+        table: returnVal,
+      },
+    });  } catch (err) {
     console.log(err);
   }
 });

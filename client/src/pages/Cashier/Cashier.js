@@ -3,6 +3,7 @@
  * the menu view by the user's selected category as well as keep track of the items in the user's current order. It also 
  * displays the divs containing the page title, navbar, and menu cards
  * @author Neha Sujith
+ * @author Estella Chen
  */
 import React, {useState, useRef} from "react";
 import Menu from "../../components/Cards/MenuCashier";
