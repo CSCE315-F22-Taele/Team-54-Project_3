@@ -9,6 +9,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import {useNavigate} from "react-router-dom";
 import logo from "./chicken-logo.jpg";
+// import { Box } from '@mui/material';
 
 /**
  * Constructs and returns a LaunchPage object displaying team logo, Google Translate component, and buttons to access each user.
@@ -77,7 +78,9 @@ const LaunchPage = () => {
     return (
       <div>
           <div>
-            <div id="google_translate_element"></div>
+            {/* <Box color="white" bgcolor="palevioletred" p={1}> */}
+                <div id="google_translate_element"></div>
+            {/* </Box> */}
           </div>
           <img width="200" className="rounded mx-auto d-block" src={logo} alt="chicken-yurh"/>
           <h1 className="font-weight-light display-1 text-center">
