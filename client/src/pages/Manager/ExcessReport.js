@@ -4,7 +4,7 @@
  * @author Mohona Ghosh
  * @author Neha Sujith
  */
-import React from "react";
+import {React, useState} from "react";
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
@@ -12,6 +12,10 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import Table from 'react-bootstrap/Table';
 import {useNavigate} from "react-router-dom";
 import { ArrowReturnLeft } from 'react-bootstrap-icons';
+import Form from 'react-bootstrap/Form';
+
+const conn = "http://localhost:3001";
+// const conn = "https://chick-fil-a-backend.onrender.com";
 
 /**
  * Constructs an ExcessReport component that generates a report of excess inventory during a given time period.
@@ -22,6 +26,14 @@ const ExcessReport = () => {
     const [start, setStart] = useState("");
     const [end, setEnd] = useState("");
     const [excess, setExcess] = useState([]);
+
+    /**
+     * Prevents the page from refreshing whenever input is changed by the user
+     * @param {Event} e the triggering event
+     */
+     const onFormSubmit = e => {
+      e.preventDefault();
+    }
   
     /**
      * Navigates to the user's desired page within the Manager user. If the Manager tries to access either the Inventory or Store Menu 
@@ -61,7 +73,7 @@ const ExcessReport = () => {
      */
      const getExcessReport = async () => {
       try {
-        const response = await fetch(conn + `/api/sales/getExcessReport/${timeStart}`);
+        const response = await fetch(conn + `/api/sales/getExcessReport/${start}`);
         const jsonVals = await response.json();
         console.log("WORKING")
         console.log(jsonVals);

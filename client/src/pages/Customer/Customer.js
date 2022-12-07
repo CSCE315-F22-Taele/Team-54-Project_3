@@ -11,8 +11,8 @@ import Menu from "../../components/Cards/MenuCustomer";
 import Categories from "../../components/NavBar/CategoriesCustomer";
 
 const allCategories = ["All Items", "Breakfast", "Entree", "Salads", "Sides", "Kids Meals", "Treats", "Drinks", "Sauce"];
-// const conn = "http://localhost:3001";
-const conn = "https://chick-fil-a-backend.onrender.com";
+const conn = "http://localhost:3001";
+// const conn = "https://chick-fil-a-backend.onrender.com";
 
 /**
  * Creates and displays the customer user skeleton by apportioning div space and describing basic view and order tracking functionality.

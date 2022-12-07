@@ -10,8 +10,8 @@ import Menu from "../../components/Cards/MenuCashier";
 import Categories from "../../components/NavBar/CategoriesCashier";
 
 const allCategories = ["All Items", "Breakfast", "Entree", "Salads", "Sides", "Kids Meals", "Treats", "Drinks", "Sauce"];
-// const conn = "http://localhost:3001";
-const conn = "https://chick-fil-a-backend.onrender.com";
+const conn = "http://localhost:3001";
+// const conn = "https://chick-fil-a-backend.onrender.com";
 
 /**
  * Creates the Cashier object, which divides the webpage into spaces for the title, navbar, and menu while containing functionality

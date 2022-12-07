@@ -10,9 +10,9 @@ import {message} from 'antd';
 import Table from 'react-bootstrap/Table';
 
 // Dev Version
-// const conn = "http://localhost:3001";
+const conn = "http://localhost:3001";
 // Prod Version
-const conn = "https://chick-fil-a-backend.onrender.com";
+// const conn = "https://chick-fil-a-backend.onrender.com";
 
 /**
  * Creates and displays the payment confirmation page that shows the user the final order.
