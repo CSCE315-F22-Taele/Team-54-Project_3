@@ -39,10 +39,11 @@ app.post("/addInventoryItem", async (req, res) => {
 app.post("/deleteInventoryItem", async (req, res) => {
   try {
 
-  const {itemName} = req.body;
-    console.log(itemName);
-    const results = await db.query("DELETE FROM inventory WHERE name = $1",
-                                    [itemName]);
+    const {itemID} = req.body;
+    console.log("item id")
+    console.log(itemID);
+    const results = await db.query("DELETE FROM inventory WHERE itemid = $1",
+                                    [itemID]);
 
     res.status(200).send("Inventory Item Deletion Succeded.");
   } catch (err) {
