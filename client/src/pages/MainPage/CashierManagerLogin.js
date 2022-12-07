@@ -86,12 +86,8 @@
      return (
        <div>
            <div>
-             <div id="google_translate_element" /*style="text-align: 'right'; vertical-align: text-top;"*/></div>
+             <div id="google_translate_element"></div>
            </div>
-           {/* <img width="200" className="rounded mx-auto d-block" src={logo} alt="chicken-yurh"/> */}
-           {/* <h1 className="font-weight-light display-1 text-center">
-               Welcome to Chick-fil-A!
-           </h1> */}
            <button onClick={() => handleUpdate("")} type="button" className="btn btn-outline-secondary"><ArrowReturnLeft color="black"/></button>
            <h2 className="font-weight-light display-5 text-center">
                Select user below:
@@ -99,8 +95,10 @@
            <br></br>
  
            <button onClick={() => handleUpdate("Cashier")} type="button" className="btn btn-outline-danger btn-block">Cashier</button>
-           <h1>Manager</h1>
-           <div id="signInDiv"></div>
+           <h1 className="font-weight-light display-6 text-center">
+              Manager
+          </h1>
+          <div id="signInDiv" style={{display: 'flex', justifyContent:'center', alignItems:'center'}}></div>
            
        </div>
      )
