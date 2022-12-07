@@ -189,7 +189,7 @@ app.post("/api/menu/addMenuItem", async (req, res) => {
 app.post("/api/menu/deleteMenuItem", async (req, res) => {
   try {
 
-  const {itemName} = req.body;
+    const {itemName} = req.body;
     
     const results = await db.query("DELETE FROM menu WHERE name = $1",
                                     [itemName]);

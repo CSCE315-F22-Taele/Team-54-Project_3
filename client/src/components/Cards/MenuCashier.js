@@ -1,6 +1,7 @@
 /**
  * This file defines the menu cards for the Cashier user. It is intended to provide a template for a menu card,
  * where each item on the menu gets one card on the user's display.
+ * @author Estella Chen
  * @author Mohona Ghosh
  * @author Neha Sujith
  */
@@ -12,6 +13,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
+import { ButtonGroup } from "react-bootstrap";
 
 /**
  * Creates a menu card using the paramters specified in props
@@ -53,20 +55,29 @@ const MenuCashier = (props) => {
         for (let i = 0; i < Number(value); i++) {
           orderList(current => [...current, [name, price]])
         }
-        console.log(orders);
+
         props.sendOrders(orders);
+      }
+
+      /**
+       * Deletes all occurences of an item from the order list
+       */
+      const deleteOrders = () => {
+        orderList(orders.filter(curr => curr[0] !== name));
+
+        props.sendOrders(orders)
       }
 
       return (
         <Col>
-            <Card style={{ width: '18rem', alignItems: 'center', justifyContent: 'center', background: "none", color: "black"}} key={menuid} className="box">
+            <Card style={{ width: '22rem', alignItems: 'center', justifyContent: 'center', background: "none", color: "black"}} key={menuid} className="box">
                 <Card.Body>
                     <Card.Title className="text-center">{name}</Card.Title>
                     <Card.Text className="text-center">${price}</Card.Text>
                 </Card.Body>
                 <div className="form-inline my-lg-1">
                   <Form onSubmit={onFormSubmit}>
-                      <Form.Group>
+                      <Form.Group style={{display: 'flex'}}>
                           <Form.Control 
                             type="text" 
                             placeholder="Enter quantity" 
@@ -78,6 +89,13 @@ const MenuCashier = (props) => {
                               style={{alignSelf: 'center', justifyContent: 'center'}} 
                               type="submit">
                               Order
+                            </button>
+                            <button
+                              onClick={deleteOrders}
+                              className="btn btn-danger"
+                              style={{alignSelf: 'center', justifyContent: 'center'}}
+                              type="submit">
+                                Delete
                             </button>
                           {/* </div> */}
                       </Form.Group>
