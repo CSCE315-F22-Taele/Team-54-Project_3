@@ -127,11 +127,11 @@ const EditInventory = () => {
    * When the user clicks the "Add Item" button, makes an API call to add the item in the backend database. This change will
    * be reflected client-side whenever the user next tries to access the inventory page.
    */
-  const handleAdd = () => {
+  const handleAdd = async () => {
     try {
       console.log("Sending via JSON...");
 
-      const response = fetch(conn + "/api/inventory/addInventoryItem", {
+      const response = await fetch(conn + "/api/inventory/addInventoryItem", {
         method: 'POST', // *GET, POST, PUT, DELETE, etc.
         headers: {
           'Content-Type': 'application/json'
@@ -169,11 +169,11 @@ const EditInventory = () => {
    * When the "Edit Item" button is clicked, makes an API call to edit the inputted item in the backend database. Change
    * is reflected immediately.
    */
-  const handleEdit = () => {
+  const handleEdit = async () => {
     try {
       console.log("Sending via JSON...");
 
-      const response = fetch(conn + "/api/inventory/deleteInventoryItem", {
+      const response = await fetch(conn + "/api/inventory/deleteInventoryItem", {
         method: 'POST', // *GET, POST, PUT, DELETE, etc.
         headers: {
           'Content-Type': 'application/json'
@@ -196,7 +196,7 @@ const EditInventory = () => {
       console.log("Adding item NOWWWWWW");
       console.log("Sending via JSON...");
 
-      const response = fetch(conn + "/api/inventory/addInventoryItem", {
+      const response = await fetch(conn + "/api/inventory/addInventoryItem", {
         method: 'POST', // *GET, POST, PUT, DELETE, etc.
         headers: {
           'Content-Type': 'application/json'
@@ -226,11 +226,11 @@ const EditInventory = () => {
    * When the "Delete Item" button is clicked, makes an API call to delete the item from the backend database using the user-
    * inputted name. Change is reflected immediately.
    */
-  const handleDelete = () => {
+  const handleDelete = async () => {
     try {
       console.log("Sending via JSON...");
 
-      const response = fetch(conn + "/api/inventory/deleteInventoryItem", {
+      const response = await fetch(conn + "/api/inventory/deleteInventoryItem", {
         method: 'POST', // *GET, POST, PUT, DELETE, etc.
         headers: {
           'Content-Type': 'application/json'
