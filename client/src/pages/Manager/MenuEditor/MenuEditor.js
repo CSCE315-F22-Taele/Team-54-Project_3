@@ -1,5 +1,11 @@
 import {React, useState} from "react";
 import Nav from 'react-bootstrap/Nav';
+/**
+ * This file implements the Store Menu page on the Manager user. This page displays the current store menu as stored in the
+ * database and has a navbar to allow the user to access other pages in the Manager user.
+ * @author Mohona Ghosh
+ * @author Neha Sujith
+ */
 import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
 import NavDropdown from 'react-bootstrap/NavDropdown';
@@ -8,11 +14,21 @@ import {useLocation, useNavigate} from "react-router-dom";
 import { ArrowReturnLeft } from 'react-bootstrap-icons';
 
 const conn = "http://localhost:3001";
+
+/**
+ * Constructs and displays the Store Menu page with a table displaying the store menu and navigation functionality.
+ * @returns a MenuEditor page displaying the current store menu as stored in the database, along with navigation ability.
+ */
 const MenuEditor = () => {
   let navigate = useNavigate();
   const location = useLocation();
-  const [inventory, setInventory] = useState([]);
+  const [menu, setMenu] = useState([]);
 
+  /**
+   * Navigates to the user's desired page. If trying to access the Inventory page, makes an API call to fetch the store inventory
+   * data from the database so that the data is displayed immediately upon navigation.
+   * @param {String} page The page the user wants to navigate to
+   */
   const handleUpdate = async (page) => {
     let nav = "";
       if (page === "Inventory") {
@@ -29,7 +45,7 @@ const MenuEditor = () => {
           const jsonVals = await response.json();
           console.log("tableeee");
           console.log(jsonVals.data.table);
-          setInventory(jsonVals.data.table);
+          setMenu(jsonVals.data.table);
           navigate(`/Manager/${page}`, {state:jsonVals.data.table});
         } catch (err) {
           console.log("ERROR!!!");
@@ -44,16 +60,6 @@ const MenuEditor = () => {
           navigate(`/${page}`);
         }
       }
-  };
-
-  const generateForm = (btn) => {
-    if (btn === "add") {
-
-    } else if (btn === "edit") {
-
-    } else if (btn === "del") {
-
-    }
   };
 
   return (
