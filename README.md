@@ -32,3 +32,9 @@ The website is publicly hosted at the following URL: https://cfa-frontend.onrend
 Alternatively:
 1. Clone this repository locally
 2. Compile and run using the command `npm start` or `npm run build`
+3. Note: This will not give access to API functionality
+
+---
+### Documentation
+Client: https://five4-client-documentation.onrender.com
+Server: https://five4-server-documentation.onrender.com
