@@ -1,3 +1,9 @@
+/**
+ * This file implements the Inventory page on the Manager user. This page displays the current inventory as stored in the
+ * database and has a navbar to allow the user to access other pages in the Manager user.
+ * @author Mohona Ghosh
+ * @author Neha Sujith
+ */
 import React, {useState} from "react";
 import Table from 'react-bootstrap/Table';
 import Nav from 'react-bootstrap/Nav';
@@ -9,11 +15,20 @@ import { ArrowReturnLeft } from 'react-bootstrap-icons';
 
 const conn = "http://localhost:3001";
 
+/**
+ * Constructs and displays the Inventory page with a table displaying the store inventory and navigation functionality.
+ * @returns an Inventory page displaying the current inventory as stored in the database, along with navigation ability.
+ */
 const Inventory = () => {
     let navigate = useNavigate()
     const location = useLocation();
     const [inventory, setInventory] = useState([]);
 
+    /**
+     * Allows the user to navigate to other pages within the Manager user. If the user tries to navigate to the Store Menu, 
+     * the function makes an API call to fetch menu data so that it displays on the store menu page once the navigation is complete.
+     * @param {String} page The page to navigate to
+     */
     const handleUpdate = async (page) => {
       let nav = "";
       if (page === "Inventory") {
