@@ -168,7 +168,56 @@ const EditInventory = () => {
    * is reflected immediately.
    */
   const handleEdit = () => {
+    try {
+      console.log("Sending via JSON...");
 
+      const response = fetch(conn + "/api/inventory/deleteInventoryItem", {
+        method: 'POST', // *GET, POST, PUT, DELETE, etc.
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          "itemID": itemID
+        })
+      });
+
+      console.log("Finished API call");
+
+      console.log("Reached reload location");
+    }
+    catch (err) {
+      console.log("ERROR");
+      console.error(err.message);
+    }
+
+    try {
+      console.log("Adding item NOWWWWWW");
+      console.log("Sending via JSON...");
+
+      const response = fetch(conn + "/api/inventory/addInventoryItem", {
+        method: 'POST', // *GET, POST, PUT, DELETE, etc.
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          "itemid": itemID,
+          "name": name,
+          "category": category,
+          "expirationdate": expiry,
+          "fridgerequired": fridge,
+          "quantity": quantity,
+          "unit": unit
+        })
+      });
+
+      console.log("Finished API call");
+
+      console.log("Reached reload location");
+    }
+    catch (err) {
+      console.log("ERROR");
+      console.error(err.message);
+    }
   }
 
   /**
@@ -185,7 +234,7 @@ const EditInventory = () => {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          "itemName": name
+          "itemID": itemID
         })
       });
 
