@@ -17,6 +17,7 @@ const finances = require("./routes/finances");
 const inventory = require("./routes/inventory");
 const menu = require("./routes/menu");
 const orders = require("./routes/orders");
+const sales = require("./routes/sales");
 
 
 app.use("/api/customers", customers);
@@ -25,6 +26,7 @@ app.use("/api/finances", finances);
 app.use("/api/inventory", inventory);
 app.use("/api/menu", menu);
 app.use("/api/orders", orders);
+app.use("/api/sales", sales);
 // app.use("/auth", authRoute);
 
 app.use(
@@ -349,9 +351,7 @@ app.use(
 // ------------------------------------ OAUTH ------------------------------------
 
 
-app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname));
-});
+
 
 
 const port = process.env.PORT || 3001;
