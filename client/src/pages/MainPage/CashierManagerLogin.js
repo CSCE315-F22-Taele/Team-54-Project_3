@@ -1,8 +1,7 @@
 /**
  * This page implements the webapp's launchpage containing buttons to access the Cashier, Customer, and Manager users.
  * The launchpage also contains an image of the team logo and a Google Translate dropdown.
- * @author Neha Sujith
- * @author Mohona Ghosh
+ * @author Estella Chen
  */
  import React from "react";
  import { useEffect, useState } from "react";

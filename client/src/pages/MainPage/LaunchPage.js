@@ -3,6 +3,7 @@
  * The launchpage also contains an image of the team logo and a Google Translate dropdown.
  * @author Neha Sujith
  * @author Mohona Ghosh
+ * @author Estella Chen
  */
 import React from "react";
 import { useEffect, useState } from "react";
@@ -87,21 +88,7 @@ const LaunchPage = () => {
     return (
       <div>
           <div>
-            <div id="google_translate_element" /*style="text-align: 'right'; vertical-align: text-top;"*/></div>
-          </div>
-          <div>
-            {/* if we have no user: sign in button
-            if we have a user: route to proper page */}
-            {/* <div id="signInDiv"></div>
-            { Object.keys(user).length != 0 &&
-              <button onClick={ (e) => handleSignOut(e)}>Sign Out</button>
-            } */}
-            {/* { user &&
-              <div>
-                <img src={user.picture}></img>
-                <h3>{user.name}</h3>
-              </div>
-            } */}
+            <div id="google_translate_element"></div>
           </div>
           <img width="200" className="rounded mx-auto d-block" src={logo} alt="chicken-yurh"/>
           <h1 className="font-weight-light display-1 text-center">
@@ -113,11 +100,10 @@ const LaunchPage = () => {
           <br></br>
 
           <button onClick={() => handleUpdate("Customer")} type="button" className="btn btn-outline-danger btn-block">Customer</button>
-          {/* <button onClick={() => handleUpdate("Cashier")} type="button" className="btn btn-outline-danger btn-block">Cashier</button> */}
-          <h1>Cashier or Manager</h1>
-          <div id="signInDiv"></div>
-          
-          {/* <button onClick={() => handleUpdate("Manager")} type="button" className="btn btn-outline-danger btn-block">Manager</button> */}
+          <h1 className="font-weight-light display-6 text-center">
+              Cashier or Manager
+          </h1>
+          <div id="signInDiv" style={{display: 'flex', justifyContent:'center', alignItems:'center'}}></div>
       </div>
     )
 }
