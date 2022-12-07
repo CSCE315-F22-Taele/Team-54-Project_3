@@ -178,10 +178,11 @@ app.post("/api/menu/addMenuItem", async (req, res) => {
   try {
 
     const {menuid, name, price, category, ingredients} = req.body;
+    console.log(menuid, name, price, category, ingredients);
     
-    const results = await db.query("INSERT INTO menu(menuid, name, price, category, 0) VALUES ($1, $2, $3, $4, $5)",
+    const results = await db.query("INSERT INTO menu(menuid, name, price, category, ingredients) VALUES ($1, $2, $3, $4, $5)",
                                     [menuid, name, price, category, ingredients]);
-    const r = 
+
     res.status(200).send("Menu Item Addition Succeded.");
   } catch (err) {
     console.log(err);
@@ -193,10 +194,10 @@ app.post("/api/menu/addMenuItem", async (req, res) => {
 app.post("/api/menu/deleteMenuItem", async (req, res) => {
   try {
 
-    const {itemName} = req.body;
+    const {itemID} = req.body;
     
-    const results = await db.query("DELETE FROM menu WHERE name = $1",
-                                    [itemName]);
+    const results = await db.query("DELETE FROM menu WHERE menuid = $1",
+                                    [itemID]);
 
     res.status(200).send("Menu Item Deletion Succeded.");
   } catch (err) {
