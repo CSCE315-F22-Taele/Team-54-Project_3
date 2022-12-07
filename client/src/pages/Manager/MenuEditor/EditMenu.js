@@ -149,6 +149,53 @@ const EditInventory = () => {
    * is reflected immediately.
    */
   const handleEdit = () => {
+    try {
+      console.log("Sending via JSON...");
+
+      const response = fetch(conn + "/api/menu/deleteMenuItem", {
+        method: 'POST', // *GET, POST, PUT, DELETE, etc.
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          "itemID": itemID
+        })
+      });
+
+      console.log("Finished API call");
+
+      console.log("Reached reload location");
+    }
+    catch (err) {
+      console.log("ERROR");
+      console.error(err.message);
+    }
+
+    try {
+      console.log("Sending via JSON...");
+
+      const response = fetch(conn + "/api/menu/addMenuItem", {
+        method: 'POST', // *GET, POST, PUT, DELETE, etc.
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          "menuid": itemID,
+          "name": name,
+          "price": price,
+          "category": category,
+          "ingredients": ingredients
+        })
+      });
+
+      console.log("Finished API call");
+
+      console.log("Reached reload location");
+    }
+    catch (err) {
+      console.log("ERROR");
+      console.error(err.message);
+    }
 
   }
 
@@ -166,7 +213,7 @@ const EditInventory = () => {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          "itemName": name
+          "itemID": itemID
         })
       });
 
