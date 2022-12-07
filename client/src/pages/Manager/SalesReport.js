@@ -1,3 +1,9 @@
+/**
+ * This file implements functionality to generate a report of menu items sold (and how much of each was sold) over a user-inputted
+ * time period.
+ * @author Mohona Ghosh
+ * @author Neha Sujith
+ */
 import React from "react";
 import { useState, useEffect } from "react";
 import Nav from 'react-bootstrap/Nav';
@@ -13,12 +19,22 @@ import Form from 'react-bootstrap/Form';
 const conn = "https://chick-fil-a-backend.onrender.com";
 
 
+/**
+ * Constructs and displays a SalesReport page that generates of what and how much was sold during a given time period.
+ * @returns A SalesReport page
+ */
 const SalesReport = () => {
     let navigate = useNavigate()
     const [start, setStart] = useState("");
     const [end, setEnd] = useState("");
     const [sales, setSales] = useState([]);
   
+    /**
+     * Navigates to the desired page within the Manager user. If Inventory or Store Menu are accessed, makes the appropriate API
+     * call to obtain the requisite information from the database.
+     * @async
+     * @param {String} page the page to navigate to
+     */
     const handleUpdate = async (page) => {
       let nav = "";
       if (page === "Inventory") {
@@ -46,6 +62,9 @@ const SalesReport = () => {
       }
     };
     
+    /**
+     * Initializes a Google Translate component to enable support for multiple languages
+     */
     const googleTranslateElementInit = () => {
       new window.google.translate.TranslateElement(
         {
@@ -56,18 +75,36 @@ const SalesReport = () => {
       );
     };
 
+    /**
+     * Prevents the page from refreshing whenever input is changed by the user
+     * @param {Event} e the triggering event
+     */
     const onFormSubmit = e => {
       e.preventDefault();
     }
 
+    /**
+     * Logs the start date for the time period the user wishes to view
+     * @param {*} value the value to set the start date to 
+     */
     const onInputStart = ({target:{value}}) => {
       console.log(value);
       setStart(value)
     }
+
+    /**
+     * Logs the end date for the time period the user wishes to view
+     * @param {*} value the value to set the end date to 
+     */
     const onInputEnd = ({target:{value}}) => {
       console.log(value);
       setEnd(value)
     }
+
+    /**
+     * Generates the SalesReport by making an API call to make calculations and sort items by order frequency.
+     * @async
+     */
     const getSalesReport = async () => {
       try {
         console.log("Sending via JSON...");

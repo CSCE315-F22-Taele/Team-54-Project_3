@@ -1,6 +1,14 @@
+/**
+ * Summary of file
+ * @author Krishnan Prashanth
+ * @author Neha Sujith
+ */
 const router = require("express").Router();
 const passport = require("passport");
 
+/**
+ * @param {*} 
+ */
 router.get("/login/success", (req, res) => {
 	if (req.user) {
 		res.status(200).json({

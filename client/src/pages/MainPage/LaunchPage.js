@@ -9,7 +9,6 @@ import React from "react";
 import { useEffect, useState } from "react";
 import {useNavigate} from "react-router-dom";
 import logo from "./chicken-logo.jpg";
-import jwt_decode from "jwt-decode";
 
 /**
  * Constructs and returns a LaunchPage object displaying team logo, Google Translate component, and buttons to access each user.
@@ -17,8 +16,6 @@ import jwt_decode from "jwt-decode";
  */
 const LaunchPage = () => {
     let navigate = useNavigate()
-
-    const [user, setUser] = useState({});
 
     /**
      * Allows the user to navigate to a certain page depending on the button clicked.
@@ -42,26 +39,25 @@ const LaunchPage = () => {
     };
 
     /**
-     * 
-     */
+      * Logs the email account chosen by the user to use for login
+      */
     function handleCallbackResponse(response) {
       console.log("Encoded JWT ID token: " + response.credential);
-      var userObject = jwt_decode(response.credential);
-      console.log(userObject);
-      setUser(userObject);
 
       document.getElementById("signInDiv").hidden = true;
       navigate("/CashierManagerLogin");
     }
 
     /**
-     * 
-     */
+      * Signs out the user
+      */
     function handleSignOut(event) {
-      setUser({});
       document.getElementById("signInDiv").hidden = false;
     }
 
+    /**
+      * Starts the display for Google Translate and Gmail login via OAuth
+      */
     useEffect(() => {
       var addScript = document.createElement("script");
       addScript.setAttribute(

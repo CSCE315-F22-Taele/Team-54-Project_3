@@ -1,6 +1,5 @@
 /**
- * This page implements the webapp's launchpage containing buttons to access the Cashier, Customer, and Manager users.
- * The launchpage also contains an image of the team logo and a Google Translate dropdown.
+ * This page implements the webapp's cashier and manager login using OAuth
  * @author Estella Chen
  */
  import React from "react";
@@ -10,10 +9,10 @@
  import jwt_decode from "jwt-decode";
  
  /**
-  * Constructs and returns a LaunchPage object displaying team logo, Google Translate component, and buttons to access each user.
-  * @returns a LaunchPage component with the display described above
+  * Constructs and returns a CashierManagerLogin object allowing the user to use their email to log in
+  * @returns a CashierManagerLogin component with the display described above
   */
- const LaunchPage = () => {
+ const CashierManagerLogin = () => {
      let navigate = useNavigate()
  
      const [user, setUser] = useState({});
@@ -40,7 +39,7 @@
      };
  
      /**
-      * 
+      * Logs the email account chosen by the user to use for login
       */
      function handleCallbackResponse(response) {
        console.log("Encoded JWT ID token: " + response.credential);
@@ -53,13 +52,8 @@
      }
  
      /**
-      * 
+      * Starts the display for Google Translate and Gmail login via OAuth
       */
-     function handleSignOut(event) {
-       setUser({});
-       document.getElementById("signInDiv").hidden = false;
-     }
- 
      useEffect(() => {
        var addScript = document.createElement("script");
        addScript.setAttribute(
@@ -104,4 +98,4 @@
      )
  }
  
- export default LaunchPage;
+ export default CashierManagerLogin;
