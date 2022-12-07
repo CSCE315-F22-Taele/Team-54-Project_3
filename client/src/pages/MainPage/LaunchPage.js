@@ -39,8 +39,8 @@ const LaunchPage = () => {
     };
 
     /**
-     * 
-     */
+      * Logs the email account chosen by the user to use for login
+      */
     function handleCallbackResponse(response) {
       console.log("Encoded JWT ID token: " + response.credential);
 
@@ -49,12 +49,15 @@ const LaunchPage = () => {
     }
 
     /**
-     * 
-     */
+      * Signs out the user
+      */
     function handleSignOut(event) {
       document.getElementById("signInDiv").hidden = false;
     }
 
+    /**
+      * Starts the display for Google Translate and Gmail login via OAuth
+      */
     useEffect(() => {
       var addScript = document.createElement("script");
       addScript.setAttribute(

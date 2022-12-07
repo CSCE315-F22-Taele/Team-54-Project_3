@@ -52,14 +52,6 @@
      }
  
      /**
-      * Signs out the user
-      */
-     function handleSignOut(event) {
-       setUser({});
-       document.getElementById("signInDiv").hidden = false;
-     }
- 
-     /**
       * Starts the display for Google Translate and Gmail login via OAuth
       */
      useEffect(() => {

@@ -9,7 +9,9 @@ import { useNavigate } from "react-router-dom";
 import Form from 'react-bootstrap/Form';
 import { message } from 'antd';
 
-const conn = "http://localhost:3001";
+// const conn = "http://localhost:3001";
+const conn = "https://chick-fil-a-backend.onrender.com";
+
 
 /**
  * Creates and displays the EditInventory page with form inputs to get information about the inventory item from the user
