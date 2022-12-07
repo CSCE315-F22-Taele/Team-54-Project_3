@@ -19,19 +19,76 @@ import { ArrowReturnLeft } from 'react-bootstrap-icons';
  */
 const ExcessReport = () => {
     let navigate = useNavigate()
+    const [start, setStart] = useState("");
+    const [end, setEnd] = useState("");
+    const [excess, setExcess] = useState([]);
   
     /**
      * Navigates to the user's desired page within the Manager user. If the Manager tries to access either the Inventory or Store Menu 
      * page, the function makes an API call to fetch the requisite data from the database so it displays correctly upon navigation.
      * @param {String} page the page to navigate to
      */
-    const handleUpdate = (page) => {
-      if (page === "Manager") {
-        navigate(`/${page}`);
-      } else {
-        navigate(`/Manager/${page}`);
+    const handleUpdate = async (page) => {
+      let nav = "";
+      if (page === "Inventory") {
+        nav = "inventory/inventoryItems";
+      }
+      else if (page === "MenuEditor") {
+        nav = "menu/menuItems";
+      }
+      
+      if (page !== "Manager") {
+        try {
+          console.log(`/api/${nav}`)
+          const response = await fetch (conn + `/api/${nav}`);
+          const jsonVals = await response.json();
+          console.log("tableeee");
+          console.log(jsonVals.data.table);
+          navigate(`/Manager/${page}`, {state:jsonVals.data.table});
+        } catch (err) {
+          console.log("ERROR!!!")
+          console.log(err);
+        }
+      }
+      else {
+        navigate(`/`);
       }
     };
+
+    /**
+     * Makes the API call to get the excess report when the ExcessReport page is opened.
+     * @async
+     */
+     const getExcessReport = async () => {
+      try {
+        const response = await fetch(conn + `/api/sales/getExcessReport/${timeStart}`);
+        const jsonVals = await response.json();
+        console.log("WORKING")
+        console.log(jsonVals);
+        setExcess(jsonVals.data.table);
+      }
+      catch (err) {
+        console.log("ERROR");
+        console.error(err.message);
+      }
+    }
+    /**
+     * Logs the start date for the time period the user wishes to view
+     * @param {*} value the value to set the start date to 
+     */
+     const onInputStart = ({target:{value}}) => {
+      console.log(value);
+      setStart(value)
+    }
+
+    /**
+     * Logs the end date for the time period the user wishes to view
+     * @param {*} value the value to set the end date to 
+     */
+    const onInputEnd = ({target:{value}}) => {
+      console.log(value);
+      setEnd(value)
+    }
 
     return (
       <div>
@@ -53,30 +110,43 @@ const ExcessReport = () => {
             </Navbar.Collapse>
           </Container>
         </Navbar>
+        <Form onSubmit={onFormSubmit}>
+          <Form.Group>
+              <Form.Control 
+              type="text" 
+              placeholder="Enter start date" 
+              onChange={onInputStart}
+              />
+              <Form.Control 
+              type="text" 
+              placeholder="Enter start date" 
+              onChange={onInputEnd}
+              />
+          </Form.Group>
+        </Form>
+        <button 
+          onClick={getExcessReport}
+          className="btn btn-primary " 
+          style={{alignSelf: 'center', justifyContent: 'center'}} 
+          type="submit">
+          Display excess
+        </button>
         <Table striped bordered hover>
           <thead>
             <tr>
-              <th>Item Name</th>
-              <th>Category</th>
+              <th>Menu Item</th>
               <th>Amount Remaining</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-                <td>
-                    To be filled
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    To be filled
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    To be filled
-                </td>
-            </tr>
+            {Object.keys(excess).map(key => {
+              return (
+                <tr>
+                  <td>{key}</td>
+                  <td>{excess[key]}</td>
+                </tr>
+              )
+            })}
           </tbody>
         </Table>
       </div>
