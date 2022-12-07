@@ -73,15 +73,33 @@ const ExcessReport = () => {
      */
      const getExcessReport = async () => {
       try {
-        const response = await fetch(conn + `/api/sales/getExcessReport/${start}`);
+        console.log("Sending via JSON...");
+        const new_start = start;
+        const new_end = end;
+        console.log(start, end);
+        const response = await fetch(conn + `/api/sales/getExcessReport/${new_start}`, 
+        {
+          method: 'GET',
+          headers: {
+            "Content-Type": "application/json",
+            'Accept': 'application/json'}
+        });
+        console.log("RESPONSE")
+        // console.log(response);
         const jsonVals = await response.json();
-        console.log("WORKING")
+
+        console.log("JSON")
         console.log(jsonVals);
-        setExcess(jsonVals.data.table);
+        console.log(typeof jsonVals);
+        setExcess(jsonVals);
+
+        console.log("Finished API call");
+
+        console.log("Reached reload location");
       }
       catch (err) {
-        console.log("ERROR");
-        console.error(err.message);
+          console.log("ERROR");
+          console.error(err.message);
       }
     }
     /**
@@ -137,11 +155,11 @@ const ExcessReport = () => {
           </Form.Group>
         </Form>
         <button 
-          onClick={getExcessReport}
+          onClick={() => getExcessReport}
           className="btn btn-primary " 
           style={{alignSelf: 'center', justifyContent: 'center'}} 
           type="submit">
-          Display excess
+          Display
         </button>
         <Table striped bordered hover>
           <thead>
