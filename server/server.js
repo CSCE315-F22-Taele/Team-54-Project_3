@@ -29,11 +29,11 @@ app.use("/api/orders", orders);
 app.use("/api/sales", sales);
 // app.use("/auth", authRoute);
 
-app.use(
-  cors({
-      origin: ["http://localhost:3001/", "https://chickfila.onrender.com"],
-  })
-);
+// app.use(
+//   cors({
+//       origin: ["http://localhost:3001/", "https://chickfila.onrender.com"],
+//   })
+// );
 
 // ------------------------------------ CUSTOMER ------------------------------------
 // get all customer items
