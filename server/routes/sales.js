@@ -75,4 +75,40 @@ app.get("/getRestockReport", async (req, res) => {
   }
 });
 
+
+app.get("/getExcessReport/:timeStart", async (req, res) => {
+
+    try {
+      const timeStart = req.params.timeStart;
+    //   const timeEnd = req.params.timeEnd;
+    //   console.log("timeStart", timeStart, "timeEnd", timeEnd)
+      const extraItems = new Array();
+      const report = await db.query("SELECT * FROM inventory;", [timeStart]);
+      for(let i = 0; i < report.rowCount; ++i)
+      {
+        // const orderItems = report.rows[i].itemsordered;
+        // getFreq(freq, orderItems);
+        // const qty = report.rows[i].quantity;
+        if(qty >= 90)
+            extraItems.push([report.rows[i].name, report.rows[i].quantity]);
+
+      }
+      
+      console.log(extraItems);
+      
+      res.status(200).json({
+        status: "success",
+        results: extraItems.length,
+        data: {
+          table: extraItems,
+        },
+      });
+    } catch (err) {
+      console.error(err.message);
+      res.status(404);
+  
+    }
+  });
+
+
 module.exports = app;
