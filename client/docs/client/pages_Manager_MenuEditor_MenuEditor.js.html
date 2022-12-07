@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: pages/Manager/MenuEditor/MenuEditor.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: pages/Manager/MenuEditor/MenuEditor.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import {React, useState} from "react";
+import Nav from 'react-bootstrap/Nav';
+/**
+ * This file implements the Store Menu page on the Manager user. This page displays the current store menu as stored in the
+ * database and has a navbar to allow the user to access other pages in the Manager user.
+ * @author Mohona Ghosh
+ * @author Neha Sujith
+ */
+import Navbar from 'react-bootstrap/Navbar';
+import Container from 'react-bootstrap/Container';
+import NavDropdown from 'react-bootstrap/NavDropdown';
+import Table from 'react-bootstrap/Table';
+import {useLocation, useNavigate} from "react-router-dom";
+import { ArrowReturnLeft } from 'react-bootstrap-icons';
+
+const conn = "http://localhost:3001";
+
+/**
+ * Constructs and displays the Store Menu page with a table displaying the store menu and navigation functionality.
+ * @returns a MenuEditor page displaying the current store menu as stored in the database, along with navigation ability.
+ */
+const MenuEditor = () => {
+  let navigate = useNavigate();
+  const location = useLocation();
+  const [menu, setMenu] = useState([]);
+
+  /**
+   * Navigates to the user's desired page. If trying to access the Inventory page, makes an API call to fetch the store inventory
+   * data from the database so that the data is displayed immediately upon navigation.
+   * @param {String} page The page the user wants to navigate to
+   */
+  const handleUpdate = async (page) => {
+    let nav = "";
+      if (page === "Inventory") {
+        nav = "inventory/inventoryItems";
+      }
+      else if (page === "MenuEditor") {
+        nav = "menu/menuItems";
+      }
+      
+      if (page !== "Manager" &amp;&amp; page !== "MenuEditor/EditMenu") {
+        try {
+          console.log(`/api/${nav}`)
+          const response = await fetch (conn + `/api/${nav}`);
+          const jsonVals = await response.json();
+          console.log("tableeee");
+          console.log(jsonVals.data.table);
+          setMenu(jsonVals.data.table);
+          navigate(`/Manager/${page}`, {state:jsonVals.data.table});
+        } catch (err) {
+          console.log("ERROR!!!");
+          console.log(err);
+        }
+      }
+      else {
+        if (page === "MenuEditor/EditMenu") {
+          navigate(`/Manager/${page}`);
+        }
+        else {
+          navigate(`/${page}`);
+        }
+      }
+  };
+
+  return (
+    &lt;div>
+      &lt;Navbar bg="dark" variant="dark" expand="lg">
+        &lt;Container>
+          &lt;button onClick={() => handleUpdate("Manager")} type="button" className="btn btn-outline-secondary">&lt;ArrowReturnLeft color="white"/>&lt;/button>
+          &lt;Navbar.Brand>&amp;nbsp;&amp;nbsp; Manager&lt;/Navbar.Brand>
+          &lt;Navbar.Toggle aria-controls="basic-navbar-nav" />
+          &lt;Navbar.Collapse id="basic-navbar-nav">
+            &lt;Nav className="me-auto">
+              &lt;Nav.Link onClick={() => handleUpdate("Inventory")}>Inventory&lt;/Nav.Link>
+              &lt;Nav.Link style={{color:"red"}} onClick={() => handleUpdate("MenuEditor")}>Store Menu&lt;/Nav.Link>
+              &lt;NavDropdown title="Order Trends" id="basic-nav-dropdown">
+                &lt;NavDropdown.Item href="/Manager/Reports/Sales">Sales Report&lt;/NavDropdown.Item>
+                &lt;NavDropdown.Item href="/Manager/Reports/Excess">Excess Report&lt;/NavDropdown.Item>
+                &lt;NavDropdown.Item href="/Manager/Reports/Restock">Restock Report&lt;/NavDropdown.Item>
+              &lt;/NavDropdown>
+              &lt;Nav.Link onClick={() => handleUpdate("MenuEditor/EditMenu")}>Edit Menu&lt;/Nav.Link>
+            &lt;/Nav>
+          &lt;/Navbar.Collapse>
+        &lt;/Container>
+      &lt;/Navbar>
+      &lt;Table striped bordered hover>
+        &lt;thead>
+          &lt;tr>
+            &lt;th>Item ID&lt;/th>
+            &lt;th>Item Name&lt;/th>
+            &lt;th>Category&lt;/th>
+            &lt;th>Price&lt;/th>
+            &lt;th>Ingredients&lt;/th>
+          &lt;/tr>
+        &lt;/thead>
+        &lt;tbody>
+          {location.state.map((m) => {
+            return (
+              &lt;tr>
+                &lt;td>{m.menuid}&lt;/td>
+                &lt;td>{m.name}&lt;/td>
+                &lt;td>{m.category}&lt;/td>
+                &lt;td>{"$" + m.price.toString()}&lt;/td>
+                &lt;td>{m.ingredients}&lt;/td>
+              &lt;/tr>
+            )
+          })}
+        &lt;/tbody>
+      &lt;/Table>
+    &lt;/div>
+  )
+}
+
+export default MenuEditor;</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="MapAutoComplete.html">MapAutoComplete</a></li><li><a href="MapsContainer.html">MapsContainer</a></li></ul><h3>Global</h3><ul><li><a href="global.html#App">App</a></li><li><a href="global.html#Cart">Cart</a></li><li><a href="global.html#Cashier">Cashier</a></li><li><a href="global.html#CashierManagerLogin">CashierManagerLogin</a></li><li><a href="global.html#Categories">Categories</a></li><li><a href="global.html#ConstraintSlider">ConstraintSlider</a></li><li><a href="global.html#Customer">Customer</a></li><li><a href="global.html#EditInventory">EditInventory</a></li><li><a href="global.html#ExcessReport">ExcessReport</a></li><li><a href="global.html#Inventory">Inventory</a></li><li><a href="global.html#LaunchPage">LaunchPage</a></li><li><a href="global.html#MapMarker">MapMarker</a></li><li><a href="global.html#MenuCashier">MenuCashier</a></li><li><a href="global.html#MenuCustomer">MenuCustomer</a></li><li><a href="global.html#MenuEditor">MenuEditor</a></li><li><a href="global.html#PaymentConfirmation">PaymentConfirmation</a></li><li><a href="global.html#PlaceCard">PlaceCard</a></li><li><a href="global.html#RestockReport">RestockReport</a></li><li><a href="global.html#SalesReport">SalesReport</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.0</a> on Tue Dec 06 2022 21:39:12 GMT-0600 (Central Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

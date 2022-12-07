@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/NavBar/CategoriesCustomer.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/NavBar/CategoriesCustomer.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * This file describes the functionality for a navigation bar in the Customer user that allows the user to filter menu items
+ * by category to view. The navigation bar also contains a button to access the Google Maps API, a button to view the order
+ * proceed to checkout, and a back button.
+ * @author Neha Sujith
+ */
+import React from "react";
+import { useEffect } from "react";
+import {Button} from 'react-bootstrap';
+import {useNavigate} from "react-router-dom";
+import { ArrowReturnLeft, GeoAltFill } from 'react-bootstrap-icons';
+import Cart from "../Cards/CartCustomer";
+
+/**
+ * Constructs and displays a navigation bar of menu categories in order to view the store menu by category for the Customer user.
+ * @param {Array} categories a list of menu categories
+ * @param {*} filterItems the menu items to display for a selected category
+ * @param {String} activeCategory the category in the navigation bar currently selected by the user
+ * @param {Array} pls an array of items in the current order to pass to the Cart object
+ * @returns a navigation bar for menu categories
+ */
+const Categories = ({ categories, filterItems, activeCategory, pls }) => {
+  let navigate = useNavigate()
+
+  /**
+   * Navigates to the desired page, triggerd by a button click
+   * @param {String} page The page to navigate to
+   */
+  const handleUpdate = (page) => {
+      if (page === "") {
+        navigate(`/`);
+      } else {
+        navigate(`/Customer/${page}`);
+      }
+  };
+
+  /**
+   * Initializes the Google Translate widget on the page
+   */
+  const googleTranslateElementInit = () => {
+    new window.google.translate.TranslateElement(
+      {
+        pageLanguage: "en",
+        autoDisplay: false
+      },
+      "google_translate_element"
+    );
+  };
+
+  /**
+   * Displayes the Google Translate element with page language set to English as the default
+   */
+  useEffect(() => {
+    var addScript = document.createElement("script");
+    addScript.setAttribute(
+      "src",
+      "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+    );
+    document.body.appendChild(addScript);
+    window.googleTranslateElementInit = googleTranslateElementInit;
+  }, []);
+  return (
+    &lt;div className="btn-container">
+      &lt;button onClick={() => handleUpdate("")} type="button" className="btn btn-outline-secondary">&lt;ArrowReturnLeft color="black"/>&lt;/button>
+      &lt;button onClick={() => handleUpdate("MapContainer")} type="button" className="btn btn-outline-secondary">&lt;GeoAltFill color="blue"/>&lt;/button>
+      {categories.map((category, index) => {
+        return (
+          &lt;Button
+          variant="outline-danger"
+          type="button" 
+            className={`${
+              activeCategory === category ? "filter-btn-active" : "filter-btn"
+            }`}
+            key={index}
+            onClick={() => filterItems(category)}
+          >
+            {category}
+          &lt;/Button>
+        );
+      })}
+      &lt;Cart mapOrders={pls}/>
+      &lt;div id="google_translate_element">&lt;/div>
+    &lt;/div>
+  );
+};
+
+export default Categories;</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="MapAutoComplete.html">MapAutoComplete</a></li><li><a href="MapsContainer.html">MapsContainer</a></li></ul><h3>Global</h3><ul><li><a href="global.html#App">App</a></li><li><a href="global.html#Cart">Cart</a></li><li><a href="global.html#Cashier">Cashier</a></li><li><a href="global.html#CashierManagerLogin">CashierManagerLogin</a></li><li><a href="global.html#Categories">Categories</a></li><li><a href="global.html#ConstraintSlider">ConstraintSlider</a></li><li><a href="global.html#Customer">Customer</a></li><li><a href="global.html#EditInventory">EditInventory</a></li><li><a href="global.html#ExcessReport">ExcessReport</a></li><li><a href="global.html#Inventory">Inventory</a></li><li><a href="global.html#LaunchPage">LaunchPage</a></li><li><a href="global.html#MapMarker">MapMarker</a></li><li><a href="global.html#MenuCashier">MenuCashier</a></li><li><a href="global.html#MenuCustomer">MenuCustomer</a></li><li><a href="global.html#MenuEditor">MenuEditor</a></li><li><a href="global.html#PaymentConfirmation">PaymentConfirmation</a></li><li><a href="global.html#PlaceCard">PlaceCard</a></li><li><a href="global.html#RestockReport">RestockReport</a></li><li><a href="global.html#SalesReport">SalesReport</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.0</a> on Tue Dec 06 2022 21:39:12 GMT-0600 (Central Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
