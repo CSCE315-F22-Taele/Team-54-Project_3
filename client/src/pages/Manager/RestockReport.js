@@ -12,7 +12,8 @@ import Table from 'react-bootstrap/Table';
 import {useNavigate} from "react-router-dom";
 import { ArrowReturnLeft } from 'react-bootstrap-icons';
 
-const conn = "http://localhost:3001";
+// const conn = "http://localhost:3001";
+const conn = "https://chick-fil-a-backend.onrender.com";
 
 /**
  * Constructs and returns a RestockReport element that generates a table of inventory items that need to be restocked. The item name

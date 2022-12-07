@@ -1,0 +1,21 @@
+{
+    "tags": {
+      "allowUnknownTags": true,
+      "dictionaries": ["jsdoc", "closure"]
+    },
+    "source": {
+      "include": ["server"],
+      "includePattern": ".+\\.js(doc|x)?$",
+      "excludePattern": "(^|\\/|\\\\)_"
+    },
+    "plugins": ["plugins/markdown"],
+    "templates": {
+    },
+    "opts": {
+      "destination": "docs/server",
+      "recurse": true
+    },
+    "scripts": {
+        "docs": "jsdoc -c jsdoc.conf.json"
+    }
+  }

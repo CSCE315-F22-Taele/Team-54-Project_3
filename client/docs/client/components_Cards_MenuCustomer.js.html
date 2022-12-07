@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/Cards/MenuCustomer.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/Cards/MenuCustomer.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * This file defines the menu cards for the Customer user. It is intended to provide a template for a menu card,
+ * where each item on the menu gets one card on the user's display.
+ * @author Estella Chen
+ * @author Mohona Ghosh
+ * @author Neha Sujith
+ */
+
+import React, {useState} from "react";
+import Card from 'react-bootstrap/Card';
+import "bootstrap/dist/css/bootstrap.min.css";
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Container from 'react-bootstrap/Container';
+import Form from 'react-bootstrap/Form';
+
+/**
+ * Creates a menu card using the paramters specified in props
+ * @param {Object} props contains the paramters of MenuCustomer as passed down from Customer.js
+ * @returns a card for a menu item displaying the item's name and price, along with a text field for quanitity and an order button
+ */
+const MenuCustomer = (props) => {
+  const [orders, orderList] = useState([]);
+  const columnsPerRow = 3;
+  const [value, setValue] = useState(0),
+        /**
+         * Update the value in the text field input
+         * @param {*} value the value the user inputs in the text field
+         */
+        onInput = ({target:{value}}) => setValue(value),
+
+        /**
+         * Sets the item quantity to add to the order; prevents the page from refreshing when this is done
+         */
+        onFormSubmit = e => {
+          e.preventDefault() // prevents the page from refreshing when you enter a quantity
+          console.log(value)
+          setValue()
+        }
+  
+  /**
+   * Creates cards for each menu item laid out in a given number of columns on the web page. Cards contain menu item name, and price,
+   * along with a text field to specify the desired quantity and a submit button to add to the order.
+   * @returns A set of cards organized into a given number of columns
+   */
+  const getColumnsForRow = () => {
+    return props.items.map((item) => {
+      const { menuid, name, price } = item;
+
+      /**
+       * Add the given item to the order "value" number of times
+       */
+      const handleOrders = () => {
+        for (let i = 0; i &lt; Number(value); i++) {
+          orderList(current => [...current, [name, price]])
+        }
+        console.log(orders);
+        props.sendOrders(orders);
+      }
+
+      /**
+       * Deletes all occurences of an item from the order list
+       */
+       const deleteOrders = () => {
+        orderList(orders.filter(curr => curr[0] !== name));
+
+        props.sendOrders(orders)
+      }
+
+      return (
+        &lt;Col>
+            &lt;Card style={{ width: '22rem', alignItems: 'center', justifyContent: 'center', background: "none", color: "black"}} key={menuid} className="box">
+                &lt;Card.Body>
+                    &lt;Card.Title className="text-center">{name}&lt;/Card.Title>
+                    &lt;Card.Text className="text-center">${price}&lt;/Card.Text>
+                &lt;/Card.Body>
+                &lt;div className="form-inline my-lg-1">
+                  &lt;Form onSubmit={onFormSubmit}>
+                      &lt;Form.Group>
+                          &lt;Form.Control 
+                            type="text" 
+                            placeholder="Enter quantity" 
+                            onChange={onInput}
+                          />
+                            &lt;button 
+                              onClick={handleOrders}
+                              className="btn btn-danger " 
+                              style={{alignSelf: 'center', justifyContent: 'center'}} 
+                              type="submit">
+                              Order
+                            &lt;/button>
+                            &lt;button
+                              onClick={deleteOrders}
+                              className="btn btn-danger"
+                              style={{alignSelf: 'center', justifyContent: 'center'}}
+                              type="submit">
+                                Delete
+                            &lt;/button>
+                      &lt;/Form.Group>
+                  &lt;/Form>
+                &lt;/div>
+            &lt;/Card>
+        &lt;/Col>
+      );
+    });
+  };
+
+  return (
+    &lt;Container>
+      &lt;Row xs={1} md={columnsPerRow}>
+          {getColumnsForRow()}
+      &lt;/Row>
+    &lt;/Container>  
+  );
+};
+
+export default MenuCustomer;</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="MapAutoComplete.html">MapAutoComplete</a></li><li><a href="MapsContainer.html">MapsContainer</a></li></ul><h3>Global</h3><ul><li><a href="global.html#App">App</a></li><li><a href="global.html#Cart">Cart</a></li><li><a href="global.html#Cashier">Cashier</a></li><li><a href="global.html#CashierManagerLogin">CashierManagerLogin</a></li><li><a href="global.html#Categories">Categories</a></li><li><a href="global.html#ConstraintSlider">ConstraintSlider</a></li><li><a href="global.html#Customer">Customer</a></li><li><a href="global.html#EditInventory">EditInventory</a></li><li><a href="global.html#ExcessReport">ExcessReport</a></li><li><a href="global.html#Inventory">Inventory</a></li><li><a href="global.html#LaunchPage">LaunchPage</a></li><li><a href="global.html#MapMarker">MapMarker</a></li><li><a href="global.html#MenuCashier">MenuCashier</a></li><li><a href="global.html#MenuCustomer">MenuCustomer</a></li><li><a href="global.html#MenuEditor">MenuEditor</a></li><li><a href="global.html#PaymentConfirmation">PaymentConfirmation</a></li><li><a href="global.html#PlaceCard">PlaceCard</a></li><li><a href="global.html#RestockReport">RestockReport</a></li><li><a href="global.html#SalesReport">SalesReport</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.0</a> on Tue Dec 06 2022 21:39:12 GMT-0600 (Central Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

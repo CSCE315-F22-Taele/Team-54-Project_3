@@ -1,4 +1,32 @@
-/**
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: pages/Manager/Inventory/EditInventory.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: pages/Manager/Inventory/EditInventory.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
  * This file implements the page to edit the inventory from the Manager user and have the changes reflect in the backend database.
  * @author Mohona Ghosh
  * @author Neha Sujith
@@ -9,9 +37,7 @@ import { useNavigate } from "react-router-dom";
 import Form from 'react-bootstrap/Form';
 import { message } from 'antd';
 
-// const conn = "http://localhost:3001";
-const conn = "https://chick-fil-a-backend.onrender.com";
-
+const conn = "http://localhost:3001";
 
 /**
  * Creates and displays the EditInventory page with form inputs to get information about the inventory item from the user
@@ -276,77 +302,99 @@ const EditInventory = () => {
   }
 
   return (
-    <div>
+    &lt;div>
       {contextHolder}
-      <Form onSubmit={onFormSubmit}>
-        <Form.Group>
-          <Form.Control
+      &lt;Form onSubmit={onFormSubmit}>
+        &lt;Form.Group>
+          &lt;Form.Control
             type="text"
             placeholder="Enter item ID"
             onChange={onInputID}
           />
-          <Form.Control
+          &lt;Form.Control
             type="text"
             placeholder="Enter item name"
             onChange={onInputName}
           />
-          <Form.Control
+          &lt;Form.Control
             type="text"
             placeholder="Enter category"
             onChange={onInputCategory}
           />
-          <Form.Control
+          &lt;Form.Control
             type="text"
             placeholder="Enter expiration date"
             onChange={onInputExpiry}
           />
-          <Form.Control
+          &lt;Form.Control
             type="text"
             placeholder="Enter refrigeration requirement"
             onChange={onInputFridge}
           />
-          <Form.Control
+          &lt;Form.Control
             type="text"
             placeholder="Enter quantity in stock"
             onChange={onInputQuantity}
           />
-          <Form.Control
+          &lt;Form.Control
             type="text"
             placeholder="Enter unit"
             onChange={onInputUnit}
           />
-        </Form.Group>
-      </Form>
-      <button
+        &lt;/Form.Group>
+      &lt;/Form>
+      &lt;button
         onClick={handleAdd}
         className="btn btn-success "
         style={{ alignSelf: 'center', justifyContent: 'center' }}
         type="submit">
         Add item
-      </button>
-      <button
+      &lt;/button>
+      &lt;button
         onClick={handleEdit}
         className="btn btn-secondary "
         style={{ alignSelf: 'center', justifyContent: 'center' }}
         type="submit">
         Edit item
-      </button>
-      <button
+      &lt;/button>
+      &lt;button
         onClick={handleDelete}
         className="btn btn-danger "
         style={{ alignSelf: 'center', justifyContent: 'center' }}
         type="submit">
         Delete item
-      </button>
-      <button
+      &lt;/button>
+      &lt;button
         onClick={handleSubmit}
         className="btn btn-primary "
         style={{ alignSelf: 'center', justifyContent: 'center' }}
         type="submit">
         Submit
-      </button>
-    </div>
+      &lt;/button>
+    &lt;/div>
   )
 }
 
-export default EditInventory;
+export default EditInventory;</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="MapAutoComplete.html">MapAutoComplete</a></li><li><a href="MapsContainer.html">MapsContainer</a></li></ul><h3>Global</h3><ul><li><a href="global.html#App">App</a></li><li><a href="global.html#Cart">Cart</a></li><li><a href="global.html#Cashier">Cashier</a></li><li><a href="global.html#CashierManagerLogin">CashierManagerLogin</a></li><li><a href="global.html#Categories">Categories</a></li><li><a href="global.html#ConstraintSlider">ConstraintSlider</a></li><li><a href="global.html#Customer">Customer</a></li><li><a href="global.html#EditInventory">EditInventory</a></li><li><a href="global.html#ExcessReport">ExcessReport</a></li><li><a href="global.html#Inventory">Inventory</a></li><li><a href="global.html#LaunchPage">LaunchPage</a></li><li><a href="global.html#MapMarker">MapMarker</a></li><li><a href="global.html#MenuCashier">MenuCashier</a></li><li><a href="global.html#MenuCustomer">MenuCustomer</a></li><li><a href="global.html#MenuEditor">MenuEditor</a></li><li><a href="global.html#PaymentConfirmation">PaymentConfirmation</a></li><li><a href="global.html#PlaceCard">PlaceCard</a></li><li><a href="global.html#RestockReport">RestockReport</a></li><li><a href="global.html#SalesReport">SalesReport</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.0</a> on Tue Dec 06 2022 21:39:12 GMT-0600 (Central Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

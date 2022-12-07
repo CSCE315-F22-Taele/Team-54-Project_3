@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: pages/Customer/MapContainer.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: pages/Customer/MapContainer.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * This file describes the component allowing customer access to the Google Maps API
+ */
+import React, { Component } from 'react';
+import GoogleMapReact from 'google-map-react';
+import MapAutoComplete from '../../components/GoogleMap/MapAutoComplete';
+import MapMarker from '../../components/GoogleMap/MapMarker';
+import PlaceCard from '../../components/GoogleMap/PlaceCard';
+import ConstraintSlider from '../../components/GoogleMap/ConstraintSlider';
+
+const CSTAT = { lat: 30.622370, lng: -96.325851 }; // default location
+
+class MapsContainer extends Component {
+  /**
+   * Constructs a MapContainer object as an extension of the Component class
+   * @param {*} props default properties from superclass Component
+   */
+  constructor(props) {
+    super(props);
+    this.state = {
+      constraints: [{ name: '', distance: 0 }],
+      searchResults: [],
+      mapsLoaded: false,
+      markers: [],
+      map: {},
+      mapsApi: {},
+      cstatLatLng: {},
+      autoCompleteService: {},
+      placesService: {},
+      geoCoderService: {},
+      directionService: {},
+    };
+  }
+
+  /**
+   * Update name for constraint with index === key
+   * @param {*} event the event triggering this function (user interaction)
+   * @param {Integer} key the constraint to update
+   */
+  updateConstraintName = ((event, key) => {
+    event.preventDefault();
+    const prevConstraints = this.state.constraints;
+    const constraints = Object.assign([], prevConstraints);
+    constraints[key].name = event.target.value;
+    this.setState({ constraints });
+  });
+
+  /**
+   * Updates distance (in KM) for constraint with index == key
+   * @param {Integer} key the constraint to update
+   * @param {Integer} value the new distance for the constraint
+   */
+  updateConstraintTime = ((key, value) => {
+    const prevConstraints = this.state.constraints;
+    const constraints = Object.assign([], prevConstraints);
+    constraints[key].distance = value;
+    this.setState({ constraints });
+  });
+
+  /** 
+   * Adds a Marker to the GoogleMaps component
+   * @param lat the latitude of the location to place the Marker at
+   * @param lng the longitude of the location to place the Marker at
+   * @param name the name of the new marker
+   */
+  addMarker = ((lat, lng, name) => {
+    const prevMarkers = this.state.markers;
+    const markers = Object.assign([], prevMarkers);
+
+    // If name already exists in marker list, just replace lat &amp; lng.
+    let newMarker = true;
+    for (let i = 0; i &lt; markers.length; i++) {
+      if (markers[i].name === name) {
+        newMarker = false;
+        markers[i].lat = lat;
+        markers[i].lng = lng;
+        break;
+      }
+    }
+
+    // Name does not exist in marker list. Create new marker
+    if (newMarker) {
+      markers.push({ lat, lng, name });
+    }
+
+    this.setState({ markers });
+  });
+
+  /** 
+   * Runs once when the Google Maps library is ready. Initializes all services that we need.
+   * @param {*} map the Map object to load
+   * @param {*} mapsApi the API to gather map data from
+   */
+  apiHasLoaded = ((map, mapsApi) => {
+    this.setState({
+      mapsLoaded: true,
+      map,
+      mapsApi,
+      cstatLatLng: new mapsApi.LatLng(CSTAT.lat, CSTAT.lng),
+      autoCompleteService: new mapsApi.places.AutocompleteService(),
+      placesService: new mapsApi.places.PlacesService(map),
+      geoCoderService: new mapsApi.Geocoder(),
+      directionService: new mapsApi.DirectionsService(),
+    });
+  });
+
+  /**
+   * Retrieves a list of Chick-Fil-A locations in the user's selected radius, ordered by distance from the user
+   */
+  handleSearch = (() => {
+    const { markers, constraints, placesService, directionService, mapsApi } = this.state;
+    if (markers.length === 0) {
+      return;
+    }
+    const filteredResults = [];
+    const marker = markers[0];
+    const distanceLimit = constraints[0].distance;
+    const markerLatLng = new mapsApi.LatLng(marker.lat, marker.lng);
+
+    const placesRequest = {
+      location: markerLatLng,
+      type: ['restaurant', 'cafe'],
+      query: 'Chick-fil-A',
+      rankBy: mapsApi.places.RankBy.DISTANCE,
+    };
+
+    placesService.textSearch(placesRequest, ((response) => {
+      const responseLimit = Math.min(10, response.length);
+      console.log(response)
+      for (let i = 0; i &lt; responseLimit; i++) {
+        const cfa = response[i];
+        const { name } = cfa;
+        const address = cfa.formatted_address;
+        let photoUrl = '';
+        let openNow = false;
+        if (cfa.opening_hours) {
+          openNow = cfa.opening_hours.open_now;
+        }
+        if (cfa.photos &amp;&amp; cfa.photos.length > 0) {
+          photoUrl = cfa.photos[0].getUrl();
+        }
+
+        const directionRequest = {
+          origin: markerLatLng,
+          destination: address,
+          travelMode: 'DRIVING',
+        }
+
+        directionService.route(directionRequest, ((result, status) => {
+          if (status !== 'OK') { return }
+          const travellingRoute = result.routes[0].legs[0];
+          console.log("limit", distanceLimit)
+          if (parseFloat(travellingRoute.distance.text, 10) &lt; distanceLimit) {
+            const distanceText = travellingRoute.distance.text;
+            filteredResults.push({
+              name,
+              address,
+              openNow,
+              photoUrl,
+              distanceText
+            });
+          }
+
+          // Finally, Add results to state
+          this.setState({ searchResults: filteredResults });
+        }));
+      }
+    }));
+  });
+
+  /**
+   * Displays the map container with search and constraints functionality, as well as the ability to place markers.
+   * @returns a displayed MapContainer object
+   */
+  render() {
+    const { constraints, mapsLoaded, cstatLatLng, markers, searchResults } = this.state;
+    const { autoCompleteService, geoCoderService } = this.state; // Google Maps Services
+    return (
+      &lt;div className="w-100 d-flex py-4 flex-wrap justify-content-center">
+        &lt;h1 className="w-100" style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>Find a nearby Chick-fil-A location&lt;/h1>
+        {/* Constraints section */}
+        &lt;section className="col-4">
+          {mapsLoaded ?
+            &lt;div>
+              {constraints.map((constraint, key) => {
+                const { name, distance } = constraint;
+                return (
+                  &lt;div key={key} className="mb-4">
+                    &lt;div className="d-flex mb-2">
+                      &lt;MapAutoComplete
+                        autoCompleteService={autoCompleteService}
+                        geoCoderService={geoCoderService}
+                        cstatLatLng={cstatLatLng}
+                        markerName={name}
+                        addMarker={this.addMarker}
+                      />
+                    &lt;/div>
+                    &lt;br>&lt;/br>
+                    &lt;ConstraintSlider
+                      value={distance}
+                      onChange={(value) => this.updateConstraintTime(key, value)}
+                    />
+                    {/* Search Button */}
+                    &lt;button className="mt-4 btn btn-outline-danger" type="primary" size="large" onClick={this.handleSearch}>Search&lt;/button>
+                  &lt;/div>
+                );
+              })}
+            &lt;/div>
+            : null
+          }
+        &lt;/section>
+
+        {/* Maps Section */}
+        &lt;section className="col-8 h-lg">
+          &lt;GoogleMapReact
+            bootstrapURLKeys={{
+              key: process.env.REACT_APP_API_KEY,
+              libraries: ['places', 'directions']
+            }}
+            defaultZoom={11}
+            defaultCenter={{ lat: CSTAT.lat, lng: CSTAT.lng }}
+            yesIWantToUseGoogleMapApiInternals={true}
+            onGoogleApiLoaded={({ map, maps }) => this.apiHasLoaded(map, maps)}
+          >
+            {/* Pin markers on the Map*/}
+            {markers.map((marker, key) => {
+              const { name, lat, lng } = marker;
+              return (
+                &lt;MapMarker key={key} name={name} lat={lat} lng={lng} />
+              );
+            })}
+          &lt;/GoogleMapReact>
+        &lt;/section>
+
+        {/* Results section */}
+        {searchResults.length > 0 ?
+          &lt;>
+            &lt;section className="col-12">
+            &lt;hr color="red"/>
+              &lt;div className="d-flex flex-column justify-content-center">
+                &lt;div className="d-flex flex-wrap">
+                  {searchResults.map((result, key) => (
+                    &lt;PlaceCard info={result} key={key} />
+                  ))}
+                &lt;/div>
+              &lt;/div>
+            &lt;/section>
+          &lt;/>
+          : null}
+      &lt;/div>
+    )
+  }
+}
+
+export default MapsContainer;</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="MapAutoComplete.html">MapAutoComplete</a></li><li><a href="MapsContainer.html">MapsContainer</a></li></ul><h3>Global</h3><ul><li><a href="global.html#App">App</a></li><li><a href="global.html#Cart">Cart</a></li><li><a href="global.html#Cashier">Cashier</a></li><li><a href="global.html#CashierManagerLogin">CashierManagerLogin</a></li><li><a href="global.html#Categories">Categories</a></li><li><a href="global.html#ConstraintSlider">ConstraintSlider</a></li><li><a href="global.html#Customer">Customer</a></li><li><a href="global.html#EditInventory">EditInventory</a></li><li><a href="global.html#ExcessReport">ExcessReport</a></li><li><a href="global.html#Inventory">Inventory</a></li><li><a href="global.html#LaunchPage">LaunchPage</a></li><li><a href="global.html#MapMarker">MapMarker</a></li><li><a href="global.html#MenuCashier">MenuCashier</a></li><li><a href="global.html#MenuCustomer">MenuCustomer</a></li><li><a href="global.html#MenuEditor">MenuEditor</a></li><li><a href="global.html#PaymentConfirmation">PaymentConfirmation</a></li><li><a href="global.html#PlaceCard">PlaceCard</a></li><li><a href="global.html#RestockReport">RestockReport</a></li><li><a href="global.html#SalesReport">SalesReport</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.0</a> on Tue Dec 06 2022 21:39:12 GMT-0600 (Central Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

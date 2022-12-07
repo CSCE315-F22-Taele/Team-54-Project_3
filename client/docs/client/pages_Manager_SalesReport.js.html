@@ -1,4 +1,32 @@
-/**
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: pages/Manager/SalesReport.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: pages/Manager/SalesReport.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
  * This file implements functionality to generate a report of menu items sold (and how much of each was sold) over a user-inputted
  * time period.
  * @author Mohona Ghosh
@@ -15,9 +43,7 @@ import {useNavigate} from "react-router-dom";
 import { ArrowReturnLeft } from 'react-bootstrap-icons';
 import Form from 'react-bootstrap/Form';
 
-// const conn = "http://localhost:3001";
-const conn = "https://chick-fil-a-backend.onrender.com";
-
+const conn = "http://localhost:3001";
 
 /**
  * Constructs and displays a SalesReport page that generates of what and how much was sold during a given time period.
@@ -139,68 +165,90 @@ const SalesReport = () => {
     }
 
     return (
-      <div>
-        <Navbar bg="dark" variant="dark" expand="lg">
-          <Container>
-            <button onClick={() => handleUpdate("Manager")} type="button" className="btn btn-outline-secondary"><ArrowReturnLeft color="white"/></button>
-            <Navbar.Brand>&nbsp;&nbsp; Manager</Navbar.Brand>
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse id="basic-navbar-nav">
-              <Nav className="me-auto">
-                <Nav.Link onClick={() => handleUpdate("Inventory")}>Inventory</Nav.Link>
-                <Nav.Link onClick={() => handleUpdate("MenuEditor")}>Store Menu</Nav.Link>
-                <NavDropdown style={{color: "red"}} title="Order Trends" id="basic-nav-dropdown">
-                  <NavDropdown.Item style={{color: "red"}} href="/Manager/Reports/Sales">Sales Report</NavDropdown.Item>
-                  <NavDropdown.Item href="/Manager/Reports/Excess">Excess Report</NavDropdown.Item>
-                  <NavDropdown.Item href="/Manager/Reports/Restock">Restock Report</NavDropdown.Item>
-                </NavDropdown>
-              </Nav>
-            </Navbar.Collapse>
-          </Container>
-        </Navbar>
+      &lt;div>
+        &lt;Navbar bg="dark" variant="dark" expand="lg">
+          &lt;Container>
+            &lt;button onClick={() => handleUpdate("Manager")} type="button" className="btn btn-outline-secondary">&lt;ArrowReturnLeft color="white"/>&lt;/button>
+            &lt;Navbar.Brand>&amp;nbsp;&amp;nbsp; Manager&lt;/Navbar.Brand>
+            &lt;Navbar.Toggle aria-controls="basic-navbar-nav" />
+            &lt;Navbar.Collapse id="basic-navbar-nav">
+              &lt;Nav className="me-auto">
+                &lt;Nav.Link onClick={() => handleUpdate("Inventory")}>Inventory&lt;/Nav.Link>
+                &lt;Nav.Link onClick={() => handleUpdate("MenuEditor")}>Store Menu&lt;/Nav.Link>
+                &lt;NavDropdown style={{color: "red"}} title="Order Trends" id="basic-nav-dropdown">
+                  &lt;NavDropdown.Item style={{color: "red"}} href="/Manager/Reports/Sales">Sales Report&lt;/NavDropdown.Item>
+                  &lt;NavDropdown.Item href="/Manager/Reports/Excess">Excess Report&lt;/NavDropdown.Item>
+                  &lt;NavDropdown.Item href="/Manager/Reports/Restock">Restock Report&lt;/NavDropdown.Item>
+                &lt;/NavDropdown>
+              &lt;/Nav>
+            &lt;/Navbar.Collapse>
+          &lt;/Container>
+        &lt;/Navbar>
 
-        <Form onSubmit={onFormSubmit}>
-          <Form.Group>
-              <Form.Control 
+        &lt;Form onSubmit={onFormSubmit}>
+          &lt;Form.Group>
+              &lt;Form.Control 
               type="text" 
               placeholder="Enter start date" 
               onChange={onInputStart}
               />
-              <Form.Control 
+              &lt;Form.Control 
               type="text" 
               placeholder="Enter start date" 
               onChange={onInputEnd}
               />
-          </Form.Group>
-        </Form>
-        <button 
+          &lt;/Form.Group>
+        &lt;/Form>
+        &lt;button 
           onClick={getSalesReport}
           className="btn btn-primary " 
           style={{alignSelf: 'center', justifyContent: 'center'}} 
           type="submit">
           Display results
-        </button>
+        &lt;/button>
 
-        <Table striped bordered hover>
-          <thead>
-            <tr>
-              <th>Menu Item</th>
-              <th>Amount Sold</th>
-            </tr>
-          </thead>
-          <tbody>
+        &lt;Table striped bordered hover>
+          &lt;thead>
+            &lt;tr>
+              &lt;th>Menu Item&lt;/th>
+              &lt;th>Amount Sold&lt;/th>
+            &lt;/tr>
+          &lt;/thead>
+          &lt;tbody>
             {Object.keys(sales).map(key => {
               return (
-                <tr>
-                  <td>{key}</td>
-                  <td>{sales[key]}</td>
-                </tr>
+                &lt;tr>
+                  &lt;td>{key}&lt;/td>
+                  &lt;td>{sales[key]}&lt;/td>
+                &lt;/tr>
               )
             })}
-          </tbody>
-        </Table>
-      </div>
+          &lt;/tbody>
+        &lt;/Table>
+      &lt;/div>
     )
   }
 
-  export default SalesReport;
+  export default SalesReport;</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="MapAutoComplete.html">MapAutoComplete</a></li><li><a href="MapsContainer.html">MapsContainer</a></li></ul><h3>Global</h3><ul><li><a href="global.html#App">App</a></li><li><a href="global.html#Cart">Cart</a></li><li><a href="global.html#Cashier">Cashier</a></li><li><a href="global.html#CashierManagerLogin">CashierManagerLogin</a></li><li><a href="global.html#Categories">Categories</a></li><li><a href="global.html#ConstraintSlider">ConstraintSlider</a></li><li><a href="global.html#Customer">Customer</a></li><li><a href="global.html#EditInventory">EditInventory</a></li><li><a href="global.html#ExcessReport">ExcessReport</a></li><li><a href="global.html#Inventory">Inventory</a></li><li><a href="global.html#LaunchPage">LaunchPage</a></li><li><a href="global.html#MapMarker">MapMarker</a></li><li><a href="global.html#MenuCashier">MenuCashier</a></li><li><a href="global.html#MenuCustomer">MenuCustomer</a></li><li><a href="global.html#MenuEditor">MenuEditor</a></li><li><a href="global.html#PaymentConfirmation">PaymentConfirmation</a></li><li><a href="global.html#PlaceCard">PlaceCard</a></li><li><a href="global.html#RestockReport">RestockReport</a></li><li><a href="global.html#SalesReport">SalesReport</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.0</a> on Tue Dec 06 2022 21:39:12 GMT-0600 (Central Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
