@@ -12,7 +12,7 @@ const app = express();
 
 app.use(
   cors({
-      origin: ["http://localhost:3001/", "https://chickfila.onrender.com"],
+      // origin: ["http://localhost:3001/", "https://chickfila.onrender.com"],
   })
 );
 app.use(express.json());
@@ -292,9 +292,10 @@ app.get("/api/sales/getSalesReport/:timeStart/:timeEnd", async (req, res) => {
 
 // ------------------------------------ Restock ------------------------------------
 app.get("/api/sales/getRestockReport/", async (req, res) => {
-  const {threshold} = req.body;
+  const threshold = 105;
   try {
     const report = await db.query("SELECT * FROM inventory WHERE quantity < $1", [threshold]);
+    console.log(report.rows);
     // console.log("SELECT * FROM inventory WHERE quantity < $1", [threshold]);
     // const depletedItems = new Array(report.rowCount);
     const returnVal = new Map();
@@ -309,7 +310,7 @@ app.get("/api/sales/getRestockReport/", async (req, res) => {
     }
     // console.log("Reached here");
     // console.log(freq);
-    
+    // console.log(returnVal);
     res.status(200).json({
       status: "success",
       results: returnVal.length,
