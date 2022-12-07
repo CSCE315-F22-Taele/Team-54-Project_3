@@ -1,3 +1,6 @@
+/**
+ * This file describes the component allowing customer access to the Google Maps API
+ */
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
 import MapAutoComplete from '../../components/GoogleMap/MapAutoComplete';
@@ -5,9 +8,13 @@ import MapMarker from '../../components/GoogleMap/MapMarker';
 import PlaceCard from '../../components/GoogleMap/PlaceCard';
 import ConstraintSlider from '../../components/GoogleMap/ConstraintSlider';
 
-const CSTAT = { lat: 30.622370, lng: -96.325851 };
+const CSTAT = { lat: 30.622370, lng: -96.325851 }; // default location
 
 class MapsContainer extends Component {
+  /**
+   * Constructs a MapContainer object as an extension of the Component class
+   * @param {*} props default properties from superclass Component
+   */
   constructor(props) {
     super(props);
     this.state = {
@@ -25,7 +32,11 @@ class MapsContainer extends Component {
     };
   }
 
-  // Update name for constraint with index === key
+  /**
+   * Update name for constraint with index === key
+   * @param {*} event the event triggering this function (user interaction)
+   * @param {Integer} key the constraint to update
+   */
   updateConstraintName = ((event, key) => {
     event.preventDefault();
     const prevConstraints = this.state.constraints;
@@ -34,7 +45,11 @@ class MapsContainer extends Component {
     this.setState({ constraints });
   });
 
-  // Updates distance (in KM) for constraint with index == key
+  /**
+   * Updates distance (in KM) for constraint with index == key
+   * @param {Integer} key the constraint to update
+   * @param {Integer} value the new distance for the constraint
+   */
   updateConstraintTime = ((key, value) => {
     const prevConstraints = this.state.constraints;
     const constraints = Object.assign([], prevConstraints);
@@ -42,7 +57,12 @@ class MapsContainer extends Component {
     this.setState({ constraints });
   });
 
-  // Adds a Marker to the GoogleMaps component
+  /** 
+   * Adds a Marker to the GoogleMaps component
+   * @param lat the latitude of the location to place the Marker at
+   * @param lng the longitude of the location to place the Marker at
+   * @param name the name of the new marker
+   */
   addMarker = ((lat, lng, name) => {
     const prevMarkers = this.state.markers;
     const markers = Object.assign([], prevMarkers);
@@ -57,6 +77,7 @@ class MapsContainer extends Component {
         break;
       }
     }
+
     // Name does not exist in marker list. Create new marker
     if (newMarker) {
       markers.push({ lat, lng, name });
@@ -65,8 +86,11 @@ class MapsContainer extends Component {
     this.setState({ markers });
   });
 
-  // Runs once when the Google Maps library is ready
-  // Initializes all services that we need
+  /** 
+   * Runs once when the Google Maps library is ready. Initializes all services that we need.
+   * @param {*} map the Map object to load
+   * @param {*} mapsApi the API to gather map data from
+   */
   apiHasLoaded = ((map, mapsApi) => {
     this.setState({
       mapsLoaded: true,
@@ -80,6 +104,9 @@ class MapsContainer extends Component {
     });
   });
 
+  /**
+   * Retrieves a list of Chick-Fil-A locations in the user's selected radius, ordered by distance from the user
+   */
   handleSearch = (() => {
     const { markers, constraints, placesService, directionService, mapsApi } = this.state;
     if (markers.length === 0) {
@@ -97,7 +124,6 @@ class MapsContainer extends Component {
       rankBy: mapsApi.places.RankBy.DISTANCE,
     };
 
-    // First, search for chick-fil-a locations.
     placesService.textSearch(placesRequest, ((response) => {
       const responseLimit = Math.min(10, response.length);
       console.log(response)
@@ -119,6 +145,7 @@ class MapsContainer extends Component {
           destination: address,
           travelMode: 'DRIVING',
         }
+
         directionService.route(directionRequest, ((result, status) => {
           if (status !== 'OK') { return }
           const travellingRoute = result.routes[0].legs[0];
@@ -133,6 +160,7 @@ class MapsContainer extends Component {
               distanceText
             });
           }
+
           // Finally, Add results to state
           this.setState({ searchResults: filteredResults });
         }));
@@ -140,6 +168,10 @@ class MapsContainer extends Component {
     }));
   });
 
+  /**
+   * Displays the map container with search and constraints functionality, as well as the ability to place markers.
+   * @returns a displayed MapContainer object
+   */
   render() {
     const { constraints, mapsLoaded, cstatLatLng, markers, searchResults } = this.state;
     const { autoCompleteService, geoCoderService } = this.state; // Google Maps Services
