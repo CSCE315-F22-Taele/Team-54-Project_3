@@ -1,3 +1,9 @@
+/**
+ * This file describes the overarching parent (or grandparent) for all components displayed in the Customer user. It contains functionality
+ * to filter the inventory and menu, as well as create reports on the order trends. 
+ * @author Mohona Ghosh
+ * @author Neha Sujith
+ */
 import React from "react";
 import { useEffect, useState } from "react";
 import Nav from 'react-bootstrap/Nav';

@@ -18,6 +18,7 @@ import RestockReport from "../pages/Manager/RestockReport";
 import PaymentConfirmation from "../components/Cards/PaymentConfirmation";
 import EditInventory from "../pages/Manager/Inventory/EditInventory";
 import EditMenu from "../pages/Manager/MenuEditor/EditMenu";
+import CashierManagerLogin from "../pages/MainPage/CashierManagerLogin";
 
 /**
  * Creates and enables the frontend routing
@@ -40,6 +41,7 @@ const App = () => {
                 <Route exact path ="/Customer/PaymentConfirmation" element={<PaymentConfirmation/>}/>
                 <Route exact path ="/Manager/Inventory/EditInventory" element={<EditInventory/>}/>
                 <Route exact path ="/Manager/MenuEditor/EditMenu" element={<EditMenu/>}/>
+                <Route exact path ="/CashierManagerLogin" element={<CashierManagerLogin/>}/>
             </Routes>
         </Router>
     </div>;
