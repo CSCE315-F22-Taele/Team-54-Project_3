@@ -13,7 +13,6 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
-import { ButtonGroup } from "react-bootstrap";
 
 /**
  * Creates a menu card using the paramters specified in props
@@ -97,7 +96,6 @@ const MenuCashier = (props) => {
                               type="submit">
                                 Delete
                             </button>
-                          {/* </div> */}
                       </Form.Group>
                   </Form>
                 </div>
