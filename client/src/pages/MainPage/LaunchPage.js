@@ -49,13 +49,6 @@ const LaunchPage = () => {
     }
 
     /**
-      * Signs out the user
-      */
-    function handleSignOut(event) {
-      document.getElementById("signInDiv").hidden = false;
-    }
-
-    /**
       * Starts the display for Google Translate and Gmail login via OAuth
       */
     useEffect(() => {
