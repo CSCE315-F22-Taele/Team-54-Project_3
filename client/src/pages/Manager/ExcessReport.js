@@ -1,3 +1,9 @@
+/**
+ * This file implements functionality to generate and display the Excess Report for the Manager user. When the Manager inputs a time
+ * range, the component makes an API call to calculate excess inventory during that time period.
+ * @author Mohona Ghosh
+ * @author Neha Sujith
+ */
 import React from "react";
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -7,9 +13,18 @@ import Table from 'react-bootstrap/Table';
 import {useNavigate} from "react-router-dom";
 import { ArrowReturnLeft } from 'react-bootstrap-icons';
 
+/**
+ * Constructs an ExcessReport component that generates a report of excess inventory during a given time period.
+ * @returns an excessReport component
+ */
 const ExcessReport = () => {
     let navigate = useNavigate()
   
+    /**
+     * Navigates to the user's desired page within the Manager user. If the Manager tries to access either the Inventory or Store Menu 
+     * page, the function makes an API call to fetch the requisite data from the database so it displays correctly upon navigation.
+     * @param {String} page the page to navigate to
+     */
     const handleUpdate = (page) => {
       if (page === "Manager") {
         navigate(`/${page}`);
