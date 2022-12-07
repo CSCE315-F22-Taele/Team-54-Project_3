@@ -12,7 +12,7 @@ const app = express();
 
 app.use(
   cors({
-      origin: ["http://localhost:3001/", "https://chickfila.onrender.com"],
+      // origin: ["http://localhost:3001/", "https://chickfila.onrender.com"],
   })
 );
 app.use(express.json());
@@ -179,9 +179,9 @@ app.post("/api/menu/addMenuItem", async (req, res) => {
 
     const {menuid, name, price, category, ingredients} = req.body;
     
-    const results = await db.query("INSERT INTO menu(menuid, name, price, category, ingredients) VALUES ($1, $2, $3, $4, $5)",
+    const results = await db.query("INSERT INTO menu(menuid, name, price, category, 0) VALUES ($1, $2, $3, $4, $5)",
                                     [menuid, name, price, category, ingredients]);
-
+    const r = 
     res.status(200).send("Menu Item Addition Succeded.");
   } catch (err) {
     console.log(err);
@@ -193,7 +193,7 @@ app.post("/api/menu/addMenuItem", async (req, res) => {
 app.post("/api/menu/deleteMenuItem", async (req, res) => {
   try {
 
-  const {itemName} = req.body;
+    const {itemName} = req.body;
     
     const results = await db.query("DELETE FROM menu WHERE name = $1",
                                     [itemName]);
@@ -233,7 +233,37 @@ try {
   
 
 
-  orderItems = itemsordered.substring(1, itemsordered.length-1).split(",");
+  orderItems = itemsordered.substring(1, itemsordered.length-1).split(", ");
+  console.log(orderItems);
+  var orderIng = new Array();
+  for(var i = 0; i < orderItems.length; ++i)
+  {
+    // console.log("SELECT ingredients FROM menu WHERE name = $1", orderItems[i])
+    const ingNeeded = await db.query("SELECT ingredients FROM menu WHERE name = $1", [orderItems[i]]);
+    for(var j = 0; j < ingNeeded.rows.length; ++j)
+      orderIng = orderIng.concat(ingNeeded.rows[j].ingredients);
+  }
+
+  for(var i = 0; i < orderIng.length; ++i)
+  {
+    const t = orderIng[i].lastIndexOf(" ");
+    orderIng[i] = [orderIng[i].substring(0, t), parseFloat(orderIng[i].substring(t+1))]
+  }
+
+  console.log(orderIng);
+  var pos = true;
+  for(var k = 0; k < orderIng.length; ++k)
+  {
+    var qty = await db.query("SELECT quantity FROM inventory WHERE name = $1", [orderIng[k][0]]);
+    qty = qty.rows[0]
+    if(qty.quantity > orderIng[k][1]) res.status(404);
+    // console.log(`UPDATE inventory SET quantity=${qty.quantity - orderIng[k][1]} WHERE name = ${orderIng[k][0]}`)
+    db.query("UPDATE inventory SET quantity=$1 WHERE name = $2", [qty.quantity - orderIng[k][1], orderIng[k][0]]);
+  }
+
+  
+
+
   
   
   
@@ -244,6 +274,8 @@ try {
   res.status(200);
 } catch (err) {
   console.log(err);
+  res.status(404);
+
 }
 });
 
@@ -292,9 +324,10 @@ app.get("/api/sales/getSalesReport/:timeStart/:timeEnd", async (req, res) => {
 
 // ------------------------------------ Restock ------------------------------------
 app.get("/api/sales/getRestockReport/", async (req, res) => {
-  const {threshold} = req.body;
+  const threshold = 105;
   try {
     const report = await db.query("SELECT * FROM inventory WHERE quantity < $1", [threshold]);
+    console.log(report.rows);
     // console.log("SELECT * FROM inventory WHERE quantity < $1", [threshold]);
     // const depletedItems = new Array(report.rowCount);
     const returnVal = new Map();
@@ -309,7 +342,7 @@ app.get("/api/sales/getRestockReport/", async (req, res) => {
     }
     // console.log("Reached here");
     // console.log(freq);
-    
+    // console.log(returnVal);
     res.status(200).json({
       status: "success",
       results: returnVal.length,

@@ -1,4 +1,4 @@
-import React from "react";
+import {React, useState} from "react";
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
@@ -7,16 +7,52 @@ import Table from 'react-bootstrap/Table';
 import {useNavigate} from "react-router-dom";
 import { ArrowReturnLeft } from 'react-bootstrap-icons';
 
+const conn = "http://localhost:3001";
 const RestockReport = () => {
-    let navigate = useNavigate()
+    let navigate = useNavigate();
+    const [restock, setRestock] = useState([]);
   
-    const handleUpdate = (page) => {
-      if (page === "Manager") {
-        navigate(`/${page}`);
-      } else {
-        navigate(`/Manager/${page}`);
-      }  
+    const handleUpdate = async (page) => {
+      let nav = "";
+      if (page === "Inventory") {
+        nav = "inventory/inventoryItems";
+      }
+      else if (page === "MenuEditor") {
+        nav = "menu/menuItems";
+      }
+      
+      if (page !== "Manager") {
+        try {
+          console.log(`/api/${nav}`)
+          const response = await fetch (conn + `/api/${nav}`);
+          const jsonVals = await response.json();
+          console.log("tableeee");
+          console.log(jsonVals.data.table);
+          navigate(`/Manager/${page}`, {state:jsonVals.data.table});
+        } catch (err) {
+          console.log("ERROR!!!")
+          console.log(err);
+        }
+      }
+      else {
+        navigate(`/`);
+      } 
     };
+
+    const getRestockReport = async () => {
+      try {
+        const response = await fetch(conn + "/api/sales/getRestockReport/");
+        const jsonVals = await response.json();
+        console.log("WORKING")
+        console.log(jsonVals);
+        setRestock(jsonVals.data.table);
+      }
+      catch (err) {
+          console.log("ERROR");
+          console.error(err.message);
+      }
+    }
+
     return (
       <div>
         <Navbar bg="dark" variant="dark" expand="lg">
@@ -37,30 +73,29 @@ const RestockReport = () => {
             </Navbar.Collapse>
           </Container>
         </Navbar>
+        <button 
+          onClick={getRestockReport}
+          className="btn btn-primary " 
+          style={{alignSelf: 'center', justifyContent: 'center'}} 
+          type="submit">
+          Display restock
+        </button>
         <Table striped bordered hover>
           <thead>
             <tr>
-              <th>Item Name</th>
-              <th>Category</th>
+              <th>Menu Item</th>
               <th>Amount Remaining</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-                <td>
-                    To be filled
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    To be filled
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    To be filled
-                </td>
-            </tr>
+            {Object.keys(restock).map(key => {
+              return (
+                <tr>
+                  <td>{key}</td>
+                  <td>{restock[key]}</td>
+                </tr>
+              )
+            })}
           </tbody>
         </Table>
       </div>

@@ -1,6 +1,7 @@
 /**
  * This file defines the menu cards for the Customer user. It is intended to provide a template for a menu card,
  * where each item on the menu gets one card on the user's display.
+ * @author Estella Chen
  * @author Mohona Ghosh
  * @author Neha Sujith
  */
@@ -57,9 +58,18 @@ const MenuCustomer = (props) => {
         props.sendOrders(orders);
       }
 
+      /**
+       * Deletes all occurences of an item from the order list
+       */
+       const deleteOrders = () => {
+        orderList(orders.filter(curr => curr[0] !== name));
+
+        props.sendOrders(orders)
+      }
+
       return (
         <Col>
-            <Card style={{ width: '18rem', alignItems: 'center', justifyContent: 'center', background: "none", color: "black"}} key={menuid} className="box">
+            <Card style={{ width: '22rem', alignItems: 'center', justifyContent: 'center', background: "none", color: "black"}} key={menuid} className="box">
                 <Card.Body>
                     <Card.Title className="text-center">{name}</Card.Title>
                     <Card.Text className="text-center">${price}</Card.Text>
@@ -79,7 +89,13 @@ const MenuCustomer = (props) => {
                               type="submit">
                               Order
                             </button>
-                          {/* </div> */}
+                            <button
+                              onClick={deleteOrders}
+                              className="btn btn-danger"
+                              style={{alignSelf: 'center', justifyContent: 'center'}}
+                              type="submit">
+                                Delete
+                            </button>
                       </Form.Group>
                   </Form>
                 </div>
