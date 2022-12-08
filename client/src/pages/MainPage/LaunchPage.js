@@ -63,7 +63,7 @@ const LaunchPage = () => {
 
       /* global google */
       google.accounts.id.initialize({
-        client_id: "971843556198-g2dablttraii3memss2rmmfeqp4pv4dn.apps.googleusercontent.com",
+        client_id: "971843556198-vhhbnbcenplrp3ea3mkoeoqo7jttkt6c.apps.googleusercontent.com",
         callback: handleCallbackResponse
       });
 
