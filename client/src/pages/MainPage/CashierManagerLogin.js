@@ -6,7 +6,6 @@
  import { useEffect, useState } from "react";
  import {useNavigate} from "react-router-dom";
  import { ArrowReturnLeft } from 'react-bootstrap-icons';
- import jwt_decode from "jwt-decode";
  
  /**
   * Constructs and returns a CashierManagerLogin object allowing the user to use their email to log in
@@ -14,8 +13,6 @@
   */
  const CashierManagerLogin = () => {
      let navigate = useNavigate()
- 
-     const [user, setUser] = useState({});
  
      /**
       * Allows the user to navigate to a certain page depending on the button clicked.
@@ -43,9 +40,6 @@
       */
      function handleCallbackResponse(response) {
        console.log("Encoded JWT ID token: " + response.credential);
-       var userObject = jwt_decode(response.credential);
-       console.log(userObject);
-       setUser(userObject);
  
        document.getElementById("signInDiv").hidden = true;
        navigate("/Manager");
