@@ -57,11 +57,14 @@ height: 15rem;
 width: 100%;
 }
 
+#google_translate_element {position:relative}
+#google_translate_element span {display: none!important;}
+
 #google_translate_element select{
 background:#f6edfd;
 color:#383ffa;
-border: none;
-border-radius:3px;
+border-color: black;
+border-radius:50px;
 padding:6px 8px
 }
 .goog-logo-link{
