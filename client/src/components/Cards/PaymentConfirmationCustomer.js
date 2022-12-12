@@ -22,7 +22,6 @@ const PaymentConfirmationCustomer = () => {
     let navigate = useNavigate();
     const location = useLocation();
     const [messageApi, contextHolder] = message.useMessage();
-    const [totalOrderAmount, setTotal] = useState(0);
 
     /**
      * Navigates to the given page
@@ -49,23 +48,23 @@ const PaymentConfirmationCustomer = () => {
         console.log(err);
       }
         console.log("LPLSLSLSLSLLSLS WORK");
-        console.log(location.state);
+        console.log(location.state[0]);
+        console.log("received price", location.state[0]);
         try {
           let total_price = 0;
           let items_ordered = "{\"";
-          for (let i = 0; i < location.state.length; i++) {
-            total_price = total_price + location.state[i][1];
-            if (i !== location.state.length-1) {
-              items_ordered = items_ordered + location.state[i][0] + "\", \""
+          for (let i = 0; i < location.state[0].length; i++) {
+            total_price = total_price + location.state[0][i][1];
+            if (i !== location.state[0].length-1) {
+              items_ordered = items_ordered + location.state[0][i][0] + "\", \""
             }
             else {
-              items_ordered = items_ordered + location.state[i][0] + "\""
+              items_ordered = items_ordered + location.state[0][i][0] + "\""
             }
           }
           items_ordered = items_ordered + "}"
           console.log(items_ordered);
           console.log(total_price);
-          setTotal(total_price);
     
           console.log("Sending via JSON...", totalNumOrders);
     
@@ -120,7 +119,7 @@ const PaymentConfirmationCustomer = () => {
             </tr>
           </thead>
           <tbody>
-            {location.state.map((item) => {
+            {location.state[0].map((item) => {
               return (
                 <tr>
                   <td>{item[0]}</td>
@@ -129,6 +128,7 @@ const PaymentConfirmationCustomer = () => {
             })}
           </tbody>
         </Table>
+        <button className="btn btn-outline-primary">Total price: {location.state[1]}</button>
         </div>
             <div style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
             <button onClick={() => addItemToOrdersTable()} type="button" className="btn btn-outline-primary">Checkout</button>

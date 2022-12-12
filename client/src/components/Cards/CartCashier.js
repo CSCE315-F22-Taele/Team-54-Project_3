@@ -17,16 +17,20 @@ import {useNavigate} from "react-router-dom";
 const Cart = (({mapOrders}) => {
   let navigate = useNavigate()
   const [orders, setMyArray] = useState([]);
+  const [totalOrderAmount, setTotal] = useState(0);
 
   /**
    * Populates the cart's orders array with items from mapOrders
    */
   const displayOrders = () => {
     setMyArray([]);
+    let total_price = 0;
     for (let i = 0; i < mapOrders.current.length; i++) {
+      total_price = total_price + mapOrders.current[i][1];
       setMyArray(oldArray => [...oldArray, mapOrders.current[i]]);
       // console.log(mapOrders.current[i])
     }
+    setTotal(total_price);
   }
 
   /**
@@ -35,7 +39,7 @@ const Cart = (({mapOrders}) => {
    */
   const clear = (page) => {
     let yurh = "Cashier";
-    navigate(`/${page}`, {state:orders});
+    navigate(`/${page}`, {state:[orders, totalOrderAmount]});
   };
 
   return (
