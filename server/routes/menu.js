@@ -23,9 +23,12 @@ app.post("/addMenuItem", async (req, res) => {
   try {
 
     const {menuid, name, price, category, ingredients} = req.body;
+    console.log(menuid, name, price, category, ingredients);
+    console.log(`INSERT INTO menu(menuid, name, price, category, ingredients) VALUES (${menuid}, ${name}, ${price}, ${category}, ${ingredients});`);
     
-    const results = await db.query("INSERT INTO menu(menuid, name, price, category, 0) VALUES ($1, $2, $3, $4, $5)",
+    const results = await db.query("INSERT INTO menu(menuid, name, price, category, ingredients) VALUES ($1, $2, $3, $4, $5);",
                                     [menuid, name, price, category, ingredients]);
+
     res.status(200).send("Menu Item Addition Succeded.");
   } catch (err) {
     console.log(err);
