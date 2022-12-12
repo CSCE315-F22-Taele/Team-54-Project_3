@@ -15,7 +15,8 @@ import MapContainer from "../pages/Customer/MapContainer";
 import SalesReport from "../pages/Manager/SalesReport";
 import ExcessReport from "../pages/Manager/ExcessReport";
 import RestockReport from "../pages/Manager/RestockReport";
-import PaymentConfirmation from "../components/Cards/PaymentConfirmation";
+import PaymentConfirmationCustomer from "../components/Cards/PaymentConfirmationCustomer";
+import PaymentConfirmationCashier from "../components/Cards/PaymentConfirmationCashier";
 import EditInventory from "../pages/Manager/Inventory/EditInventory";
 import EditMenu from "../pages/Manager/MenuEditor/EditMenu";
 import CashierManagerLogin from "../pages/MainPage/CashierManagerLogin";
@@ -38,7 +39,8 @@ const App = () => {
                 <Route exact path ="/Manager/Reports/Sales" element={<SalesReport/>}/>
                 <Route exact path ="/Manager/Reports/Excess" element={<ExcessReport/>}/>
                 <Route exact path ="/Manager/Reports/Restock" element={<RestockReport/>}/>
-                <Route exact path ="/Customer/PaymentConfirmation" element={<PaymentConfirmation/>}/>
+                <Route exact path ="/Customer/PaymentConfirmationCustomer" element={<PaymentConfirmationCustomer/>}/>
+                <Route exact path ="/Customer/PaymentConfirmationCashier" element={<PaymentConfirmationCashier/>}/>
                 <Route exact path ="/Manager/Inventory/EditInventory" element={<EditInventory/>}/>
                 <Route exact path ="/Manager/MenuEditor/EditMenu" element={<EditMenu/>}/>
                 <Route exact path ="/CashierManagerLogin" element={<CashierManagerLogin/>}/>

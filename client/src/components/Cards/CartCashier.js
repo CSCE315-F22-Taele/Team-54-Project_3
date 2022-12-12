@@ -54,7 +54,7 @@ const Cart = (({mapOrders}) => {
               </>
             )}
               <div style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
-                <button onClick={() => clear("Customer/PaymentConfirmation")} type="button" className="btn btn-primary">View Payment</button>
+                <button onClick={() => clear("Cashier/PaymentConfirmationCashier")} type="button" className="btn btn-primary">View Payment</button>
               </div>
             </>
           ) : (
