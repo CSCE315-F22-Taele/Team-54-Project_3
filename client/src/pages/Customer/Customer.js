@@ -11,6 +11,7 @@ import Menu from "../../components/Cards/MenuCustomer";
 import Categories from "../../components/NavBar/CategoriesCustomer";
 
 const allCategories = ["All Items", "Breakfast", "Entree", "Salads", "Sides", "Kids Meals", "Treats", "Drinks", "Sauce"];
+
 // const conn = "http://localhost:3001";
 const conn = "https://chick-fil-a-backend.onrender.com";
 
