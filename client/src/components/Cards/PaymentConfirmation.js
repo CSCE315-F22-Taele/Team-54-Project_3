@@ -36,6 +36,18 @@ const PaymentConfirmation = () => {
      * Adds the final order to the orders table in the database. Called by the "Checkout" button.
      */
     const addItemToOrdersTable = async () => {
+      let totalNumOrders = 0;
+      try {
+        console.log("/api/orders/orderItems")
+        const response = await fetch (conn + "/api/orders/orderItems");
+        const jsonVals = await response.json();
+        console.log("getting orders")
+        console.log(jsonVals.results);
+        totalNumOrders = jsonVals.results
+      } catch (err) {
+        console.log("ERROR!!!")
+        console.log(err);
+      }
         console.log("LPLSLSLSLSLLSLS WORK");
         console.log(location.state);
         try {
@@ -55,7 +67,7 @@ const PaymentConfirmation = () => {
           console.log(total_price);
           setTotal(total_price);
     
-          console.log("Sending via JSON...");
+          console.log("Sending via JSON...", totalNumOrders);
     
           const response = fetch(conn + "/api/orders/placeOrder", {
             method: 'POST', // *GET, POST, PUT, DELETE, etc.
@@ -63,10 +75,10 @@ const PaymentConfirmation = () => {
               'Content-Type': 'application/json'
             },
             body : JSON.stringify({
-              "orderid": 3000000,
+              "orderid": totalNumOrders,
               "ordernumber":3000000,
               "totalprice": total_price,
-              "saledate":"2024-10-04",
+              "saledate":"2022-12-12",
               "employeeid":10,
               "customerid":10,
               "satisfied": "t",
