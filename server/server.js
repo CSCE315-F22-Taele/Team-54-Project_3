@@ -31,7 +31,7 @@ app.use("/api/sales", sales);
 
 app.use(
   cors({
-      origin: ["http://localhost:3001/", "https://chickfila.onrender.com"],
+      origin: ["http://localhost:3001/", "https://chick-fil-a-backend.onrender.com"],
   })
 );
 
