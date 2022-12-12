@@ -40,7 +40,7 @@ const App = () => {
                 <Route exact path ="/Manager/Reports/Excess" element={<ExcessReport/>}/>
                 <Route exact path ="/Manager/Reports/Restock" element={<RestockReport/>}/>
                 <Route exact path ="/Customer/PaymentConfirmationCustomer" element={<PaymentConfirmationCustomer/>}/>
-                <Route exact path ="/Customer/PaymentConfirmationCashier" element={<PaymentConfirmationCashier/>}/>
+                <Route exact path ="/Cashier/PaymentConfirmationCashier" element={<PaymentConfirmationCashier/>}/>
                 <Route exact path ="/Manager/Inventory/EditInventory" element={<EditInventory/>}/>
                 <Route exact path ="/Manager/MenuEditor/EditMenu" element={<EditMenu/>}/>
                 <Route exact path ="/CashierManagerLogin" element={<CashierManagerLogin/>}/>

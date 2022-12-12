@@ -18,7 +18,7 @@ const conn = "https://chick-fil-a-backend.onrender.com";
  * Creates and displays the payment confirmation page that shows the user the final order.
  * @returns a page showing the final order, along with options to proceed to payment or start a new order
  */
-const PaymentConfirmation = () => {
+const PaymentConfirmationCustomer = () => {
     let navigate = useNavigate();
     const location = useLocation();
     const [messageApi, contextHolder] = message.useMessage();
@@ -139,4 +139,4 @@ const PaymentConfirmation = () => {
     )
 }
 
-export default PaymentConfirmation;
+export default PaymentConfirmationCustomer;
