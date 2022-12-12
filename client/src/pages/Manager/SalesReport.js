@@ -123,9 +123,9 @@ const SalesReport = () => {
         const jsonVals = await response.json();
 
         console.log("JSON")
-        console.log(jsonVals);
+        console.log(jsonVals.data.table);
         console.log(typeof jsonVals);
-        setSales(jsonVals);
+        setSales(jsonVals.data.table);
         console.log("sales", sales);
 
         console.log("Finished API call");
@@ -168,7 +168,7 @@ const SalesReport = () => {
               />
               <Form.Control 
               type="text" 
-              placeholder="Enter start date" 
+              placeholder="Enter end date" 
               onChange={onInputEnd}
               />
           </Form.Group>
@@ -189,11 +189,11 @@ const SalesReport = () => {
             </tr>
           </thead>
           <tbody>
-            {Object.keys(sales).map(key => {
+            {sales.map(item => {
               return (
                 <tr>
-                  <td>{key}</td>
-                  <td>{sales[key]}</td>
+                  <td>{item[0]}</td>
+                  <td>{item[1]}</td>
                 </tr>
               )
             })}

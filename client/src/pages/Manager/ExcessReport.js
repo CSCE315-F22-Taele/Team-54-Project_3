@@ -133,8 +133,8 @@
                  <Nav.Link onClick={() => handleUpdate("MenuEditor")}>Store Menu</Nav.Link>
                  <NavDropdown style={{color: "red"}} title="Order Trends" id="basic-nav-dropdown">
                    <NavDropdown.Item href="/Manager/Reports/Sales">Sales Report</NavDropdown.Item>
-                   <NavDropdown.Item href="/Manager/Reports/Excess">Excess Report</NavDropdown.Item>
-                   <NavDropdown.Item style={{color: "red"}} href="/Manager/Reports/Restock">Restock Report</NavDropdown.Item>
+                   <NavDropdown.Item style={{color: "red"}} href="/Manager/Reports/Excess">Excess Report</NavDropdown.Item>
+                   <NavDropdown.Item href="/Manager/Reports/Restock">Restock Report</NavDropdown.Item>
                  </NavDropdown>
                </Nav>
              </Navbar.Collapse>
@@ -149,7 +149,7 @@
               />
               <Form.Control 
               type="text" 
-              placeholder="Enter start date" 
+              placeholder="Enter end date" 
               onChange={onInputEnd}
               />
           </Form.Group>
