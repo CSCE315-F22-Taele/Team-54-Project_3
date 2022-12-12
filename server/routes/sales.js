@@ -25,14 +25,22 @@ app.get("/getSalesReport/:timeStart/:timeEnd", async (req, res) => {
       const orderItems = report.rows[i].itemsordered;
       getFreq(freq, orderItems);
     }
+
+    var arr = [];
+
+    for (var key in freq) {
+        if (freq.hasOwnProperty(key)) {
+            arr.push( [ key, freq[key] ] );
+        }
+    }
     
-    console.log(freq);
+    // console.log(freq);
     
     res.status(200).json({
       status: "success",
-      results: freq.length,
+      results: arr.length,
       data: {
-        table: freq,
+        table: arr,
       },
     });
   } catch (err) {
